@@ -1,0 +1,32 @@
+---
+description: Flutter testing quality baseline for unit, widget, integration, and golden tests with clear feature done criteria.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for FLUTTER_TESTING_QUALITY
+
+#### TEST_STRATEGY
+
+- Cover core game logic with deterministic unit tests.
+- Cover critical UI behaviors with widget tests.
+- Cover end-to-end player paths with integration tests for major releases.
+- Keep tests fast, isolated, and stable in local runs.
+
+#### MINIMUM_TEST_EXPECTATIONS
+
+- New game mechanics require unit tests for success and edge cases.
+- New UI screens require widget tests for rendering and interactions.
+- Regression fixes must include a test that fails before and passes after the fix.
+
+#### VISUAL_REGRESSION
+
+- Use golden tests for key screens/components where practical.
+- Update goldens intentionally and review diffs before accepting changes.
+
+#### DONE_CRITERIA
+
+- Feature is not done until required tests are present and passing.
+- Analyzer, formatter, and tests must pass locally before PR.
+- Platform-impacting changes should be verified on Android and iOS targets.

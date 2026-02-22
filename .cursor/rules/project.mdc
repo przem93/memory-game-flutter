@@ -1,0 +1,62 @@
+---
+description: Project-wide product scope, quality baseline, and release expectations for Flutter Memory Game on Android and iOS.
+alwaysApply: true
+---
+
+# AI Rules for Memory Game (Flutter)
+
+## PROJECT_CONTEXT
+
+- Product: single-player memory game built in Flutter.
+- Target platforms: Android and iOS from one shared codebase.
+- Distribution: Google Play and Apple App Store.
+- Design source of truth: Figma file `Memory-game-design` (`fALJoRbR9Mxao3BintsOoJ`).
+
+## PRODUCT_SCOPE
+
+### MVP_SCOPE
+
+- Core game loop works fully offline.
+- Local gameplay and score tracking must work without network access.
+- Platform game services are integrated when available:
+  - iOS: Game Center for leaderboards/achievements where relevant.
+  - Android: Google Play Games Services equivalent for leaderboards/achievements.
+- If platform services are unavailable, app behavior must gracefully fallback to local-only mode.
+
+### ROADMAP_SCOPE
+
+- Future phases may include cloud sync, extended profiles, events, and social features.
+- CI/CD release automation can be added after the manual process is stable.
+- Observability (analytics and crash reporting) should be added after MVP stability.
+
+## ENGINEERING_BASELINE
+
+- Language/runtime: Dart + stable Flutter SDK.
+- Platforms: maintain parity across Android and iOS for user-facing features.
+- UI behavior:
+  - responsive layouts for phones and tablets,
+  - consistent spacing/typography/components from Figma tokens,
+  - accessibility support (scalable text, contrast, semantic labels).
+- Architecture direction: clear separation of presentation/domain/data concerns and reusable components.
+
+## QUALITY_GATES
+
+- No critical crashes in core gameplay paths.
+- Smooth interactions and animations on common mid-range devices.
+- Deterministic game logic covered by tests.
+- UI changes validated against Figma screenshots for key screens.
+- New features must include platform impact notes (Android/iOS) before merge.
+
+## RELEASE_ARTIFACTS
+
+- Store-ready app icons, splash assets, screenshots, and descriptions.
+- Proper app signing setup for both platforms.
+- Versioning and release notes maintained for each store submission.
+- Privacy policy and store privacy declarations updated before release.
+
+## WORKFLOW
+
+- Build and release are manual for now (local validation + store console submissions).
+- Keep documentation (`README.md`, `/docs`) aligned with feature and release process changes.
+- Rules in `.cursor/rules` are authoritative implementation guidance and should be kept consistent.
+

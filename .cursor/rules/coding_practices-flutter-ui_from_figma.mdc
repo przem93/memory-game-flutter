@@ -1,0 +1,33 @@
+---
+description: Rules for implementing Flutter UI from Figma with reusable components, token mapping, responsiveness, and visual parity checks.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for FLUTTER_UI_FROM_FIGMA
+
+#### FIGMA_IMPLEMENTATION
+
+- Treat Figma as visual source of truth for spacing, typography, colors, and component hierarchy.
+- Build reusable Flutter widgets for repeating Figma components before duplicating UI code.
+- Convert absolute design values into tokenized scales (spacing, radius, typography sizes).
+- Preserve visual parity for key screens while keeping Flutter code maintainable.
+
+#### RESPONSIVE_LAYOUT
+
+- Implement layouts that adapt to phone and tablet sizes.
+- Use constraints-based composition over fixed-position assumptions.
+- Define behavior for narrow, medium, and wide breakpoints.
+
+#### DESIGN_TOKENS
+
+- Centralize colors, text styles, spacing, and elevations in theme/token classes.
+- Avoid hard-coded style literals in feature widgets unless justified and documented.
+- Map Figma color/text styles to named tokens to support future design iteration.
+
+#### REVIEW_STANDARD
+
+- For every substantial UI change, include screenshot comparison against Figma references.
+- Document intentional visual deviations and technical rationale in PR description.
+- Prefer incremental UI pull requests when implementing large Figma sections.

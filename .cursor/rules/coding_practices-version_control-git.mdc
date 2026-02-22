@@ -1,0 +1,23 @@
+---
+description: Git conventions for Flutter mobile development, including branching strategy and commit quality for cross-platform changes.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for VERSION_CONTROL
+
+#### GIT
+
+- Use conventional commits to create meaningful commit messages.
+- Use descriptive branch names:
+  - `feature/shared-*` for cross-platform Dart changes,
+  - `feature/ios-*` for iOS-specific work,
+  - `feature/android-*` for Android-specific work,
+  - `release/*` and `hotfix/*` for stabilization and production fixes.
+- Write meaningful commit messages that explain why changes were made, not just what.
+- Keep commits focused on one logical change to simplify review and rollback.
+- Include platform scope in commits/PRs when a change is platform-specific.
+- Before opening a PR, run formatting, static analysis, and tests locally.
+- Leverage git hooks (when configured) to enforce code quality checks before commits and pushes.
+

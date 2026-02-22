@@ -1,0 +1,33 @@
+---
+description: Manual mobile release checklist and gating criteria for preparing and publishing Android and iOS builds.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for MOBILE_RELEASE_MANUAL
+
+#### RELEASE_MODEL
+
+- Use manual release flow for both stores until CI/CD is explicitly introduced.
+- Keep release checklist documents current in `/docs`.
+- Every release must include version bump, release notes, and changelog updates.
+
+#### ANDROID_RELEASE_CHECKS
+
+- Validate signing configuration and keystore access.
+- Verify package id, versionCode/versionName, and target SDK compatibility.
+- Confirm required store listing assets and Data safety details are updated.
+- Test install/upgrade path on at least one physical Android device.
+
+#### IOS_RELEASE_CHECKS
+
+- Validate signing identities/profiles and bundle identifier.
+- Verify build/archive settings and App Store Connect metadata.
+- Confirm Privacy Nutrition labels and policy links are current.
+- Test build on physical iOS device and run TestFlight smoke verification.
+
+#### RELEASE_DECISION
+
+- Block release when critical gameplay, crash, or compliance issues are unresolved.
+- Keep a simple rollback/hotfix plan for production defects.

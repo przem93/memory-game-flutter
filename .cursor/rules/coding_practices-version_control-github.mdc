@@ -1,0 +1,23 @@
+---
+description: GitHub pull request and review quality gates, including platform impact, testing, and UI verification standards.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for VERSION_CONTROL
+
+#### GITHUB
+
+- Use pull request templates to standardize information provided for code reviews.
+- Use a minimal PR checklist for every change:
+  - local tests and analyzer status,
+  - impacted platforms (Android/iOS/both),
+  - screenshots for UI changes (with Figma reference),
+  - release/process impact (if any).
+- Implement branch protection rules for default branches to enforce quality checks.
+- Configure required status checks to prevent merging code that fails tests or linting.
+- Prefer small, reviewable PRs with clear scope boundaries.
+- Use GitHub Projects/Issues to track roadmap and release preparation tasks.
+- Keep CI/CD optional for now, but structure workflows so manual release can be automated later.
+

@@ -1,0 +1,32 @@
+---
+description: Platform services integration rules for Game Center and Play Games with resilient offline fallback behavior.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for MOBILE_PLATFORM_SERVICES
+
+#### GAME_SERVICES_INTEGRATION
+
+- Integrate iOS Game Center for supported leaderboard/achievement flows.
+- Integrate Android Google Play Games Services equivalent for the same flows.
+- Keep service integration behind shared interfaces to maintain feature parity.
+
+#### FALLBACK_AND_RESILIENCE
+
+- Gameplay must remain fully usable offline without platform service connectivity.
+- If sign-in or service initialization fails, continue in local mode without blocking gameplay.
+- Queue or ignore non-critical remote score operations gracefully; never crash core game flow.
+
+#### ACCOUNT_AND_IDENTITY
+
+- Request platform sign-in only where needed for leaderboard/achievement features.
+- Avoid making login mandatory for core single-player gameplay.
+- Clearly communicate when scores are local-only versus synced/platform-backed.
+
+#### IMPLEMENTATION_GUARDRAILS
+
+- Keep platform channel code minimal and well-isolated.
+- Add integration notes for required console/app-id setup changes.
+- Verify behavior on both platforms whenever game services logic changes.

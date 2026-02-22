@@ -1,0 +1,36 @@
+---
+description: Flutter architecture guidelines for layered design, dependency management, state strategy, and platform-specific isolation.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for FLUTTER_ARCHITECTURE
+
+#### ARCHITECTURE
+
+- Use a layered structure with clear boundaries: `presentation`, `domain`, `data`.
+- Keep game rules and scoring logic in domain layer, independent from widgets.
+- Keep platform APIs and persistence access behind abstractions in data layer.
+- Inject dependencies explicitly (constructor/provider based), avoid hidden globals.
+- Isolate side effects (storage, network, platform services) from pure game logic.
+- Model failure states explicitly and propagate typed errors to presentation layer.
+
+#### PROJECT_STRUCTURE
+
+- Organize by feature first, then by layer where practical.
+- Keep reusable UI primitives in shared component modules.
+- Keep theme/tokens centralized; avoid hard-coded style values in feature widgets.
+- Prefer immutable models and predictable state transitions.
+
+#### STATE_MANAGEMENT
+
+- Use one consistent state management approach across the app.
+- Keep state minimal, serializable where needed, and easy to test.
+- Avoid rebuilding large widget subtrees for localized state changes.
+
+#### PLATFORM_SPLIT
+
+- Keep Android/iOS-specific logic in thin adapters.
+- Avoid duplicating core logic across platform channels.
+- Document every platform-specific implementation decision and fallback behavior.

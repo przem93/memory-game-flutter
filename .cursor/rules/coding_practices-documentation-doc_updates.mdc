@@ -1,0 +1,24 @@
+---
+description: Documentation update rules for README, docs, changelog, and manual release notes whenever features or processes change.
+alwaysApply: true
+---
+## CODING_PRACTICES
+
+### Guidelines for DOCUMENTATION
+
+#### DOC_UPDATES
+
+- Update relevant documentation in `/docs` when modifying features, release flow, or platform integrations.
+- Keep `README.md` in sync with:
+  - Flutter setup prerequisites,
+  - local run/test commands,
+  - Android/iOS platform notes,
+  - release process expectations.
+- Document any new dependency and why it was introduced.
+- For UI updates, include before/after screenshots and mention Figma node coverage in PR notes.
+- Maintain release documentation for manual publishing:
+  - version bumps,
+  - signing artifacts expectations,
+  - store metadata updates.
+- Maintain changelog entries in `CHANGELOG.md` when user-visible behavior changes.
+

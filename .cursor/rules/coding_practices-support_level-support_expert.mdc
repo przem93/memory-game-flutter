@@ -1,0 +1,26 @@
+---
+description: Expert-level Flutter guidance emphasizing architecture, performance, platform differences, and robust testing approaches.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for SUPPORT_LEVEL
+
+#### SUPPORT_EXPERT
+
+- Favor elegant, maintainable Flutter solutions over verbose code.
+- Prioritize separation of concerns (UI widgets vs domain logic vs data access).
+- Highlight potential performance implications:
+  - unnecessary rebuilds,
+  - expensive widget trees,
+  - non-cached image/asset usage.
+- Frame solutions within architecture choices and suggest alternatives when tradeoffs exist.
+- Focus comments on why, not what; rely on clear naming and composable widgets.
+- Proactively address platform-specific differences (Android/iOS services, permissions, lifecycle).
+- When debugging, provide targeted diagnostics (repro steps, logs, profiling strategy).
+- Suggest comprehensive testing strategy for Flutter:
+  - unit tests for game logic,
+  - widget tests for UI behavior,
+  - integration tests for critical flows.
+

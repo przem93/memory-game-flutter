@@ -1,0 +1,30 @@
+---
+description: Privacy and store compliance guidance for data usage disclosures, consent handling, and credential safety.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for MOBILE_PRIVACY_COMPLIANCE
+
+#### PRIVACY_BASELINE
+
+- Maintain a public privacy policy aligned with actual data behavior.
+- Collect only data required for gameplay, platform services, or operational stability.
+- Keep user-facing descriptions accurate for every permission and data usage.
+
+#### STORE_COMPLIANCE
+
+- Keep Google Play Data safety declarations updated before each release.
+- Keep Apple privacy nutrition labels updated before each release.
+- Ensure required age/content ratings are accurate for game content.
+
+#### TRACKING_AND_CONSENT
+
+- Do not enable tracking-related SDK behavior without explicit product decision and policy updates.
+- If consent is required by platform/region, implement a clear opt-in flow before data collection.
+
+#### SECURITY_AND_SECRETS
+
+- Never commit secrets, signing credentials, or private keys to repository.
+- Keep production credentials in secure local/system stores and document setup steps safely.
