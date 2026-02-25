@@ -60,3 +60,12 @@ alwaysApply: true
 - Keep documentation (`README.md`, `/docs`) aligned with feature and release process changes.
 - Rules in `.cursor/rules` are authoritative implementation guidance and should be kept consistent.
 
+### ROADMAP_FOLDERS_SOURCE_OF_TRUTH
+
+- Roadmaps in progress must live in `/in-progress-roadmaps`.
+- Completed roadmaps must be moved to `/done-roadmaps`.
+- The two folders are the source of truth for planning status:
+  - `/in-progress-roadmaps` defines what is currently to be implemented.
+  - `/done-roadmaps` defines what is already completed and accepted.
+- Every screen roadmap follows `Spec Lock -> component-first implementation -> 1:1 Figma validation`.
+
