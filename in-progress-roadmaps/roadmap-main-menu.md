@@ -1,125 +1,125 @@
-# Roadmap implementacji - Main Menu Screen (component-first)
+# Implementation Roadmap - Main Menu Screen (component-first)
 
-Ten dokument opisuje plan wdrozenia kolejnego ekranu (`Main Menu`) z podejsciem:
-- najpierw komponenty wielokrotnego uzytku,
-- potem integracja calego ekranu,
-- na koncu walidacja 1:1 vs Figma.
+This document describes the implementation plan for the next screen (`Main Menu`) using the following approach:
+- reusable components first,
+- full screen integration second,
+- 1:1 validation against Figma at the end.
 
-## Zasady wykonania
+## Execution Rules
 
-1. Kazdy krok konczy sie bramka weryfikacyjna (`analyze`, `test`, uruchomienie aplikacji).
-2. Zanim zacznie sie implementacja warstwy wizualnej, musi byc zamkniety `Spec Lock` dla docelowego node ekranu `Main Menu` w Figma.
-3. Nie przechodzimy do nastepnego ekranu, dopoki `Main Menu` nie ma statusu `accepted`.
+1. Each step ends with a verification gate (`analyze`, `test`, app run).
+2. Before visual UI implementation starts, `Spec Lock` for the target `Main Menu` node in Figma must be completed.
+3. Do not move to the next screen until `Main Menu` reaches `accepted` status.
 
-## Etap 1 - Spec Lock dla `Main Menu` (Figma)
+## Stage 1 - Spec Lock for `Main Menu` (Figma)
 
-Cel: zamrozic specyfikacje 1:1 przed kodowaniem UI.
+Goal: freeze the 1:1 specification before coding the UI.
 
-Do zebrania i zapisania:
-- wymiary frame i safe area (telefon + tablet, portrait),
-- pozycje i rozmiary: `background`, `logo-group`, `action-buttons`, `developer-brand`,
-- spacing pionowy miedzy sekcjami i marginesy poziome,
-- specyfikacja przyciskow (`Quick Play`, `Customize`): promienie, border, shadow, stany,
-- kolory (hex/opacity), gradienty i kolejnosc warstw tla,
-- typografia (family, weight, size, line-height, letter-spacing).
+Collect and document:
+- frame dimensions and safe area (phone + tablet, portrait),
+- positions and sizes of: `background`, `logo-group`, `action-buttons`, `developer-brand`,
+- vertical spacing between sections and horizontal margins,
+- button specs (`Quick Play`, `Customize`): corner radius, border, shadow, states,
+- colors (hex/opacity), gradients, and background layer order,
+- typography (family, weight, size, line-height, letter-spacing).
 
-Wynik:
-- tabela `Spec Lock` dodana do tego pliku albo osobnego pliku referencyjnego (`docs/main-menu-spec-lock.md`).
+Output:
+- `Spec Lock` table added to this file or a dedicated reference file (`docs/main-menu-spec-lock.md`).
 
-Bramka Etapu 1:
-- `done` (mozna rozpoczac Etap 2.1 `MainMenuBackground`).
+Stage 1 Gate:
+- `done` (Stage 2.1 `MainMenuBackground` can start).
 
-## Etap 2 - Komponenty reusable (osobne kroki implementacji)
+## Stage 2 - Reusable Components (separate implementation steps)
 
-Kazdy komponent musi zostac zaimplementowany i zweryfikowany osobno.
+Each component must be implemented and verified independently.
 
 ### 2.1 `MainMenuBackground`
-- render tla zgodnie z Figma (gradient + warstwa ikon SVG),
-- kontrola opacity ikon tla i kolejnosci warstw,
-- responsywne skalowanie bez hardcoded pod jeden model telefonu.
+- render background according to Figma (gradient + SVG icon layer),
+- control background icon opacity and layer order,
+- responsive scaling with no hardcoding for a single phone model.
 
-Bramka:
+Gate:
 - `flutter analyze`
-- screenshot porownawczy samego tla.
+- background-only comparison screenshot.
 
 ### 2.2 `MainMenuLogoGroup`
-- grupa logo (`logo-icon` + `logo-text`) jako oddzielny komponent,
-- API komponentu: alignment, spacing, opcjonalny scale preset.
+- logo group (`logo-icon` + `logo-text`) as a separate component,
+- component API: alignment, spacing, optional scale preset.
 
-Bramka:
+Gate:
 - `flutter analyze`
-- test widgetowy wariantow API i ukladu.
+- widget test for API variants and layout.
 
 ### 2.3 `MainMenuPrimaryButton`
-- wspolny komponent przycisku dla `Quick Play` i `Customize`,
-- styl 1:1 (font, obrys, promien, wysokosc, padding),
-- stany minimum: enabled, pressed, disabled.
+- shared button component for `Quick Play` and `Customize`,
+- 1:1 style (font, outline, radius, height, padding),
+- minimum states: enabled, pressed, disabled.
 
-Bramka:
+Gate:
 - `flutter analyze`
-- test widgetowy styli i stanow.
+- widget test for styles and states.
 
 ### 2.4 `MainMenuActionSection`
-- sekcja ukladajaca przyciski akcji na ekranie,
-- API sekcji: lista akcji, spacing miedzy przyciskami, semantyka.
+- section that arranges action buttons on the screen,
+- section API: action list, button spacing, semantics.
 
-Bramka:
+Gate:
 - `flutter analyze`
-- test widgetowy ukladu i semantyki.
+- widget test for layout and semantics.
 
 ### 2.5 `DeveloperBrand`
-- wykorzystanie istniejacego komponentu stopki dewelopera (bez duplikacji),
-- ewentualna adaptacja API pod `Main Menu` (offset/size variant), jesli wynika ze `Spec Lock`.
+- reuse the existing developer footer component (no duplication),
+- optional API adaptation for `Main Menu` (offset/size variant) if required by `Spec Lock`.
 
-Bramka:
+Gate:
 - `flutter analyze`
-- screenshot porownawczy sekcji dolnej.
+- bottom section comparison screenshot.
 
-## Etap 3 - Integracja `MainMenuScreenComposition`
+## Stage 3 - `MainMenuScreenComposition` Integration
 
-Zakres:
-- zlozenie ekranu `Main Menu` z gotowych komponentow,
-- odwzorowanie warstw i spacingu 1:1 zgodnie z `Spec Lock`,
-- podpiecie akcji:
-  - `Quick Play` -> start domyslnej rozgrywki,
-  - `Customize` -> przejscie do ekranu konfiguracji,
-- dodanie semantyki dostepnosci dla kluczowych elementow.
+Scope:
+- compose the `Main Menu` screen from completed components,
+- map layers and spacing 1:1 according to `Spec Lock`,
+- connect actions:
+  - `Quick Play` -> start default gameplay,
+  - `Customize` -> navigate to configuration screen,
+- add accessibility semantics for key elements.
 
-Bramka:
+Gate:
 - `flutter analyze`
 - `flutter test`
 - `flutter run`
 
-## Etap 4 - Walidacja 1:1 i akceptacja
+## Stage 4 - 1:1 Validation and Acceptance
 
 Checklist:
-- spacing i pozycjonowanie zgodne z Figma,
-- typografia i rozmiary przyciskow zgodne z Figma,
-- kolory, opacity i warstwy tla zgodne z Figma,
-- proporcje logo i stopki dewelopera zgodne z Figma,
-- wynik na Android i iOS.
+- spacing and positioning match Figma,
+- typography and button sizes match Figma,
+- colors, opacity, and background layers match Figma,
+- logo and developer footer proportions match Figma,
+- result is correct on Android and iOS.
 
-Artefakty:
-- min. 2 screenshoty porownawcze (2 rozdzielczosci),
-- lista odchylen (`known deviations`) albo wpis `none`.
+Artifacts:
+- minimum 2 comparison screenshots (2 resolutions),
+- deviations list (`known deviations`) or `none`.
 
-Bramka:
+Gate:
 - `flutter analyze`
 - `flutter test`
 - `flutter build apk --debug`
 - `flutter build ios --simulator`
 
-## Etap 5 - Dokumentacja i zamkniecie ekranu
+## Stage 5 - Documentation and Screen Closure
 
-Po akceptacji `Main Menu`:
-- aktualizacja `README.md` i/lub `docs` o nowy ekran oraz flow nawigacji,
-- wpis do `CHANGELOG.md` (jesli zmiana jest user-visible),
-- odnotowanie finalnego statusu ekranu (`accepted`) i decyzji o odchyleniach.
+After `Main Menu` acceptance:
+- update `README.md` and/or `docs` with the new screen and navigation flow,
+- add an entry in `CHANGELOG.md` (if user-visible),
+- record final screen status (`accepted`) and deviation decisions.
 
-## Definicja zakonczonego etapu `Main Menu` (`Definition of Done`)
+## `Main Menu` Definition of Done (`Definition of Done`)
 
-`Main Menu` ma status `done`, gdy:
-- wszystkie komponenty reusable z Etapu 2 sa gotowe,
-- ekran z Etapu 3 jest zintegrowany i ma podlaczone akcje,
-- Etap 4 przeszedl bez krytycznych odchylen,
-- dokumentacja z Etapu 5 jest uzupelniona.
+`Main Menu` has `done` status when:
+- all reusable components from Stage 2 are complete,
+- Stage 3 screen integration is complete and actions are connected,
+- Stage 4 passes with no critical deviations,
+- Stage 5 documentation is updated.
