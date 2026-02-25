@@ -1,0 +1,40 @@
+---
+description: Screen-by-screen Flutter workflow with component-first implementation and mandatory 1:1 Figma validation.
+alwaysApply: false
+---
+
+## CODING_PRACTICES
+
+### Guidelines for FLUTTER_SCREEN_WORKFLOW_COMPONENT_FIRST
+
+#### SCREEN_BY_SCREEN_FLOW
+
+- Implement one screen at a time and close it fully before starting the next screen.
+- For each screen, identify reusable components first and implement them as separate tasks.
+- Compose the screen only after required reusable components are completed.
+
+#### SPEC_LOCK_BEFORE_UI
+
+- Before implementing visual layout, collect and lock Figma specs for the target node:
+  - frame size and safe areas,
+  - spacing and alignment,
+  - typography values,
+  - colors and layer order.
+- Do not approximate missing visual values without documenting a temporary assumption.
+
+#### COMPONENT_FIRST_RULE
+
+- Repeated visual blocks must live in shared reusable widgets.
+- Avoid duplicating screen-specific layout code for elements already represented by reusable components.
+- Keep component APIs explicit (size presets, alignment, spacing variants).
+
+#### ONE_TO_ONE_VALIDATION
+
+- Every completed screen requires a visual comparison against Figma references.
+- Verify at least two viewport sizes and both Android/iOS behavior for user-facing parity.
+- If there are visual deviations, list each one with rationale and acceptance decision.
+
+#### QUALITY_GATES
+
+- Run `flutter analyze` and relevant tests before marking any screen task as done.
+- Run platform build checks at screen milestone level (`apk` debug and iOS simulator build where possible).

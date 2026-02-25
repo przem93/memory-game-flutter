@@ -36,6 +36,10 @@ flutter test
 flutter run
 ```
 
+Dependency note:
+
+- `flutter_svg` is used to render SVG assets exported from Figma (e.g. splash screen visuals).
+
 ## Platform Notes
 
 - Keep user-facing behavior aligned across Android and iOS.
