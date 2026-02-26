@@ -5,7 +5,7 @@ class SelectLevelTitle extends StatelessWidget {
   const SelectLevelTitle({
     super.key,
     this.text = 'Select level',
-    this.maxTextScaleFactor = 1.3,
+    this.maxTextScaleFactor = 1.2,
   }) : assert(maxTextScaleFactor >= 1);
 
   static const labelKey = ValueKey<String>('selectLevelTitleLabel');
@@ -32,7 +32,7 @@ class SelectLevelTitle extends StatelessWidget {
         style: const TextStyle(
           fontFamily: 'DynaPuff',
           fontWeight: FontWeight.w700,
-          fontSize: 56,
+          fontSize: 32,
           height: 1,
           letterSpacing: 0,
           color: Color(0xFFFFFFFF),

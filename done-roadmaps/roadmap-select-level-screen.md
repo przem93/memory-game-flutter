@@ -239,7 +239,15 @@ Gate:
 - documentation updates merged and consistent with implemented flow.
 
 Status:
-- `todo`
+- `done` (`2026-02-26`)
+- Acceptance:
+  - `accepted-with-known-deviations`.
+- Artifacts:
+  - `docs/select-level-stage-6-closure.md`,
+  - `CHANGELOG.md`.
+- Decisions:
+  - Stage 5 acceptance level remains unchanged after closure re-check,
+  - Select Level flow documentation is now synchronized across README/docs/roadmap.
 
 ## `Select Level` Definition of Done (`Definition of Done`)
 
@@ -251,4 +259,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress`
+- `done` with acceptance level `accepted-with-known-deviations`.

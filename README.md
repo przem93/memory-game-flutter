@@ -60,6 +60,9 @@ Release is currently manual for both stores.
 - Main Menu Spec Lock: `docs/main-menu-spec-lock.md`
 - Main Menu validation (Stage 4): `docs/main-menu-stage-4-validation.md`
 - Main Menu closure (Stage 5): `docs/main-menu-stage-5-closure.md`
+- Select Level Spec Lock: `docs/select-level-spec-lock.md`
+- Select Level validation (Stage 5): `docs/select-level-stage-5-validation.md`
+- Select Level closure (Stage 6): `docs/select-level-stage-6-closure.md`
 - Cursor project rules: `.cursor/rules/`
 
 ## Main Menu
@@ -67,7 +70,8 @@ Release is currently manual for both stores.
 - `MainMenuScreen` is composed from reusable Stage 2 widgets in
   `lib/features/main_menu/presentation/widgets/`.
 - Primary actions:
-  - `Quick Play` starts default gameplay flow.
+  - `Quick Play` opens `SelectLevelScreen`; choosing a difficulty starts gameplay
+    board initialization with mapped grid config.
   - `Customize` navigates to the game configuration flow.
 - Visual implementation and acceptance notes are documented in the Main Menu
   files listed in the Documentation section.

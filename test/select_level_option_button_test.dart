@@ -54,12 +54,13 @@ void main() {
       expect(border.top.color, scenario.$2);
       expect(border.top.width, 2);
       expect(text.style?.color, scenario.$2);
+      expect(text.style?.fontSize, 32);
       expect(decoration.borderRadius, BorderRadius.circular(10));
       expect(tester.getSize(find.byType(SelectLevelOptionButton)).height, 56);
     }
   });
 
-  testWidgets('renders unselected neutral colors', (tester) async {
+  testWidgets('keeps difficulty colors even when not selected', (tester) async {
     await pumpHarness(
       tester,
       child: SelectLevelOptionButton(
@@ -79,9 +80,9 @@ void main() {
     final decoration = container.decoration! as BoxDecoration;
     final border = decoration.border! as Border;
 
-    expect(border.top.color, const Color(0xFFD2D2D2));
-    expect(border.top.width, 3);
-    expect(text.style?.color, const Color(0xFFD2D2D2));
+    expect(border.top.color, const Color(0xFFE2C800));
+    expect(border.top.width, 2);
+    expect(text.style?.color, const Color(0xFFE2C800));
   });
 
   testWidgets('applies pressed animation and invokes callback', (tester) async {

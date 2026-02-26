@@ -30,12 +30,11 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
   static const _phoneReferenceSize = Size(393, 852);
   static const _phoneLogoTop = 28.0;
   static const _phoneTitleTop = 330.0;
-  static const _phoneOptionsTop = 371.0;
+  static const _phoneTitleToFirstButtonGap = 41.0;
   static const _phoneHorizontalMargin = 20.0;
   static const _tabletHorizontalInset = 48.0;
   static const _tabletOptionsMaxWidth = 560.0;
 
-  static const _logoWidth = 287.0;
   static const _logoHeight = 60.0;
   static const _logoIconSize = 60.0;
   static const _logoTextHeight = 49.0;
@@ -50,11 +49,25 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final isTablet = constraints.maxWidth > 600;
-          final verticalScale =
-              (constraints.maxHeight / _phoneReferenceSize.height).clamp(
-                0.9,
-                1.3,
-              );
+          final viewPadding = MediaQuery.viewPaddingOf(context);
+          final fullViewportHeight =
+              constraints.maxHeight + viewPadding.top + viewPadding.bottom;
+          final normalizedHeight = fullViewportHeight.clamp(
+            _phoneReferenceSize.height * 0.85,
+            _phoneReferenceSize.height * 1.25,
+          );
+          final logoTopSpacing = math.max(
+            0,
+            _scaledOffset(_phoneLogoTop, normalizedHeight) - viewPadding.top,
+          ).toDouble();
+          final logoToTitleSpacing = _scaledOffset(
+            _phoneTitleTop - _phoneLogoTop - _logoHeight,
+            normalizedHeight,
+          );
+          final titleToOptionsSpacing = _scaledOffset(
+            _phoneTitleToFirstButtonGap,
+            normalizedHeight,
+          );
           final optionsWidth = isTablet
               ? math.min(
                   _tabletOptionsMaxWidth,
@@ -65,34 +78,30 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
           return Semantics(
             key: SelectLevelScreen.contentKey,
             container: true,
-            child: Stack(
-              fit: StackFit.expand,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Positioned(
+                SizedBox(height: logoTopSpacing),
+                SizedBox(
                   key: SelectLevelScreen.logoSlotKey,
-                  top: _phoneLogoTop * verticalScale,
-                  left: _phoneHorizontalMargin,
+                  width: double.infinity,
                   child: _TopLogoRow(isTablet: isTablet),
                 ),
-                Positioned(
+                SizedBox(height: logoToTitleSpacing),
+                SizedBox(
                   key: SelectLevelScreen.titleSlotKey,
-                  top: _phoneTitleTop * verticalScale,
-                  left: 0,
-                  right: 0,
-                  child: const Center(child: SelectLevelTitle()),
+                  width: double.infinity,
+                  child: const SelectLevelTitle(),
                 ),
-                Positioned(
+                SizedBox(height: titleToOptionsSpacing),
+                Container(
                   key: SelectLevelScreen.optionsSlotKey,
-                  top: _phoneOptionsTop * verticalScale,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: SizedBox(
-                      width: optionsWidth,
-                      child: SelectLevelOptionsSection(
-                        selectedDifficulty: _selectedDifficulty,
-                        onDifficultyChanged: _onDifficultyChanged,
-                      ),
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: optionsWidth,
+                    child: SelectLevelOptionsSection(
+                      selectedDifficulty: _selectedDifficulty,
+                      onDifficultyChanged: _onDifficultyChanged,
                     ),
                   ),
                 ),
@@ -112,6 +121,10 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
     final startConfig = resolveSelectLevelStartConfig(difficulty);
     widget.onStartRequested?.call(startConfig);
   }
+
+  double _scaledOffset(double phoneOffset, double height) {
+    return phoneOffset * (height / _phoneReferenceSize.height);
+  }
 }
 
 class _TopLogoRow extends StatelessWidget {
@@ -124,9 +137,10 @@ class _TopLogoRow extends StatelessWidget {
     final factor = isTablet ? 1.2 : 1.0;
 
     return SizedBox(
-      width: _SelectLevelScreenState._logoWidth * factor,
       height: _SelectLevelScreenState._logoHeight * factor,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(

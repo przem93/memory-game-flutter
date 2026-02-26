@@ -38,7 +38,7 @@ void main() {
     expect(style, isNotNull);
     expect(style!.fontFamily, 'DynaPuff');
     expect(style.fontWeight, FontWeight.w700);
-    expect(style.fontSize, 56);
+    expect(style.fontSize, 32);
     expect(style.letterSpacing, 0);
     expect(style.height, 1);
     expect(style.color, const Color(0xFFFFFFFF));
@@ -53,6 +53,6 @@ void main() {
 
     final label = tester.widget<Text>(find.byKey(SelectLevelTitle.labelKey));
     expect(label.textScaler, isNotNull);
-    expect(label.textScaler!.scale(1), 1.3);
+    expect(label.textScaler!.scale(1), 1.2);
   });
 }

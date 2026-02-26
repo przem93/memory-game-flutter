@@ -33,7 +33,6 @@ class _SelectLevelOptionButtonState extends State<SelectLevelOptionButton> {
   static const _enabledFillColor = Color(0xFFFFFFFF);
   static const _pressedFillColor = Color(0xFFF7F7F7);
   static const _disabledFillColor = Color(0xFFF1F1F1);
-  static const _neutralColor = Color(0xFFD2D2D2);
 
   bool _isPressed = false;
 
@@ -42,14 +41,11 @@ class _SelectLevelOptionButtonState extends State<SelectLevelOptionButton> {
   @override
   Widget build(BuildContext context) {
     final accent = _accentFor(widget.difficulty);
-    final accentOrNeutral = widget.isSelected ? accent : _neutralColor;
     final fill = _isEnabled
         ? (_isPressed ? _pressedFillColor : _enabledFillColor)
         : _disabledFillColor;
-    final borderWidth = widget.isSelected ? 2.0 : 3.0;
-    final shadowColor = widget.isSelected
-        ? accent.withValues(alpha: _isPressed ? 0.18 : 0.3)
-        : const Color(0x40000000);
+    final borderWidth = 2.0;
+    final shadowColor = accent.withValues(alpha: _isPressed ? 0.18 : 0.3);
 
     return Semantics(
       button: true,
@@ -75,7 +71,7 @@ class _SelectLevelOptionButtonState extends State<SelectLevelOptionButton> {
             decoration: BoxDecoration(
               color: fill,
               borderRadius: BorderRadius.circular(_radius),
-              border: Border.all(color: accentOrNeutral, width: borderWidth),
+              border: Border.all(color: accent, width: borderWidth),
               boxShadow: [
                 BoxShadow(
                   color: shadowColor,
@@ -90,10 +86,10 @@ class _SelectLevelOptionButtonState extends State<SelectLevelOptionButton> {
               style: const TextStyle(
                 fontFamily: 'DynaPuff',
                 fontWeight: FontWeight.w700,
-                fontSize: 48,
+                fontSize: 32,
                 letterSpacing: 0,
                 height: 1,
-              ).copyWith(color: accentOrNeutral),
+              ).copyWith(color: accent),
             ),
           ),
         ),

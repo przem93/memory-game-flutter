@@ -35,6 +35,8 @@ alwaysApply: true
 - Platforms: maintain parity across Android and iOS for user-facing features.
 - UI behavior:
   - responsive layouts for phones and tablets,
+  - prefer vertical flow layouts (`Column`, flexible spacing, proportional scale) for full-screen compositions,
+  - avoid hardcoded absolute `Positioned(top/left/right/bottom)` screen placement unless there is no viable responsive alternative,
   - consistent spacing/typography/components from Figma tokens,
   - accessibility support (scalable text, contrast, semantic labels).
 - Architecture direction: clear separation of presentation/domain/data concerns and reusable components.
