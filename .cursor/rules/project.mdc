@@ -39,6 +39,12 @@ alwaysApply: true
   - accessibility support (scalable text, contrast, semantic labels).
 - Architecture direction: clear separation of presentation/domain/data concerns and reusable components.
 
+### DESIGN_ASSETS_CONTEXT
+
+- Treat `/assets` as the primary local source of design assets required to recreate the app according to Figma.
+- Before introducing replacement assets, first reuse existing files from `/assets` when they satisfy the design requirement.
+- If a required asset is missing, ambiguous, or does not match the expected Figma element, ask the user for clarification or for the missing file before proceeding.
+
 ## QUALITY_GATES
 
 - No critical crashes in core gameplay paths.
