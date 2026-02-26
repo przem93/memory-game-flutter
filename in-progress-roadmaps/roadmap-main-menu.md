@@ -77,6 +77,12 @@ Gate:
 - `flutter analyze`
 - widget test for styles and states.
 
+Status:
+- `done` (`2026-02-26`)
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test` -> all tests passed (including `test/main_menu_primary_button_test.dart`).
+
 ### 2.4 `MainMenuActionSection`
 - section that arranges action buttons on the screen,
 - section API: action list, button spacing, semantics.
