@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/logo-icon.png
     - assets/logo-icon.svg
+    - assets/logo-text.png
     - assets/logo-text.svg
     - assets/background.svg
     - assets/developer-logo.svg

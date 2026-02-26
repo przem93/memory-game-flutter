@@ -128,6 +128,15 @@ Gate:
 - `flutter test`
 - `flutter run`
 
+Status:
+- `done` (`2026-02-26`)
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test` -> all tests passed (including `test/main_menu_screen_test.dart`),
+  - `flutter run -d chrome --debug --no-resident` -> app launched and completed.
+- Platform note:
+  - local `flutter run -d macos` is unavailable in this repo (`No macOS desktop project configured`), so run validation was executed on available target (`chrome`).
+
 ## Stage 4 - 1:1 Validation and Acceptance
 
 Checklist:

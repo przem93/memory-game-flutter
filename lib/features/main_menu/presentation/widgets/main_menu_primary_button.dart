@@ -73,7 +73,7 @@ class _MainMenuPrimaryButtonState extends State<MainMenuPrimaryButton> {
               key: MainMenuPrimaryButton.labelKey,
               style: const TextStyle(
                 color: _enabledTextColor,
-                fontSize: 19,
+                fontSize: 32,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0,
                 height: 1,

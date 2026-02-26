@@ -46,7 +46,7 @@ void main() {
     expect(decoration.color, const Color(0xFFFFFFFF));
     expect(border.top.color, const Color(0xFF000000));
     expect(decoration.borderRadius, BorderRadius.circular(10));
-    expect(text.style?.fontSize, 19);
+    expect(text.style?.fontSize, 32);
     expect(text.style?.fontWeight, FontWeight.w700);
     expect(text.style?.color, const Color(0xFF214336));
   });
