@@ -111,7 +111,12 @@ Gate:
 - widget test for typography and scaling behavior.
 
 Status:
-- `todo`
+- `done`
+
+Completion notes:
+- Implemented `SelectLevelTitle` in `lib/features/select_level/presentation/widgets/select_level_title.dart` with locked `Select level` label, `DynaPuff` typography, and capped text scaling support.
+- Added widget coverage for render, typography, and text scale clamping in `test/select_level_title_test.dart`.
+- Gate passed: `flutter analyze` and `flutter test test/select_level_title_test.dart`.
 
 ### 2.4 `SelectLevelBackgroundAndBrandReuse`
 - reuse existing `MainMenuBackground` and `DeveloperBrand` components where possible,
