@@ -105,6 +105,14 @@ Gate:
 - `flutter analyze`
 - bottom section comparison screenshot.
 
+Status:
+- `done` (`2026-02-26`)
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test test/main_menu_developer_brand_test.dart` -> all tests passed,
+  - bottom section artifact generated: `test/main_menu_developer_brand_phone.png`,
+  - comparison note: `docs/main-menu-stage-2-5-validation.md`.
+
 ## Stage 3 - `MainMenuScreenComposition` Integration
 
 Scope:
