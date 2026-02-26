@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory_game/shared/widgets/app_background.dart';
 import 'package:memory_game/shared/theme/app_theme.dart';
 
 class MemoryGameApp extends StatelessWidget {
@@ -9,7 +10,9 @@ class MemoryGameApp extends StatelessWidget {
     return MaterialApp(
       title: 'Memory Game',
       theme: AppTheme.light(),
-      home: const Scaffold(body: SizedBox.expand()),
+      home: const Scaffold(
+        body: AppBackground(),
+      ),
     );
   }
 }
