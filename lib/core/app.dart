@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
+import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
 import 'package:memory_game/shared/theme/app_theme.dart';
 
 class MemoryGameApp extends StatelessWidget {
@@ -10,13 +11,26 @@ class MemoryGameApp extends StatelessWidget {
     return MaterialApp(
       title: 'Memory Game',
       theme: AppTheme.light(),
-      home: MainMenuScreen(
-        onQuickPlayPressed: () {
-          debugPrint('Quick Play tapped');
-        },
-        onCustomizePressed: () {
-          debugPrint('Customize tapped');
-        },
+      home: Builder(
+        builder: (context) => MainMenuScreen(
+          onQuickPlayPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => SelectLevelScreen(
+                  onStartRequested: (startConfig) {
+                    debugPrint(
+                      'Select level: ${startConfig.difficulty.name} '
+                      '(${startConfig.rows}x${startConfig.columns})',
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+          onCustomizePressed: () {
+            debugPrint('Customize tapped');
+          },
+        ),
       ),
     );
   }

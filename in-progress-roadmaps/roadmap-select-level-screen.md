@@ -155,7 +155,18 @@ Gate:
 - `flutter run`
 
 Status:
-- `todo`
+- `done`
+
+Completion notes:
+- Implemented composed `SelectLevelScreen` in `lib/features/select_level/presentation/select_level_screen.dart` with locked layout slots, immediate selection updates, and start callback contract.
+- Added start payload + difficulty mapping resolver in `lib/features/select_level/presentation/select_level_start_config.dart` (`simple: 3x4`, `medium: 4x4`, `hard: 4x5`, fallback to `simple`).
+- Wired `MainMenu` `Quick Play` entry to `SelectLevelScreen` in `lib/core/app.dart`.
+- Added Stage 3 tests in `test/select_level_screen_test.dart` and extended navigation flow coverage in `test/main_menu_screen_test.dart`.
+- Gate results:
+  - passed: `flutter analyze`
+  - passed: `flutter test`
+  - attempted: `flutter run -d macos` (blocked: project has no macOS desktop target)
+  - attempted: `flutter run -d chrome` (blocked: project is not configured for web)
 
 ## Stage 4 - Gameplay Mapping Validation (difficulty -> board grid)
 

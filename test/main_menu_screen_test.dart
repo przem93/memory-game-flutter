@@ -5,6 +5,7 @@ import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_ac
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_background.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_logo_group.dart';
+import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
 
 void main() {
   setUp(() {
@@ -55,5 +56,35 @@ void main() {
 
     expect(quickPlayTapCount, 1);
     expect(customizeTapCount, 1);
+  });
+
+  testWidgets('Quick Play can navigate to SelectLevelScreen', (
+    WidgetTester tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(393, 852);
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) => MainMenuScreen(
+            onQuickPlayPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const SelectLevelScreen(),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(MainMenuActionSection.actionButtonKeyAt(0)));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SelectLevelScreen), findsOneWidget);
   });
 }
