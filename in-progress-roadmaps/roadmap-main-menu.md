@@ -47,6 +47,13 @@ Gate:
 - `flutter analyze`
 - background-only comparison screenshot.
 
+Status:
+- `done` (`2026-02-26`)
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - background artifact generated: `test/main_menu_background_phone.png`,
+  - comparison note: `docs/main-menu-stage-2-1-validation.md`.
+
 ### 2.2 `MainMenuLogoGroup`
 - logo group (`logo-icon` + `logo-text`) as a separate component,
 - component API: alignment, spacing, optional scale preset.
