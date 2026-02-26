@@ -214,7 +214,18 @@ Gate:
 - `flutter build ios --simulator`
 
 Status:
-- `todo`
+- `done` (`2026-02-26`)
+- Acceptance:
+  - `accepted-with-known-deviations`.
+- Artifacts:
+  - `test/select_level_screen_phone.png` (`393x852`),
+  - `test/select_level_screen_tablet.png` (`1024x1366`),
+  - validation note: `docs/select-level-stage-5-validation.md`.
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test` -> all tests passed,
+  - `flutter build apk --debug` -> built `build/app/outputs/flutter-apk/app-debug.apk`,
+  - `flutter build ios --simulator` -> built `build/ios/iphonesimulator/Runner.app`.
 
 ## Stage 6 - Documentation and Screen Closure
 
