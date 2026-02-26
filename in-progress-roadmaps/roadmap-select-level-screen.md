@@ -128,7 +128,14 @@ Gate:
 - comparison screenshot for bottom and background alignment.
 
 Status:
-- `todo`
+- `done`
+
+Completion notes:
+- Implemented reusable Select Level shell in `lib/features/select_level/presentation/widgets/select_level_scene_shell.dart` with `MainMenuBackground` + `MainMenuDeveloperBrand` reuse and automatic phone/tablet brand preset selection.
+- Existing `MainMenuBackground` and `MainMenuDeveloperBrand` APIs were sufficient; no extension was required for Stage 2.4.
+- Added widget and golden coverage in `test/select_level_scene_shell_test.dart` and `test/select_level_scene_shell_golden_test.dart`.
+- Added Stage 2.4 baseline screenshots for background/footer alignment: `test/select_level_scene_shell_phone.png` and `test/select_level_scene_shell_tablet.png`.
+- Gate passed: `flutter analyze`, `flutter test test/select_level_scene_shell_test.dart`, `flutter test test/select_level_scene_shell_golden_test.dart --update-goldens`.
 
 ## Stage 3 - `SelectLevelScreenComposition` Integration
 
