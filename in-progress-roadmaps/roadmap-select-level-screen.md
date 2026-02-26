@@ -184,7 +184,14 @@ Artifacts:
 - tests covering all three difficulty levels and expected board setup.
 
 Status:
-- `todo`
+- `done`
+
+Completion notes:
+- Added gameplay init destination `GameplayBoardInitScreen` in `lib/features/gameplay/presentation/gameplay_board_init_screen.dart` to validate Select Level -> board setup flow.
+- Wired `SelectLevelScreen` `onStartRequested` to push gameplay init with resolved `{difficulty, rows, columns}` payload in `lib/core/app.dart`.
+- Added unit coverage for difficulty mapping + fallback contract in `test/select_level_start_config_test.dart`.
+- Added flow coverage for all difficulty selections (`Simple`, `Medium`, `Hard`) and resulting board config payload in `test/app_select_level_flow_test.dart`.
+- Gate passed: `flutter analyze` and `flutter test test/select_level_start_config_test.dart test/app_select_level_flow_test.dart test/select_level_screen_test.dart`.
 
 ## Stage 5 - 1:1 Validation and Acceptance
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory_game/features/gameplay/presentation/gameplay_board_init_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
 import 'package:memory_game/shared/theme/app_theme.dart';
@@ -18,9 +19,11 @@ class MemoryGameApp extends StatelessWidget {
               MaterialPageRoute<void>(
                 builder: (_) => SelectLevelScreen(
                   onStartRequested: (startConfig) {
-                    debugPrint(
-                      'Select level: ${startConfig.difficulty.name} '
-                      '(${startConfig.rows}x${startConfig.columns})',
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) =>
+                            GameplayBoardInitScreen(startConfig: startConfig),
+                      ),
                     );
                   },
                 ),
