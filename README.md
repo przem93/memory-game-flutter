@@ -38,7 +38,7 @@ flutter run
 
 Dependency note:
 
-- `flutter_svg` is used to render SVG assets exported from Figma (e.g. splash screen visuals).
+- `flutter_native_splash` is used to generate native launch screens for Android and iOS.
 
 ## Platform Notes
 
