@@ -57,4 +57,17 @@ Release is currently manual for both stores.
 
 - Development guidance: `docs/development-guide.md`
 - Manual release process: `docs/release-manual.md`
+- Main Menu Spec Lock: `docs/main-menu-spec-lock.md`
+- Main Menu validation (Stage 4): `docs/main-menu-stage-4-validation.md`
+- Main Menu closure (Stage 5): `docs/main-menu-stage-5-closure.md`
 - Cursor project rules: `.cursor/rules/`
+
+## Main Menu
+
+- `MainMenuScreen` is composed from reusable Stage 2 widgets in
+  `lib/features/main_menu/presentation/widgets/`.
+- Primary actions:
+  - `Quick Play` starts default gameplay flow.
+  - `Customize` navigates to the game configuration flow.
+- Visual implementation and acceptance notes are documented in the Main Menu
+  files listed in the Documentation section.

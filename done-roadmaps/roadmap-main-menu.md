@@ -177,6 +177,20 @@ After `Main Menu` acceptance:
 - add an entry in `CHANGELOG.md` (if user-visible),
 - record final screen status (`accepted`) and deviation decisions.
 
+Status:
+- `done` (`2026-02-26`)
+- Acceptance:
+  - `accepted-with-known-deviations`.
+- Artifacts:
+  - `docs/main-menu-stage-5-closure.md`,
+  - `CHANGELOG.md`.
+- Decisions:
+  - new reference screenshot re-check completed
+    (`assets/Main_page-0559cdc2-f0fa-4faf-806d-3900fee26460.png`
+    vs `test/main_menu_screen_phone.png`),
+  - visual deltas remain non-trivial, so strict `accepted` status is deferred
+    until future parity pass.
+
 ## `Main Menu` Definition of Done (`Definition of Done`)
 
 `Main Menu` has `done` status when:
@@ -184,3 +198,6 @@ After `Main Menu` acceptance:
 - Stage 3 screen integration is complete and actions are connected,
 - Stage 4 passes with no critical deviations,
 - Stage 5 documentation is updated.
+
+Final status:
+- `done` with acceptance level `accepted-with-known-deviations`.
