@@ -96,7 +96,12 @@ Gate:
 - widget test for layout, single-selection behavior, and callback emission.
 
 Status:
-- `todo`
+- `done`
+
+Completion notes:
+- Implemented `SelectLevelOptionsSection` in `lib/features/select_level/presentation/widgets/select_level_options_section.dart` with API: `selectedDifficulty`, `onDifficultyChanged`, optional `spacing`, optional `isEnabled`.
+- Added widget coverage for layout, single-selection state, callback emission, and spacing variants in `test/select_level_options_section_test.dart`.
+- Gate passed: `flutter analyze` and `flutter test test/select_level_options_section_test.dart`.
 
 ### 2.3 `SelectLevelTitle`
 - implement reusable title block for `Select level` text with Figma-accurate style.
