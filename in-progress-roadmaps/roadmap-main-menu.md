@@ -26,6 +26,11 @@ Collect and document:
 Output:
 - `Spec Lock` table added to this file or a dedicated reference file (`docs/main-menu-spec-lock.md`).
 
+Status:
+- `accepted-with-fallback` (implemented based on reference screenshot measurements).
+- Figma MCP strict extraction was blocked by account call limit during this step.
+- Metrics reference: `docs/main-menu-spec-lock.md`.
+
 Stage 1 Gate:
 - `done` (Stage 2.1 `MainMenuBackground` can start).
 
