@@ -72,3 +72,17 @@ These values are extracted from screenshot pixels and should be replaced by exac
 - Decision: `accepted-with-fallback`.
 - Rationale: unblocks Etap 2 (component-first implementation) while preserving a measurable baseline.
 - Exit condition to upgrade to strict `accepted`: replace fallback rows with exact Figma values when MCP access is restored.
+
+## Native launch implementation notes (Stage 6)
+
+- Implemented date: `2026-02-26`.
+- Native launch source image: `assets/start-page.png` (`1572 x 3408`, portrait).
+- Integration path: `flutter_native_splash` generator.
+- iOS launch composition:
+  - full-screen constraints in `LaunchScreen.storyboard`,
+  - foreground launch image uses `scaleAspectFill` for centered cover behavior.
+- Android launch composition:
+  - pre-Android 12 uses `launch_background.xml` with `android:gravity="fill"` and generated `background.png`,
+  - Android 12+ uses system splash API (`windowSplashScreenAnimatedIcon` + background color) due platform constraints.
+- Known platform deviation:
+  - Android 12+ cannot provide the same full-screen custom background image behavior as pre-12/iOS native launch.

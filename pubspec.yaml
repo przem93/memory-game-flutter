@@ -46,6 +46,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -105,3 +106,17 @@ flutter:
           weight: 600
         - asset: assets/font/DynaPuff_SemiCondensed-Bold.ttf
           weight: 700
+
+flutter_native_splash:
+  color: "#29654E"
+  background_image: assets/start-page.png
+  fullscreen: true
+  android: true
+  ios: true
+  web: false
+  android_gravity: fill
+  ios_content_mode: scaleAspectFill
+  android_12:
+    color: "#29654E"
+    image: assets/logo-icon.png
+    icon_background_color: "#29654E"

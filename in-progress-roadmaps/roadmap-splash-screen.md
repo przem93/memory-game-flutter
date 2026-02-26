@@ -126,7 +126,7 @@ After finishing splash, add permanent rules in `.cursor/rules`:
 - mandatory `Spec Lock` before visual implementation,
 - mandatory 1:1 validation after screen integration.
 
-## Stage 6 - Native Launch Replacement (`LaunchTheme` / `LaunchScreen`) [IN PROGRESS]
+## Stage 6 - Native Launch Replacement (`LaunchTheme` / `LaunchScreen`) [COMPLETED]
 
 Goal: align native startup screens with the splash visual direction so users see consistent branding before Flutter renders the first frame.
 
@@ -161,6 +161,33 @@ Stage 6 Gate:
 - `flutter test`
 - real device/emulator cold start check (Android + iOS),
 - screenshots/video evidence of startup transition attached in docs/PR notes.
+
+### Stage 6 implementation status (2026-02-26)
+
+Completed path: `flutter_native_splash`.
+
+Implemented:
+- added dev dependency: `flutter_native_splash`,
+- configured native splash in `pubspec.yaml` with:
+  - `background_image: assets/start-page.png`,
+  - fullscreen mode, centered/cover behavior (`android_gravity: fill`, `ios_content_mode: scaleAspectFill`),
+  - Android 12 fallback (`android_12`) using icon + background color.
+- generated native resources via:
+  - `dart run flutter_native_splash:create`.
+
+Validation run:
+- `flutter analyze` -> pass,
+- `flutter test` -> pass,
+- `flutter build apk --debug` -> pass,
+- `flutter build ios --simulator` -> pass,
+- cold-start launches executed on:
+  - Android emulator (`emulator-5554`),
+  - iOS simulator (`iPhone 16e`).
+
+Platform notes:
+- Android < 12: full-screen splash background image from `assets/start-page.png`.
+- Android 12+: system splash API limits full-screen custom artwork; fallback icon+color is applied by design.
+- iOS: launch storyboard uses full-bleed/cover composition generated from the same source image.
 
 ## Splash Completion Definition (`Definition of Done`)
 
