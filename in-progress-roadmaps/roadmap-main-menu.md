@@ -156,6 +156,20 @@ Gate:
 - `flutter build apk --debug`
 - `flutter build ios --simulator`
 
+Status:
+- `done` (`2026-02-26`)
+- Acceptance:
+  - `accepted-with-known-deviations` (fallback baseline from Stage 1 still applies).
+- Artifacts:
+  - `test/main_menu_screen_phone.png` (`393x852`),
+  - `test/main_menu_screen_tablet.png` (`1024x1366`),
+  - validation note: `docs/main-menu-stage-4-validation.md`.
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test` -> all tests passed,
+  - `flutter build apk --debug` -> built `build/app/outputs/flutter-apk/app-debug.apk`,
+  - `flutter build ios --simulator` -> built `build/ios/iphonesimulator/Runner.app`.
+
 ## Stage 5 - Documentation and Screen Closure
 
 After `Main Menu` acceptance:
