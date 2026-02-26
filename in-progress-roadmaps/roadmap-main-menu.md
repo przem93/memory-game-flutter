@@ -91,6 +91,12 @@ Gate:
 - `flutter analyze`
 - widget test for layout and semantics.
 
+Status:
+- `done` (`2026-02-26`)
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test test/main_menu_action_section_test.dart` -> all tests passed.
+
 ### 2.5 `DeveloperBrand`
 - reuse the existing developer footer component (no duplication),
 - optional API adaptation for `Main Menu` (offset/size variant) if required by `Spec Lock`.
