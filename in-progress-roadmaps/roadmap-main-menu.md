@@ -62,6 +62,12 @@ Gate:
 - `flutter analyze`
 - widget test for API variants and layout.
 
+Status:
+- `done` (`2026-02-26`)
+- Gate passed:
+  - `flutter analyze` -> no issues,
+  - `flutter test` -> all tests passed (including `test/main_menu_logo_group_test.dart`).
+
 ### 2.3 `MainMenuPrimaryButton`
 - shared button component for `Quick Play` and `Customize`,
 - 1:1 style (font, outline, radius, height, padding),
