@@ -38,14 +38,19 @@ Asset references to reuse (do not recreate unless blocked):
 - `assets/Level button.png` (raster reference for color and visual state checks).
 
 Output:
-- `Spec Lock` table added to this file or dedicated reference file (`docs/select-level-spec-lock.md`),
-- explicit grid mapping table consumed by gameplay board setup.
+- `Spec Lock` document added: `docs/select-level-spec-lock.md`,
+- explicit grid mapping table consumed by gameplay board setup (included in spec lock doc),
+- temporary assumptions explicitly listed for later Figma re-validation.
 
 Stage 1 Gate:
 - `done` (Stage 2.1 `SelectLevelOptionButton` can start).
 
 Status:
-- `in-progress`
+- `done`
+
+Completion notes:
+- Stage 1 locked using local assets + provided screen reference screenshot.
+- Figma MCP access was blocked by plan call limit during this stage; assumptions were documented in `docs/select-level-spec-lock.md` for follow-up verification.
 
 ## Stage 2 - Reusable Components (separate implementation steps)
 
@@ -71,7 +76,12 @@ Gate:
 - widget test for all color/state variants and semantics.
 
 Status:
-- `todo`
+- `done`
+
+Completion notes:
+- Implemented `SelectLevelOptionButton` as a dedicated reusable component in `lib/features/select_level/presentation/widgets/select_level_option_button.dart`.
+- Added widget coverage for selected/unselected/pressed/disabled states and semantics in `test/select_level_option_button_test.dart`.
+- Gate passed: `flutter analyze` and `flutter test test/select_level_option_button_test.dart`.
 
 ### 2.2 `SelectLevelOptionsSection`
 - implement section that renders and spaces all level buttons (`Simple`, `Medium`, `Hard`),
