@@ -130,31 +130,18 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
 class _TopLogoRow extends StatelessWidget {
   const _TopLogoRow({required this.isTablet});
 
+  static const _phoneHorizontalMargin = 20.0;
+  static const _tabletHorizontalInset = 48.0;
+
   final bool isTablet;
 
   @override
   Widget build(BuildContext context) {
-    final factor = isTablet ? 1.2 : 1.0;
-
-    return SizedBox(
-      height: _SelectLevelScreenState._logoHeight * factor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: _SelectLevelScreenState._logoIconSize * factor,
-            height: _SelectLevelScreenState._logoIconSize * factor,
-            child: Image.asset('assets/logo-icon.png', fit: BoxFit.contain),
-          ),
-          SizedBox(width: _SelectLevelScreenState._logoSpacing * factor),
-          SizedBox(
-            height: _SelectLevelScreenState._logoTextHeight * factor,
-            child: Image.asset('assets/logo-text.png', fit: BoxFit.contain),
-          ),
-        ],
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: isTablet ? _tabletHorizontalInset : _phoneHorizontalMargin,
       ),
+      child: Image.asset('assets/screen-logo.png', fit: BoxFit.contain),
     );
   }
 }
