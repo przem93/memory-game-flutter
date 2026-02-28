@@ -190,7 +190,7 @@ Artifacts:
 - tests covering all difficulty levels (`simple|medium|hard`) with expected card/pair counts and icon selection invariants.
 
 Status:
-- `todo`.
+- `done`.
 
 ## Stage 5 - 1:1 Validation and Acceptance
 
@@ -214,7 +214,13 @@ Gate:
 - `flutter build ios --simulator`
 
 Status:
-- `todo`.
+- `in-progress`.
+
+Stage 5 closure note:
+- Validation artifacts and checklist are complete in `docs/game-screen-stage-5-validation.md`.
+- Remaining acceptance blockers are environment/process level:
+  - local iOS build prerequisite (`xcodebuild` license + first launch),
+  - failing non-Game full-suite goldens in `Select Level` tests.
 
 ## Stage 6 - Documentation and Screen Closure
 
