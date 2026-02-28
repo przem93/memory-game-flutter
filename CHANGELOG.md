@@ -39,3 +39,6 @@ All notable user-visible changes to this project are documented in this file.
 - Added Game Stage 5/6 documentation set:
   - `docs/game-screen-stage-5-validation.md`,
   - `docs/game-screen-stage-6-closure.md`.
+- Cleared local Xcode prerequisite and completed final `Game` Stage 5 gate,
+  including successful `flutter build ios --simulator`; `Game` roadmap status
+  is now closed as `done`.

@@ -22,19 +22,19 @@ Scope: documentation closure for `GameScreen` after Stage 5 validation updates
   - `docs/game-screen-stage-5-validation.md` now records:
     - `Select Level` golden baseline policy resolution (`--update-goldens`),
     - full `flutter test` pass after baseline update,
-    - remaining iOS-local environment prerequisite.
+    - local iOS simulator build gate passing after Xcode prerequisite clearance.
 - Roadmap updated:
   - `in-progress-roadmaps/roadmap-game-screen.md` now tracks:
-    - Stage 5 blocker reduced to iOS environment only,
-    - Stage 6 status moved to `in-progress` with this closure note referenced.
+    - Stage 5 status set to `done` after successful local iOS simulator build,
+    - Stage 6 status set to `done` with this closure note referenced,
+    - final `Game` status set to `done`.
 - Project documentation updated:
   - `README.md` includes `Game` spec/validation/closure references.
   - `CHANGELOG.md` includes user-visible `Game` screen delivery notes and test-baseline update note.
 
-## Remaining Acceptance Blocker
+## Final Acceptance
 
-- Local iOS build gate requires machine-level admin actions:
-  - `sudo xcodebuild -license`
-  - `sudo xcodebuild -runFirstLaunch`
+- Stage 5 gate is complete (`analyze`, `test`, `build apk --debug`, `build ios --simulator`).
+- `Game` screen closure documentation is synchronized and accepted.
 
-Status: `prepared-pending-ios-prerequisite`
+Status: `done`

@@ -52,23 +52,19 @@ This note records final Stage 5 validation evidence for `Game` against locked re
 - `flutter test test/features/gameplay/presentation/widgets/game_top_bar_test.dart`: **pass**
 - `flutter test --update-goldens test/select_level_screen_golden_test.dart`: **pass**
   - baseline policy applied: update `Select Level` golden snapshots to current shared non-main layout baseline.
-- `flutter analyze`: **pass with info-level warnings only**
+- `flutter analyze --no-fatal-infos`: **pass with info-level warnings only**
   - `deprecated_member_use` (`hasFlag`) in `test/features/gameplay/presentation/widgets/game_board_grid_test.dart` (no analyzer errors).
 - `flutter test` (full suite): **pass**
 - `flutter build apk --debug`: **pass**
-- `flutter build ios --simulator`: **blocked by local machine prerequisite**
-  - Xcode license not accepted (`sudo xcodebuild -license`)
-  - additional first-launch Xcode setup pending (`sudo xcodebuild -runFirstLaunch`)
+- `flutter build ios --simulator`: **pass**
 
-## Known Deviations / Blockers
+## Known Deviations
 
 - No critical `Game` visual regressions identified for phone/tablet Stage 5 artifacts.
 - Minor rendering softness differences can occur between runtime SVG rendering and static PNG references.
-- Stage 5 full gate is currently blocked by environment/setup factors unrelated to `Game` implementation:
-  - missing local Xcode acceptance/setup for iOS simulator build.
 
 ## Verdict
 
 - `Game` Stage 5 visual validation items are complete based on locked references and Stage 5 artifacts.
-- Final acceptance gate remains **pending environment clearance** for iOS local build prerequisite.
+- Full Stage 5 gate is complete on local Android and iOS simulator builds.
 

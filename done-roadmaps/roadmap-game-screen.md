@@ -49,7 +49,7 @@ Stage 1 Gate:
 - `done` (Stage 2.1 can start).
 
 Status:
-- `in-progress`.
+- `done`.
 
 ## Stage 2 - Reusable Components (separate implementation steps)
 
@@ -214,12 +214,11 @@ Gate:
 - `flutter build ios --simulator`
 
 Status:
-- `in-progress`.
+- `done`.
 
 Stage 5 closure note:
 - Validation artifacts and checklist are complete in `docs/game-screen-stage-5-validation.md`.
-- Remaining acceptance blockers are environment/process level:
-  - local iOS build prerequisite (`xcodebuild` license + first launch).
+- Full platform gate is verified, including local iOS simulator build.
 
 ## Stage 6 - Documentation and Screen Closure
 
@@ -233,11 +232,11 @@ Gate:
 - documentation updates merged and consistent with implemented behavior.
 
 Status:
-- `in-progress`.
+- `done`.
 
-Stage 6 preparation note:
-- Documentation skeleton and closure entry were prepared in `docs/game-screen-stage-6-closure.md`.
-- Final Stage 6 sign-off is pending Stage 5 iOS environment clearance.
+Stage 6 closure note:
+- Documentation closure is complete in `docs/game-screen-stage-6-closure.md`.
+- Changelog entry is synchronized with final `Game` acceptance.
 
 ## Open Questions to Lock Before Stage 2/3
 
@@ -260,4 +259,4 @@ Stage 6 preparation note:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress`.
+- `done`.
