@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
 
@@ -17,16 +16,16 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  String renderedAssetName(WidgetTester tester) {
-    final svg = tester.widget<SvgPicture>(
+  Color renderedFillColor(WidgetTester tester) {
+    final box = tester.widget<DecoratedBox>(
       find.byKey(GameCardShell.backgroundAssetKey),
     );
-    final loader = svg.bytesLoader as SvgAssetLoader;
-    return loader.assetName;
+    final decoration = box.decoration as BoxDecoration;
+    return decoration.color!;
   }
 
-  testWidgets('renders expected shell asset for each card state', (tester) async {
-    Future<void> expectAssetForState(GameCardShellState state, String expected) async {
+  testWidgets('renders expected shell fill style for each card state', (tester) async {
+    Future<void> expectFillForState(GameCardShellState state, Color expected) async {
       await pumpHarness(
         tester,
         child: Center(
@@ -38,20 +37,20 @@ void main() {
         ),
       );
 
-      expect(renderedAssetName(tester), expected);
+      expect(renderedFillColor(tester), expected);
     }
 
-    await expectAssetForState(
+    await expectFillForState(
       GameCardShellState.hidden,
-      'assets/game-screen/reversed-card.svg',
+      const Color(0xFFF3F3F3),
     );
-    await expectAssetForState(
+    await expectFillForState(
       GameCardShellState.revealed,
-      'assets/game-screen/Card.svg',
+      const Color(0xFFFFFFFF),
     );
-    await expectAssetForState(
+    await expectFillForState(
       GameCardShellState.matched,
-      'assets/game-screen/matched card.svg',
+      const Color(0xFF03EBD0),
     );
   });
 

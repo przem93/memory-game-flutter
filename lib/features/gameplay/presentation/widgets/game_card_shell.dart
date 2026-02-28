@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 enum GameCardShellState { hidden, revealed, matched }
 
@@ -15,6 +14,11 @@ class GameCardShell extends StatelessWidget {
 
   static const shellKey = ValueKey<String>('gameCardShell');
   static const backgroundAssetKey = ValueKey<String>('gameCardShellBackgroundAsset');
+  static const _cornerRadius = 6.0;
+  static const _borderWidth = 2.0;
+  static const _hiddenFill = Color(0xFFF3F3F3);
+  static const _revealedFill = Color(0xFFFFFFFF);
+  static const _matchedFill = Color(0xFF03EBD0);
 
   final GameCardShellState state;
   final Widget? child;
@@ -29,16 +33,28 @@ class GameCardShell extends StatelessWidget {
       label: semanticLabel,
       child: Container(
         key: shellKey,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(_cornerRadius),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x40000000),
+              offset: Offset(0, 4),
+              blurRadius: 2,
+            ),
+          ],
+        ),
         clipBehavior: Clip.antiAlias,
         child: Stack(
           fit: StackFit.expand,
           children: [
             ExcludeSemantics(
-              child: SvgPicture.asset(
-                _assetPathFor(state),
+              child: DecoratedBox(
                 key: backgroundAssetKey,
-                fit: BoxFit.fill,
+                decoration: BoxDecoration(
+                  color: _fillColorFor(state),
+                  borderRadius: BorderRadius.circular(_cornerRadius),
+                  border: Border.all(color: Colors.black, width: _borderWidth),
+                ),
               ),
             ),
             if (child != null)
@@ -51,11 +67,11 @@ class GameCardShell extends StatelessWidget {
     );
   }
 
-  static String _assetPathFor(GameCardShellState state) {
+  static Color _fillColorFor(GameCardShellState state) {
     return switch (state) {
-      GameCardShellState.hidden => 'assets/game-screen/reversed-card.svg',
-      GameCardShellState.revealed => 'assets/game-screen/Card.svg',
-      GameCardShellState.matched => 'assets/game-screen/matched card.svg',
+      GameCardShellState.hidden => _hiddenFill,
+      GameCardShellState.revealed => _revealedFill,
+      GameCardShellState.matched => _matchedFill,
     };
   }
 }

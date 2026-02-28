@@ -19,6 +19,8 @@ class GameCardFaceContent extends StatelessWidget {
   static const rootKey = ValueKey<String>('gameCardFaceContent');
   static const overlayAssetKey = ValueKey<String>('gameCardFaceContentOverlayAsset');
   static const hiddenAssetPath = 'assets/card-brain.svg';
+  static const hiddenIconMaxScale = 0.7;
+  static const revealedIconScale = 0.52;
 
   final GameCardShellState state;
   final String? symbolAssetPath;
@@ -34,10 +36,14 @@ class GameCardFaceContent extends StatelessWidget {
       label: semanticLabel ?? _defaultSemanticLabelFor(state),
       child: ExcludeSemantics(
         child: Center(
-          child: SvgPicture.asset(
-            _overlayAssetPathFor(state: state, symbolAssetPath: symbolAssetPath),
-            key: overlayAssetKey,
-            fit: BoxFit.contain,
+          child: FractionallySizedBox(
+            widthFactor: _overlayScaleFor(state),
+            heightFactor: _overlayScaleFor(state),
+            child: SvgPicture.asset(
+              _overlayAssetPathFor(state: state, symbolAssetPath: symbolAssetPath),
+              key: overlayAssetKey,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),
@@ -60,6 +66,14 @@ class GameCardFaceContent extends StatelessWidget {
       GameCardShellState.hidden => 'Hidden card symbol',
       GameCardShellState.revealed || GameCardShellState.matched =>
         'Card symbol',
+    };
+  }
+
+  static double _overlayScaleFor(GameCardShellState state) {
+    return switch (state) {
+      GameCardShellState.hidden => hiddenIconMaxScale,
+      GameCardShellState.revealed || GameCardShellState.matched =>
+        revealedIconScale,
     };
   }
 }

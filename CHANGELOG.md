@@ -42,3 +42,5 @@ All notable user-visible changes to this project are documented in this file.
 - Cleared local Xcode prerequisite and completed final `Game` Stage 5 gate,
   including successful `flutter build ios --simulator`; `Game` roadmap status
   is now closed as `done`.
+- Reduced revealed/matched gameplay card icon scale so symbols fit card faces
+  with better visual balance during play.
