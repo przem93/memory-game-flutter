@@ -219,8 +219,7 @@ Status:
 Stage 5 closure note:
 - Validation artifacts and checklist are complete in `docs/game-screen-stage-5-validation.md`.
 - Remaining acceptance blockers are environment/process level:
-  - local iOS build prerequisite (`xcodebuild` license + first launch),
-  - failing non-Game full-suite goldens in `Select Level` tests.
+  - local iOS build prerequisite (`xcodebuild` license + first launch).
 
 ## Stage 6 - Documentation and Screen Closure
 
@@ -234,7 +233,11 @@ Gate:
 - documentation updates merged and consistent with implemented behavior.
 
 Status:
-- `todo`.
+- `in-progress`.
+
+Stage 6 preparation note:
+- Documentation skeleton and closure entry were prepared in `docs/game-screen-stage-6-closure.md`.
+- Final Stage 6 sign-off is pending Stage 5 iOS environment clearance.
 
 ## Open Questions to Lock Before Stage 2/3
 

@@ -14,6 +14,9 @@ All notable user-visible changes to this project are documented in this file.
   difficulty options (`Simple`, `Medium`, `Hard`).
 - Added Select Level flow wiring from `Quick Play` to gameplay board
   initialization via difficulty mapping (`3x4`, `4x4`, `4x5`).
+- Implemented `GameScreen` gameplay loop with deterministic pair setup,
+  match/mismatch state transitions, and elapsed timer behavior across
+  `simple`, `medium`, and `hard` boards.
 
 ### Changed
 
@@ -31,3 +34,8 @@ All notable user-visible changes to this project are documented in this file.
   `accepted-with-known-deviations`.
 - Improved Select Level responsive composition by switching to a vertical layout
   flow with proportional spacing, reducing overlap risk on real device viewports.
+- Updated Select Level golden baselines (`phone` + `tablet`) to match the current
+  shared non-main scene layout policy used by gameplay-adjacent screens.
+- Added Game Stage 5/6 documentation set:
+  - `docs/game-screen-stage-5-validation.md`,
+  - `docs/game-screen-stage-6-closure.md`.
