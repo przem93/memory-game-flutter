@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memory_game/core/app.dart';
-import 'package:memory_game/features/gameplay/presentation/gameplay_board_init_screen.dart';
+import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
+import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_action_section.dart';
 
 void main() {
@@ -26,7 +27,7 @@ void main() {
   Future<void> expectGameplayStartFromDifficulty(
     WidgetTester tester, {
     required String difficultyLabel,
-    required String expectedText,
+    required int expectedCardCount,
   }) async {
     await pumpApp(tester);
     await openSelectLevel(tester);
@@ -34,15 +35,15 @@ void main() {
     await tester.tap(find.text(difficultyLabel));
     await tester.pumpAndSettle();
 
-    expect(find.byType(GameplayBoardInitScreen), findsOneWidget);
-    expect(find.text(expectedText), findsOneWidget);
+    expect(find.byType(GameScreen), findsOneWidget);
+    expect(find.byType(GameCardShell), findsNWidgets(expectedCardCount));
   }
 
   testWidgets('starts gameplay config for Simple', (WidgetTester tester) async {
     await expectGameplayStartFromDifficulty(
       tester,
       difficultyLabel: 'Simple',
-      expectedText: 'SIMPLE 3x4 pairs:6',
+      expectedCardCount: 12,
     );
   });
 
@@ -50,7 +51,7 @@ void main() {
     await expectGameplayStartFromDifficulty(
       tester,
       difficultyLabel: 'Medium',
-      expectedText: 'MEDIUM 4x4 pairs:8',
+      expectedCardCount: 16,
     );
   });
 
@@ -58,7 +59,7 @@ void main() {
     await expectGameplayStartFromDifficulty(
       tester,
       difficultyLabel: 'Hard',
-      expectedText: 'HARD 4x5 pairs:10',
+      expectedCardCount: 20,
     );
   });
 }

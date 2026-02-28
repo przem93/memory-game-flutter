@@ -137,7 +137,7 @@ Gate:
 - comparison screenshot for background/footer alignment.
 
 Status:
-- `todo`.
+- `done`.
 
 ## Stage 3 - `GameScreenComposition` Integration
 

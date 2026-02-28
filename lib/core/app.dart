@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:memory_game/features/gameplay/presentation/gameplay_board_init_screen.dart';
+import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
 import 'package:memory_game/shared/theme/app_theme.dart';
@@ -21,8 +21,7 @@ class MemoryGameApp extends StatelessWidget {
                   onStartRequested: (startConfig) {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (_) =>
-                            GameplayBoardInitScreen(startConfig: startConfig),
+                        builder: (_) => GameScreen(startConfig: startConfig),
                       ),
                     );
                   },
