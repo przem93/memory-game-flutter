@@ -19,7 +19,7 @@ class GameCardFaceContent extends StatelessWidget {
   static const rootKey = ValueKey<String>('gameCardFaceContent');
   static const overlayAssetKey = ValueKey<String>('gameCardFaceContentOverlayAsset');
   static const hiddenAssetPath = 'assets/card-brain.svg';
-  static const hiddenIconMaxScale = 0.7;
+  static const hiddenIconMaxScale = 0.82;
   static const revealedIconScale = 0.52;
 
   final GameCardShellState state;
