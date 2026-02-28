@@ -68,7 +68,7 @@ Gate:
 - widget tests for layout, timer format rendering, and button semantics.
 
 Status:
-- `todo`.
+- `done`.
 
 ### 2.2 `GameCardShell`
 - implement card shell component with visual states from assets:
@@ -83,7 +83,7 @@ Gate:
 - widget tests for all states and dimensions.
 
 Status:
-- `todo`.
+- `done`.
 
 ### 2.3 `GameCardFaceContent`
 - implement content layer displayed on top of `GameCardShell` when card is revealed/matched,
@@ -95,7 +95,7 @@ Gate:
 - widget tests for asset rendering and semantic labels.
 
 Status:
-- `todo`.
+- `done`.
 
 ### 2.4 `GameBoardGrid`
 - implement reusable board section rendering cards in responsive fixed-ratio grid,
@@ -107,7 +107,7 @@ Gate:
 - widget tests for grid dimensions, spacing, and interaction contract.
 
 Status:
-- `todo`.
+- `done`.
 
 ### 2.5 `GameIconSetProvider` (pair source selection)
 - implement data/provider layer for icon-set based board generation,
