@@ -125,7 +125,7 @@ Gate:
 - unit tests for icon draw count, uniqueness, duplication-to-pairs, and deterministic seeded shuffle.
 
 Status:
-- `todo`.
+- `done`.
 
 ### 2.6 `GameSceneShell` (background + brand reuse)
 - reuse existing background and developer brand components where possible,
