@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
+import 'package:memory_game/features/gameplay/presentation/widgets/game_board_grid.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_top_bar.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
@@ -90,5 +91,27 @@ void main() {
     await tester.tap(find.byKey(GameTopBar.closeButtonKey));
     await tester.pumpAndSettle();
     expect(closeTapped, isTrue);
+  });
+
+  testWidgets('binds provider icon asset path to each board card', (tester) async {
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.medium,
+        rows: 4,
+        columns: 4,
+      ),
+    );
+
+    final boardGrid = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    expect(boardGrid.cards, hasLength(16));
+
+    for (final card in boardGrid.cards) {
+      final symbolAssetPath = card.symbolAssetPath;
+      expect(symbolAssetPath, isNotNull);
+      expect(symbolAssetPath, isNotEmpty);
+      expect(symbolAssetPath, startsWith('assets/sets/food-set/'));
+      expect(symbolAssetPath, endsWith('.svg'));
+    }
   });
 }

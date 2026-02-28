@@ -136,6 +136,7 @@ class _GameScreenState extends State<GameScreen> {
         return GameBoardGridCardData(
           id: '${icon.id}-$index',
           state: GameCardShellState.hidden,
+          symbolAssetPath: icon.assetPath,
           semanticLabel:
               'Card ${index + 1} of ${icons.length} ${GameCardShellState.hidden.name}',
         );
