@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:memory_game/features/gameplay/data/game_icon_set_provider.dart';
+import 'package:memory_game/features/gameplay/presentation/gameplay_state_machine.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_board_grid.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_scene_shell.dart';
@@ -15,6 +18,8 @@ class GameScreen extends StatefulWidget {
     this.elapsed = Duration.zero,
     this.seed,
     this.semanticsLabel = 'Game screen',
+    this.mismatchRevealDuration = const Duration(milliseconds: 650),
+    this.timerTick = const Duration(seconds: 1),
     super.key,
   });
 
@@ -28,6 +33,8 @@ class GameScreen extends StatefulWidget {
   final Duration elapsed;
   final int? seed;
   final String semanticsLabel;
+  final Duration mismatchRevealDuration;
+  final Duration timerTick;
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -40,22 +47,35 @@ class _GameScreenState extends State<GameScreen> {
   static const _phoneBoardBottomPadding = 138.0;
   static const _tabletBoardBottomPadding = 166.0;
 
+  Timer? _ticker;
+  GameplayStateMachine? _stateMachine;
   late List<GameBoardGridCardData> _cards;
   String? _generationError;
+  late Duration _elapsed;
+  int _boardVersion = 0;
 
   @override
   void initState() {
     super.initState();
+    _elapsed = widget.elapsed;
     _hydrateBoard();
   }
 
   @override
   void didUpdateWidget(covariant GameScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.startConfig != widget.startConfig ||
+    if (oldWidget.startConfig.rows != widget.startConfig.rows ||
+        oldWidget.startConfig.columns != widget.startConfig.columns ||
+        oldWidget.startConfig.difficulty != widget.startConfig.difficulty ||
         oldWidget.seed != widget.seed) {
       _hydrateBoard();
     }
+  }
+
+  @override
+  void dispose() {
+    _stopTimer(reset: true);
+    super.dispose();
   }
 
   @override
@@ -73,7 +93,7 @@ class _GameScreenState extends State<GameScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 GameTopBar(
-                  elapsed: widget.elapsed,
+                  elapsed: _elapsed,
                   scalePreset: isTablet
                       ? GameTopBarScalePreset.tablet
                       : GameTopBarScalePreset.phone,
@@ -103,8 +123,9 @@ class _GameScreenState extends State<GameScreen> {
                               rows: widget.startConfig.rows,
                               columns: widget.startConfig.columns,
                               cards: _cards,
-                              onCardTap: null,
-                              isInteractionEnabled: false,
+                              onCardTap: _onCardTap,
+                              isInteractionEnabled:
+                                  _stateMachine?.isInteractionEnabled ?? false,
                             )
                           : _buildErrorState(),
                     ),
@@ -119,32 +140,122 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _hydrateBoard() {
+    _boardVersion += 1;
+    _stopTimer(reset: true);
+    _stateMachine = null;
     _generationError = null;
-    _cards = _buildInitialHiddenCards();
-  }
-
-  List<GameBoardGridCardData> _buildInitialHiddenCards() {
+    _elapsed = widget.elapsed;
+    _cards = const <GameBoardGridCardData>[];
     final provider = widget.iconSetProvider ?? GameIconSetProvider();
     try {
       final icons = provider.generateForStartConfig(
         widget.startConfig,
         seed: widget.seed,
       );
-
-      return List<GameBoardGridCardData>.generate(icons.length, (index) {
-        final icon = icons[index];
-        return GameBoardGridCardData(
-          id: '${icon.id}-$index',
-          state: GameCardShellState.hidden,
-          symbolAssetPath: icon.assetPath,
-          semanticLabel:
-              'Card ${index + 1} of ${icons.length} ${GameCardShellState.hidden.name}',
-        );
-      });
+      _stateMachine = GameplayStateMachine(icons: icons);
+      _syncCardsFromStateMachine();
+      _startTimer();
     } on GameIconSetProviderException catch (error) {
       _generationError =
           'Unable to start game (${error.failure.name}). Please try again.';
-      return const <GameBoardGridCardData>[];
+    }
+  }
+
+  void _onCardTap(String cardId) {
+    final stateMachine = _stateMachine;
+    if (stateMachine == null) {
+      return;
+    }
+
+    final result = stateMachine.flipCard(cardId);
+    if (result.type == GameplayFlipResultType.ignored) {
+      return;
+    }
+
+    setState(_syncCardsFromStateMachine);
+
+    if (result.type == GameplayFlipResultType.mismatchPending) {
+      _scheduleMismatchResolution(version: _boardVersion);
+      return;
+    }
+
+    if (result.isBoardCompleted) {
+      _stopTimer();
+    }
+  }
+
+  Future<void> _scheduleMismatchResolution({required int version}) async {
+    await Future<void>.delayed(widget.mismatchRevealDuration);
+    if (!mounted || version != _boardVersion) {
+      return;
+    }
+
+    final stateMachine = _stateMachine;
+    if (stateMachine == null) {
+      return;
+    }
+
+    stateMachine.resolvePendingMismatch();
+    setState(_syncCardsFromStateMachine);
+  }
+
+  void _syncCardsFromStateMachine() {
+    final stateMachine = _stateMachine;
+    if (stateMachine == null) {
+      _cards = const <GameBoardGridCardData>[];
+      return;
+    }
+
+    final snapshot = stateMachine.cards;
+    _cards = List<GameBoardGridCardData>.generate(snapshot.length, (index) {
+      final card = snapshot[index];
+      return GameBoardGridCardData(
+        id: card.id,
+        state: card.state,
+        symbolAssetPath: card.symbolAssetPath,
+        semanticLabel: _semanticLabelFor(
+          position: index + 1,
+          total: snapshot.length,
+          state: card.state,
+        ),
+      );
+    });
+  }
+
+  String _semanticLabelFor({
+    required int position,
+    required int total,
+    required GameCardShellState state,
+  }) {
+    final stateLabel = switch (state) {
+      GameCardShellState.hidden => 'hidden',
+      GameCardShellState.revealed => 'revealed',
+      GameCardShellState.matched => 'matched',
+    };
+    return 'Card $position of $total $stateLabel';
+  }
+
+  void _startTimer() {
+    if (_generationError != null || _stateMachine == null) {
+      return;
+    }
+
+    _ticker?.cancel();
+    _ticker = Timer.periodic(widget.timerTick, (_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _elapsed += widget.timerTick;
+      });
+    });
+  }
+
+  void _stopTimer({bool reset = false}) {
+    _ticker?.cancel();
+    _ticker = null;
+    if (reset) {
+      _elapsed = widget.elapsed;
     }
   }
 

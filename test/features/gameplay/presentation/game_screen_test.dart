@@ -17,6 +17,9 @@ void main() {
     VoidCallback? onCloseTap,
     GameIconSetProvider? iconSetProvider,
     String semanticsLabel = 'Game screen',
+    Duration elapsed = Duration.zero,
+    Duration mismatchRevealDuration = const Duration(milliseconds: 650),
+    Duration timerTick = const Duration(seconds: 1),
   }) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = canvas;
@@ -29,6 +32,9 @@ void main() {
           seed: 42,
           onCloseTap: onCloseTap,
           iconSetProvider: iconSetProvider,
+          elapsed: elapsed,
+          mismatchRevealDuration: mismatchRevealDuration,
+          timerTick: timerTick,
           semanticsLabel: semanticsLabel,
         ),
       ),
@@ -123,6 +129,136 @@ void main() {
       expect(symbolAssetPath, startsWith('assets/sets/food-set/'));
       expect(symbolAssetPath, endsWith('.svg'));
     }
+  });
+
+  testWidgets('supports mismatch resolution with temporary interaction lock', (
+    tester,
+  ) async {
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.simple,
+        rows: 3,
+        columns: 4,
+      ),
+      mismatchRevealDuration: const Duration(milliseconds: 100),
+      timerTick: const Duration(milliseconds: 100),
+    );
+
+    final boardBefore = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    final cards = boardBefore.cards;
+    final first = cards.first;
+    final second = cards.firstWhere(
+      (card) => card.symbolAssetPath != first.symbolAssetPath,
+    );
+    final third = cards.firstWhere(
+      (card) =>
+          card.id != first.id &&
+          card.id != second.id &&
+          card.symbolAssetPath != first.symbolAssetPath,
+    );
+
+    await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(first.id)));
+    await tester.pump();
+    await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(second.id)));
+    await tester.pump();
+
+    final boardDuringMismatch = tester.widget<GameBoardGrid>(
+      find.byType(GameBoardGrid),
+    );
+    final mismatchCards = boardDuringMismatch.cards;
+    expect(
+      mismatchCards.firstWhere((card) => card.id == first.id).state,
+      GameCardShellState.revealed,
+    );
+    expect(
+      mismatchCards.firstWhere((card) => card.id == second.id).state,
+      GameCardShellState.revealed,
+    );
+    expect(boardDuringMismatch.isInteractionEnabled, isFalse);
+
+    await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(third.id)));
+    await tester.pump();
+    final boardAfterLockedTap = tester.widget<GameBoardGrid>(
+      find.byType(GameBoardGrid),
+    );
+    expect(
+      boardAfterLockedTap.cards.firstWhere((card) => card.id == third.id).state,
+      GameCardShellState.hidden,
+    );
+
+    await tester.pump(const Duration(milliseconds: 120));
+    final boardAfterResolution = tester.widget<GameBoardGrid>(
+      find.byType(GameBoardGrid),
+    );
+    expect(
+      boardAfterResolution.cards.firstWhere((card) => card.id == first.id).state,
+      GameCardShellState.hidden,
+    );
+    expect(
+      boardAfterResolution.cards
+          .firstWhere((card) => card.id == second.id)
+          .state,
+      GameCardShellState.hidden,
+    );
+    expect(boardAfterResolution.isInteractionEnabled, isTrue);
+  });
+
+  testWidgets('completes full happy-path game and freezes timer', (tester) async {
+    final provider = GameIconSetProvider(
+      availableIconAssets: const <String>[
+        'assets/sets/food-set/apple-svgrepo-com.svg',
+        'assets/sets/food-set/banana-svgrepo-com.svg',
+        'assets/sets/food-set/cherry-svgrepo-com.svg',
+      ],
+    );
+
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.simple,
+        rows: 2,
+        columns: 2,
+      ),
+      iconSetProvider: provider,
+      mismatchRevealDuration: const Duration(milliseconds: 80),
+      timerTick: const Duration(milliseconds: 150),
+    );
+
+    await tester.pump(const Duration(milliseconds: 1250));
+    final timerBeforeCompletion = tester.widget<Text>(
+      find.byKey(GameTopBar.timerTextKey),
+    );
+    expect(timerBeforeCompletion.data, isNot('00:00:00'));
+
+    final board = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    final grouped = <String, List<String>>{};
+    for (final card in board.cards) {
+      final symbol = card.symbolAssetPath!;
+      grouped.putIfAbsent(symbol, () => <String>[]).add(card.id);
+    }
+    expect(grouped.length, 2);
+    for (final ids in grouped.values) {
+      expect(ids.length, 2);
+    }
+
+    for (final ids in grouped.values) {
+      await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(ids[0])));
+      await tester.pump();
+      await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(ids[1])));
+      await tester.pump();
+    }
+
+    final completedBoard = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    expect(completedBoard.isInteractionEnabled, isFalse);
+    for (final card in completedBoard.cards) {
+      expect(card.state, GameCardShellState.matched);
+    }
+
+    final frozenTimerValue = tester.widget<Text>(find.byKey(GameTopBar.timerTextKey));
+    await tester.pump(const Duration(milliseconds: 1400));
+    final timerAfterWait = tester.widget<Text>(find.byKey(GameTopBar.timerTextKey));
+    expect(timerAfterWait.data, frozenTimerValue.data);
   });
 
   testWidgets('falls back to navigator maybePop when onCloseTap not provided', (
