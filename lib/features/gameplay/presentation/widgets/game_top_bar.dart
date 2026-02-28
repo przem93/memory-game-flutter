@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:memory_game/shared/layout/non_main_flow_layout.dart';
+import 'package:memory_game/shared/widgets/screen_logo_row.dart';
 
 enum GameTopBarScalePreset { phone, tablet }
 
@@ -30,13 +31,7 @@ class _GameTopBarState extends State<GameTopBar> {
   static const _phoneReferenceWidth = 393.0;
   static const _phoneHorizontalMargin = 29.0;
   static const _tabletHorizontalInset = 48.0;
-  static const _phoneTopSpacing = 50.0;
   static const _phoneRowsGap = 22.0;
-
-  static const _logoIconTileSize = 64.0;
-  static const _logoIconPadding = 10.0;
-  static const _logoWordmarkHeight = 54.0;
-  static const _logoWordmarkLeftGap = 28.0;
 
   static const _closeButtonWidth = 97.0;
   static const _closeButtonHeight = 28.0;
@@ -68,17 +63,24 @@ class _GameTopBarState extends State<GameTopBar> {
           effectiveWidth: effectiveWidth,
           isTablet: isTablet,
         );
+        final viewPadding = MediaQuery.viewPaddingOf(context);
+        final safeAreaHeight =
+            MediaQuery.sizeOf(context).height - viewPadding.top - viewPadding.bottom;
+        final topSpacing = NonMainFlowLayout.resolveTopLogoSpacing(
+          safeAreaHeight: safeAreaHeight,
+          viewPadding: viewPadding,
+        );
 
         return Padding(
           padding: EdgeInsets.only(
-            top: _phoneTopSpacing * widthScale,
+            top: topSpacing,
             left: horizontalPadding,
             right: horizontalPadding,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildTopLogoRow(scale: widthScale),
+              _buildTopLogoRow(),
               SizedBox(height: _phoneRowsGap * widthScale),
               _buildTimerCloseRow(scale: widthScale),
             ],
@@ -88,30 +90,15 @@ class _GameTopBarState extends State<GameTopBar> {
     );
   }
 
-  Widget _buildTopLogoRow({required double scale}) {
-    return Row(
+  Widget _buildTopLogoRow() {
+    return SizedBox(
       key: GameTopBar.topRowKey,
-      children: [
-        Container(
-          key: GameTopBar.logoIconTileKey,
-          width: _logoIconTileSize * scale,
-          height: _logoIconTileSize * scale,
-          padding: EdgeInsets.all(_logoIconPadding * scale),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20 * scale),
-            border: Border.all(color: Colors.black, width: 2.5 * scale),
-          ),
-          child: SvgPicture.asset('assets/logo-icon.svg', fit: BoxFit.contain),
-        ),
-        SizedBox(width: _logoWordmarkLeftGap * scale),
-        Expanded(
-          child: SizedBox(
-            height: _logoWordmarkHeight * scale,
-            child: SvgPicture.asset('assets/logo-text.svg', fit: BoxFit.contain),
-          ),
-        ),
-      ],
+      width: double.infinity,
+      child: const ScreenLogoRow(
+        // Top bar already owns external horizontal insets.
+        horizontalPadding: 0,
+        imageKey: GameTopBar.logoIconTileKey,
+      ),
     );
   }
 

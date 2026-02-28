@@ -39,6 +39,10 @@ alwaysApply: true
   - avoid hardcoded absolute `Positioned(top/left/right/bottom)` screen placement unless there is no viable responsive alternative,
   - consistent spacing/typography/components from Figma tokens,
   - accessibility support (scalable text, contrast, semantic labels).
+- Non-main screen shell consistency:
+  - all screens except Main Menu must reuse the same shared scene shell (`background + developer brand`) from shared widgets,
+  - top logo row must start at the same vertical baseline as `Select Level` (`NonMainFlowLayout.phoneTopLogoOffset`) and use the same responsive scaling rule,
+  - avoid per-screen custom top-logo offsets on non-main screens; extend shared layout tokens only when the product owner explicitly approves a global change.
 - Architecture direction: clear separation of presentation/domain/data concerns and reusable components.
 
 ### DESIGN_ASSETS_CONTEXT

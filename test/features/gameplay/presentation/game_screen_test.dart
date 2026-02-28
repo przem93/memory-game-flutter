@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:memory_game/features/gameplay/data/game_icon_set_provider.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_board_grid.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
+import 'package:memory_game/features/gameplay/presentation/widgets/game_scene_shell.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_top_bar.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
 import 'package:memory_game/features/select_level/presentation/widgets/select_level_option_button.dart';
@@ -13,6 +15,8 @@ void main() {
     required SelectLevelStartConfig config,
     Size canvas = const Size(393, 852),
     VoidCallback? onCloseTap,
+    GameIconSetProvider? iconSetProvider,
+    String semanticsLabel = 'Game screen',
   }) async {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = canvas;
@@ -20,7 +24,13 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: GameScreen(startConfig: config, seed: 42, onCloseTap: onCloseTap),
+        home: GameScreen(
+          startConfig: config,
+          seed: 42,
+          onCloseTap: onCloseTap,
+          iconSetProvider: iconSetProvider,
+          semanticsLabel: semanticsLabel,
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -113,5 +123,86 @@ void main() {
       expect(symbolAssetPath, startsWith('assets/sets/food-set/'));
       expect(symbolAssetPath, endsWith('.svg'));
     }
+  });
+
+  testWidgets('falls back to navigator maybePop when onCloseTap not provided', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(393, 852);
+    addTearDown(tester.view.reset);
+
+    late BuildContext rootContext;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) {
+            rootContext = context;
+            return const SizedBox.shrink();
+          },
+        ),
+      ),
+    );
+
+    Navigator.of(rootContext).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const GameScreen(
+          startConfig: SelectLevelStartConfig(
+            difficulty: SelectLevelDifficulty.simple,
+            rows: 3,
+            columns: 4,
+          ),
+          seed: 42,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(GameScreen), findsOneWidget);
+    await tester.tap(find.byKey(GameTopBar.closeButtonKey));
+    await tester.pumpAndSettle();
+    expect(find.byType(GameScreen), findsNothing);
+  });
+
+  testWidgets('renders recoverable error when icon pool is insufficient', (
+    tester,
+  ) async {
+    final provider = GameIconSetProvider(
+      availableIconAssets: const <String>[
+        'assets/sets/food-set/apple-svgrepo-com.svg',
+        'assets/sets/food-set/banana-svgrepo-com.svg',
+      ],
+    );
+
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.hard,
+        rows: 4,
+        columns: 5,
+      ),
+      iconSetProvider: provider,
+    );
+
+    expect(find.byKey(GameScreen.errorKey), findsOneWidget);
+    expect(find.textContaining('insufficientIconPool'), findsOneWidget);
+    expect(find.byType(GameBoardGrid), findsNothing);
+  });
+
+  testWidgets('exposes custom screen semantics label on scene shell', (
+    tester,
+  ) async {
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.medium,
+        rows: 4,
+        columns: 4,
+      ),
+      semanticsLabel: 'Gameplay stage 3 shell',
+    );
+
+    final shellNode = tester.getSemantics(find.byKey(GameSceneShell.screenKey));
+    expect(shellNode.label, contains('Gameplay stage 3 shell'));
   });
 }

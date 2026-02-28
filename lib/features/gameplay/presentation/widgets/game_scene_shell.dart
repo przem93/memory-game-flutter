@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_background.dart';
-import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
+import 'package:memory_game/shared/widgets/non_main_scene_shell.dart';
 
 /// Shared scene shell for gameplay that reuses background and brand footer.
 class GameSceneShell extends StatelessWidget {
@@ -17,33 +16,10 @@ class GameSceneShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MainMenuBackground(
-        child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isTablet = constraints.maxWidth > 600;
-
-              return Semantics(
-                key: screenKey,
-                container: true,
-                label: semanticsLabel,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    if (child != null) child!,
-                    MainMenuDeveloperBrand(
-                      scalePreset: isTablet
-                          ? MainMenuDeveloperBrandScalePreset.tablet
-                          : MainMenuDeveloperBrandScalePreset.phone,
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ),
+    return NonMainSceneShell(
+      screenKey: screenKey,
+      semanticsLabel: semanticsLabel,
+      child: child,
     );
   }
 }

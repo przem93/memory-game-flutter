@@ -157,9 +157,13 @@ Gate:
 - `flutter run`
 
 Status:
-- `todo`.
+- `done`.
 
 ## Stage 4 - Gameplay Loop and Deterministic State Validation
+
+Kickoff note from Stage 3:
+- Build gameplay state machine on top of existing Stage 3 composition in `lib/features/gameplay/presentation/game_screen.dart` (already wired with `SelectLevelStartConfig`, `GameBoardGrid`, and close semantics).
+- Reuse deterministic pair generation from `lib/features/gameplay/data/game_icon_set_provider.dart`; Stage 4 should only add card state transitions and timer lifecycle around this initialized card set.
 
 Checklist:
 - deterministic board setup (pair generation + shuffle strategy suitable for tests),
