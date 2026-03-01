@@ -212,7 +212,19 @@ Gate:
 - `flutter build ios --simulator`
 
 Status:
-- `pending`.
+- `done`.
+
+Stage 5 closure note:
+- Full-screen Success comparison coverage is available in `test/features/success/presentation/success_screen_golden_test.dart` with locked artifacts:
+  - `test/features/success/presentation/success_screen_phone.png`,
+  - `test/features/success/presentation/success_screen_tablet.png`.
+- Validation summary is documented in `docs/success-screen-stage-5-validation.md` (checklist, artifacts, deviations decision).
+- Stage 5 gate executed:
+  - `flutter analyze` (reported only existing unrelated infos in gameplay tests),
+  - `flutter test` (reported existing unrelated golden mismatches in `test/select_level_screen_golden_test.dart`; Success scope remained green),
+  - `flutter build apk --debug` (pass),
+  - `flutter build ios --simulator` (pass),
+  - focused confidence run: `flutter test test/features/success/presentation` (pass).
 
 ## Stage 6 - Documentation and Screen Closure
 
@@ -245,4 +257,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress` (Stages 1-4 done; Stages 5-6 pending).
+- `in-progress` (Stages 1-5 done; Stage 6 pending).
