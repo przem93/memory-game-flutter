@@ -187,7 +187,7 @@ Gate:
 - `flutter build ios --simulator`
 
 Status:
-- `todo`.
+- `done` (golden tests in `test/features/customize/presentation/customize_screen_golden_test.dart`; phone/tablet screenshots generated; validation note in `docs/customize-screen-stage-5-validation.md`; all gates passed; known deviation: set icon from food-set vs reference cookie-like, acceptable per scope).
 
 ## Stage 6 - Documentation and Screen Closure
 
