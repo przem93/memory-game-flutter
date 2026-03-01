@@ -54,7 +54,7 @@ Stage 1 Gate:
 - `done` (Stage 2.1 can start).
 
 Status:
-- `pending`.
+- `done`.
 
 ## Stage 2 - Reusable Components (separate implementation steps)
 
@@ -197,4 +197,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress` (planning).
+- `in-progress` (Stage 1 spec lock done; Stage 2 pending).
