@@ -119,7 +119,17 @@ Gate:
 - comparison screenshot for logo/footer/background alignment.
 
 Status:
-- `pending`.
+- `done`.
+
+Stage 2.3 closure note:
+- `SuccessSceneShell` implemented in `lib/features/success/presentation/widgets/success_scene_shell.dart` as a thin wrapper around `NonMainSceneShell`.
+- Widget coverage is available in `test/features/success/presentation/widgets/success_scene_shell_test.dart` (background/footer reuse, safe area, phone/tablet brand presets).
+- Comparison screenshot coverage is available in `test/features/success/presentation/widgets/success_scene_shell_golden_test.dart` (phone and tablet baselines).
+- Stage gate executed:
+  - `flutter analyze` (reported only existing unrelated infos in gameplay tests),
+  - `flutter test test/features/success/presentation/widgets/success_scene_shell_test.dart` (pass),
+  - `flutter test test/features/success/presentation/widgets/success_scene_shell_golden_test.dart --update-goldens` (pass),
+  - `flutter test test/features/success/presentation/widgets/success_scene_shell_golden_test.dart` (pass).
 
 ## Stage 3 - `SuccessScreenComposition` Integration
 
@@ -216,4 +226,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress` (Stage 1 spec lock done; Stage 2 pending).
+- `in-progress` (Stages 1-2 done; Stage 3 pending).
