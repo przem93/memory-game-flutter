@@ -73,7 +73,14 @@ Gate:
 - widget tests for duration formatting, semantics, and responsive scaling.
 
 Status:
-- `pending`.
+- `done`.
+
+Stage 2.1 closure note:
+- `SuccessResultPanel` implemented in `lib/features/success/presentation/widgets/success_result_panel.dart`.
+- Widget coverage is available in `test/features/success/presentation/widgets/success_result_panel_test.dart` (formatting, semantics, scaling).
+- Stage gate executed:
+  - `flutter analyze` (reported only existing unrelated infos in gameplay tests),
+  - `flutter test test/features/success/presentation/widgets/success_result_panel_test.dart` (pass).
 
 ### 2.2 `SuccessActionButtons`
 - implement reusable action section with `Play again` and `Close` buttons,
@@ -89,6 +96,9 @@ Gate:
 
 Status:
 - `pending`.
+
+Kickoff note:
+- Ready to start after Stage 2.1 closure.
 
 ### 2.3 `SuccessSceneShell`
 - reuse existing non-main scene shell (`background + developer brand + top logo row`) without duplicating scaffold logic,

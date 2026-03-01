@@ -53,6 +53,26 @@ void main() {
     );
   });
 
+  testWidgets('uses tabular figures for elapsed value typography', (tester) async {
+    await pumpHarness(
+      tester,
+      child: const SuccessResultPanel(
+        elapsed: Duration(minutes: 12, seconds: 34),
+      ),
+    );
+
+    final elapsedText = tester.widget<Text>(
+      find.byKey(SuccessResultPanel.elapsedValueKey),
+    );
+    final fontFeatures = elapsedText.style?.fontFeatures;
+
+    expect(fontFeatures, isNotNull);
+    expect(
+      fontFeatures!.any((feature) => feature.feature == 'tnum' && feature.value == 1),
+      isTrue,
+    );
+  });
+
   testWidgets('exposes expected default and custom semantics labels', (tester) async {
     await pumpHarness(
       tester,
