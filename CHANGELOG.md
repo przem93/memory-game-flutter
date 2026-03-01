@@ -20,6 +20,8 @@ All notable user-visible changes to this project are documented in this file.
 
 ### Changed
 
+- Added a `CLOSE` action on `SelectLevelScreen` below difficulty options
+  (30 px spacing) to let players return directly to Main Menu.
 - Finalized Main Menu documentation closure in:
   - `docs/main-menu-spec-lock.md`,
   - `docs/main-menu-stage-4-validation.md`,

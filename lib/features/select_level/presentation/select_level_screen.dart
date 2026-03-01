@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_primary_button.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
 import 'package:memory_game/features/select_level/presentation/widgets/select_level_option_button.dart';
 import 'package:memory_game/features/select_level/presentation/widgets/select_level_options_section.dart';
@@ -32,6 +33,8 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
   static const _phoneTitleTop = 330.0;
   static const _phoneTitleToFirstButtonGap = 41.0;
   static const _tabletOptionsMaxWidth = 560.0;
+  static const _optionsToCloseButtonGap = 50.0;
+  static const _maxLogoToTitleSpacing = 120.0;
 
   static const _logoHeight = 60.0;
   SelectLevelDifficulty _selectedDifficulty = SelectLevelDifficulty.simple;
@@ -60,7 +63,7 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
           final logoToTitleSpacing = NonMainFlowLayout.scaledOffset(
             _phoneTitleTop - NonMainFlowLayout.phoneTopLogoOffset - _logoHeight,
             normalizedHeight,
-          );
+          ).clamp(0.0, _maxLogoToTitleSpacing);
           final titleToOptionsSpacing = NonMainFlowLayout.scaledOffset(
             _phoneTitleToFirstButtonGap,
             normalizedHeight,
@@ -102,6 +105,16 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(height: _optionsToCloseButtonGap),
+                Center(
+                  child: SizedBox(
+                    width: optionsWidth,
+                    child: MainMenuPrimaryButton(
+                      label: 'Close',
+                      onPressed: _onClosePressed,
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -117,6 +130,10 @@ class _SelectLevelScreenState extends State<SelectLevelScreen> {
 
     final startConfig = resolveSelectLevelStartConfig(difficulty);
     widget.onStartRequested?.call(startConfig);
+  }
+
+  void _onClosePressed() {
+    Navigator.of(context).pop();
   }
 
 }

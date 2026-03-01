@@ -38,6 +38,7 @@ void main() {
     expect(find.byKey(SelectLevelScreen.titleSlotKey), findsOneWidget);
     expect(find.byKey(SelectLevelScreen.optionsSlotKey), findsOneWidget);
     expect(find.text('Select level'), findsOneWidget);
+    expect(find.text('CLOSE'), findsOneWidget);
   });
 
   testWidgets('updates selection and emits start config on tap', (
@@ -85,5 +86,44 @@ void main() {
     expect(startConfigs.last.difficulty, SelectLevelDifficulty.hard);
     expect(startConfigs.last.rows, 4);
     expect(startConfigs.last.columns, 5);
+  });
+
+  testWidgets('close button pops back to previous screen', (
+    WidgetTester tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(393, 852);
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const SelectLevelScreen(),
+                    ),
+                  );
+                },
+                child: const Text('Open select level'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Open select level'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SelectLevelScreen), findsOneWidget);
+
+    await tester.tap(find.text('CLOSE'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SelectLevelScreen), findsNothing);
+    expect(find.text('Open select level'), findsOneWidget);
   });
 }
