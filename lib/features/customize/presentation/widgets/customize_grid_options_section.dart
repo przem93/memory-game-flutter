@@ -33,38 +33,50 @@ class CustomizeGridOptionsSection extends StatelessWidget {
       rows.add(orderedCardCounts.sublist(index, index + _buttonsPerRow));
     }
 
+    final gap = _spacingFor(spacingPreset);
+
     return Semantics(
       key: sectionSemanticsKey,
       container: true,
       label: 'Cards grid options',
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (var rowIndex = 0; rowIndex < rows.length; rowIndex++) ...[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (var columnIndex = 0;
-                    columnIndex < rows[rowIndex].length;
-                    columnIndex++) ...[
-                  CustomizeGridOptionButton(
-                    key: ValueKey<String>(
-                      'customizeGridOptionsButton-${rows[rowIndex][columnIndex]}',
-                    ),
-                    cardCount: rows[rowIndex][columnIndex],
-                    onTap: isEnabled
-                        ? () => onCardCountSelected(rows[rowIndex][columnIndex])
-                        : null,
-                  ),
-                  if (columnIndex < rows[rowIndex].length - 1)
-                    SizedBox(width: _spacingFor(spacingPreset)),
-                ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final availableWidth = constraints.maxWidth;
+          final buttonWidth =
+              (availableWidth - (_buttonsPerRow - 1) * gap) / _buttonsPerRow;
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (var rowIndex = 0; rowIndex < rows.length; rowIndex++) ...[
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    for (var columnIndex = 0;
+                        columnIndex < rows[rowIndex].length;
+                        columnIndex++) ...[
+                      CustomizeGridOptionButton(
+                        key: ValueKey<String>(
+                          'customizeGridOptionsButton-${rows[rowIndex][columnIndex]}',
+                        ),
+                        cardCount: rows[rowIndex][columnIndex],
+                        onTap: isEnabled
+                            ? () =>
+                                onCardCountSelected(rows[rowIndex][columnIndex])
+                            : null,
+                        width: buttonWidth,
+                      ),
+                      if (columnIndex < rows[rowIndex].length - 1)
+                        SizedBox(width: gap),
+                    ],
+                  ],
+                ),
+                if (rowIndex < rows.length - 1)
+                  SizedBox(height: _spacingFor(spacingPreset)),
               ],
-            ),
-            if (rowIndex < rows.length - 1)
-              SizedBox(height: _spacingFor(spacingPreset)),
-          ],
-        ],
+            ],
+          );
+        },
       ),
     );
   }

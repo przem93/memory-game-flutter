@@ -11,6 +11,7 @@ class CustomizeGridOptionButton extends StatefulWidget {
     this.isSelected = false,
     this.preset = CustomizeGridOptionButtonPreset.phone,
     this.semanticsLabel,
+    this.width,
     super.key,
   }) : assert(cardCount > 0);
 
@@ -28,6 +29,7 @@ class CustomizeGridOptionButton extends StatefulWidget {
   final bool isSelected;
   final CustomizeGridOptionButtonPreset preset;
   final String? semanticsLabel;
+  final double? width;
 
   @override
   State<CustomizeGridOptionButton> createState() =>
@@ -35,8 +37,8 @@ class CustomizeGridOptionButton extends StatefulWidget {
 }
 
 class _CustomizeGridOptionButtonState extends State<CustomizeGridOptionButton> {
-  static const _phoneWidth = 110.667;
-  static const _phoneHeight = 89.0;
+  static const _phoneWidth = 95.0;
+  static const _phoneHeight = 77.0;
   static const _radius = 5.5;
 
   static const _enabledFill = Color(0xFFFFFFFF);
@@ -54,6 +56,7 @@ class _CustomizeGridOptionButtonState extends State<CustomizeGridOptionButton> {
   @override
   Widget build(BuildContext context) {
     final dimensions = _dimensionsFor(widget.preset);
+    final effectiveWidth = widget.width ?? dimensions.width;
     final fill = _isInteractive
         ? (_isPressed ? _pressedFill : _enabledFill)
         : _disabledFill;
@@ -82,7 +85,7 @@ class _CustomizeGridOptionButtonState extends State<CustomizeGridOptionButton> {
           child: AnimatedContainer(
             key: CustomizeGridOptionButton.containerKey,
             duration: const Duration(milliseconds: 90),
-            width: dimensions.width,
+            width: effectiveWidth,
             height: dimensions.height,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -96,7 +99,7 @@ class _CustomizeGridOptionButtonState extends State<CustomizeGridOptionButton> {
               style: TextStyle(
                 fontFamily: 'DynaPuff',
                 fontWeight: FontWeight.w700,
-                fontSize: 48 * (44 / 89),
+                fontSize: 42,
                 height: 1,
                 letterSpacing: 0,
                 color: _isInteractive ? _labelColor : _disabledLabelColor,

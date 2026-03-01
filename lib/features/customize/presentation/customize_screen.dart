@@ -2,9 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:memory_game/features/customize/presentation/customize_start_payload.dart';
+import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/features/customize/presentation/widgets/customize_grid_options_section.dart';
 import 'package:memory_game/features/customize/presentation/widgets/customize_scene_shell.dart';
 import 'package:memory_game/features/customize/presentation/widgets/customize_set_selector_field.dart';
+import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_primary_button.dart';
 import 'package:memory_game/shared/layout/non_main_flow_layout.dart';
 import 'package:memory_game/shared/widgets/screen_logo_row.dart';
 
@@ -28,13 +30,15 @@ class CustomizeScreen extends StatelessWidget {
     'customizeScreenCardsGridTitleSlot',
   );
   static const gridOptionsSlotKey = ValueKey<String>('customizeScreenGridSlot');
+  static const closeButtonSlotKey = ValueKey<String>('customizeScreenCloseSlot');
 
   static const _phoneLogoHeight = 60.0;
-  static const _phoneSelectSetTop = 205.0;
-  static const _phoneSetSelectorTop = 253.5;
-  static const _phoneCardsGridTop = 349.0;
-  static const _phoneGridTop = 397.0;
-  static const _maxGridWidth = 355.0;
+  static const _phoneSelectSetTop = 165.0;
+  static const _phoneSetSelectorTop = 213.5;
+  static const _phoneCardsGridTop = 309.0;
+  static const _phoneGridTop = 357.0;
+  static const _gridToCloseButtonGap = 50.0;
+  static const _maxGridWidth = 354.0;
   static const _phoneHorizontalMargin = 19.0;
   static const _tabletMaxContentWidth = 560.0;
   static const _setIconAsset = 'assets/sets/food-set/coffee-svgrepo-com.svg';
@@ -106,36 +110,65 @@ class CustomizeScreen extends StatelessWidget {
                   child: ScreenLogoRow(isTablet: isTablet),
                 ),
                 SizedBox(height: logoToSelectSetSpacing),
-                SizedBox(
-                  key: selectSetTitleSlotKey,
-                  child: const _CustomizeSectionTitle(text: 'Select set'),
-                ),
-                SizedBox(height: selectSetTitleToSelectorSpacing),
-                Container(
-                  key: setSelectorSlotKey,
-                  alignment: Alignment.center,
-                  child: const CustomizeSetSelectorField(
-                    label: 'Animals',
-                    leadingIconAsset: _setIconAsset,
-                    onTap: _noopSetTap,
-                  ),
-                ),
-                SizedBox(height: selectorToCardsGridTitleSpacing),
-                SizedBox(
-                  key: cardsGridTitleSlotKey,
-                  child: const _CustomizeSectionTitle(text: 'Cards grid'),
-                ),
-                SizedBox(height: cardsGridTitleToGridSpacing),
-                Container(
-                  key: gridOptionsSlotKey,
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: gridWidth,
-                    child: CustomizeGridOptionsSection(
-                      availableCardCounts:
-                          CustomizeGridOptionsSection.buttonValues,
-                      onCardCountSelected: (cardCount) =>
-                          _onCardCountSelected(context, cardCount),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.only(
+                      bottom: MainMenuDeveloperBrand.requiredBottomSpace(
+                        isTablet
+                            ? MainMenuDeveloperBrandScalePreset.tablet
+                            : MainMenuDeveloperBrandScalePreset.phone,
+                      ),
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          key: selectSetTitleSlotKey,
+                          child: const _CustomizeSectionTitle(text: 'Select set'),
+                        ),
+                        SizedBox(height: selectSetTitleToSelectorSpacing),
+                        Container(
+                          key: setSelectorSlotKey,
+                          alignment: Alignment.center,
+                          child: const CustomizeSetSelectorField(
+                            label: 'Food',
+                            leadingIconAsset: _setIconAsset,
+                            onTap: _noopSetTap,
+                          ),
+                        ),
+                        SizedBox(height: selectorToCardsGridTitleSpacing),
+                        SizedBox(
+                          key: cardsGridTitleSlotKey,
+                          child: const _CustomizeSectionTitle(text: 'Cards grid'),
+                        ),
+                        SizedBox(height: cardsGridTitleToGridSpacing),
+                        Container(
+                          key: gridOptionsSlotKey,
+                          alignment: Alignment.center,
+                          child: SizedBox(
+                            width: gridWidth,
+                            child: CustomizeGridOptionsSection(
+                              availableCardCounts:
+                                  CustomizeGridOptionsSection.buttonValues,
+                              onCardCountSelected: (cardCount) =>
+                                  _onCardCountSelected(context, cardCount),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: _gridToCloseButtonGap),
+                        Center(
+                          key: closeButtonSlotKey,
+                          child: SizedBox(
+                            width: gridWidth,
+                            child: MainMenuPrimaryButton(
+                              label: 'Close',
+                              onPressed: () => _onClosePressed(context),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -145,6 +178,10 @@ class CustomizeScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _onClosePressed(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
   void _onCardCountSelected(BuildContext context, int cardCount) {

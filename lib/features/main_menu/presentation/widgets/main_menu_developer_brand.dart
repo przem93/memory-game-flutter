@@ -33,6 +33,15 @@ class MainMenuDeveloperBrand extends StatelessWidget {
 
   static const _baseSize = Size(119, 65);
 
+  /// Total vertical space needed from the bottom of the viewport.
+  /// Use for scroll content padding to avoid overlap with the developer brand.
+  static double requiredBottomSpace(MainMenuDeveloperBrandScalePreset preset) {
+    const buffer = 8.0;
+    final factor = preset.sizeFactor;
+    final offset = preset.bottomOffset;
+    return _baseSize.height * factor + offset + buffer;
+  }
+
   final AlignmentGeometry alignment;
   final MainMenuDeveloperBrandScalePreset scalePreset;
   final double? bottomOffset;

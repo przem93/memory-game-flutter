@@ -35,8 +35,8 @@ void main() {
     final containerSize = tester.getSize(
       find.byKey(CustomizeGridOptionButton.containerKey),
     );
-    expect(containerSize.width, closeTo(110.667, 0.01));
-    expect(containerSize.height, closeTo(89, 0.01));
+    expect(containerSize.width, closeTo(95, 0.01));
+    expect(containerSize.height, closeTo(77, 0.01));
 
     final container = tester.widget<AnimatedContainer>(
       find.byKey(CustomizeGridOptionButton.containerKey),

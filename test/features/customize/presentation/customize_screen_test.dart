@@ -30,8 +30,9 @@ void main() {
     expect(find.text('Select set'), findsOneWidget);
     expect(find.text('Cards grid'), findsOneWidget);
     expect(find.byType(CustomizeSetSelectorField), findsOneWidget);
-    expect(find.text('Animals'), findsOneWidget);
+    expect(find.text('Food'), findsOneWidget);
     expect(find.byType(CustomizeGridOptionButton), findsNWidgets(9));
+    expect(find.text('CLOSE'), findsOneWidget);
   });
 
   testWidgets('emits locked start payload for each supported card count', (

@@ -4,6 +4,7 @@ import 'package:memory_game/core/app.dart';
 import 'package:memory_game/features/customize/presentation/customize_screen.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
+import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_action_section.dart';
 
 void main() {
@@ -29,6 +30,20 @@ void main() {
     expect(find.byType(CustomizeScreen), findsOneWidget);
     expect(find.text('Select set'), findsOneWidget);
     expect(find.text('Cards grid'), findsOneWidget);
+  });
+
+  testWidgets('Close returns from Customize to Main Menu', (tester) async {
+    await pumpApp(tester);
+
+    await tester.tap(find.byKey(MainMenuActionSection.actionButtonKeyAt(1)));
+    await tester.pumpAndSettle();
+    expect(find.byType(CustomizeScreen), findsOneWidget);
+
+    await tester.tap(find.text('CLOSE'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MainMenuScreen), findsOneWidget);
+    expect(find.byType(CustomizeScreen), findsNothing);
   });
 
   testWidgets('starts game with selected Customize card count', (tester) async {

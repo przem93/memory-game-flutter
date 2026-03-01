@@ -32,7 +32,8 @@ class NonMainSceneShell extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    if (child != null) child!,
+                    if (child != null)
+                      Positioned.fill(child: child!),
                     MainMenuDeveloperBrand(
                       scalePreset: isTablet
                           ? MainMenuDeveloperBrandScalePreset.tablet

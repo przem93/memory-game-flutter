@@ -22,7 +22,7 @@ void main() {
     await pumpHarness(
       tester,
       child: const CustomizeSetSelectorField(
-        label: 'Animals',
+        label: 'Food',
         leadingIconAsset: iconAsset,
       ),
     );
@@ -30,7 +30,7 @@ void main() {
     expect(find.byKey(CustomizeSetSelectorField.containerKey), findsOneWidget);
     expect(find.byKey(CustomizeSetSelectorField.iconSlotKey), findsOneWidget);
     expect(find.byKey(CustomizeSetSelectorField.labelKey), findsOneWidget);
-    expect(find.text('Animals'), findsOneWidget);
+    expect(find.text('Food'), findsOneWidget);
 
     final containerSize = tester.getSize(
       find.byKey(CustomizeSetSelectorField.containerKey),
@@ -59,7 +59,7 @@ void main() {
     await pumpHarness(
       tester,
       child: const CustomizeSetSelectorField(
-        label: 'Animals',
+        label: 'Food',
         leadingIconAsset: iconAsset,
       ),
     );
@@ -74,14 +74,14 @@ void main() {
         hasEnabledState: true,
         isEnabled: false,
         hasTapAction: false,
-        label: 'Active set Animals',
+        label: 'Active set Food',
       ),
     );
 
     await pumpHarness(
       tester,
       child: CustomizeSetSelectorField(
-        label: 'Animals',
+        label: 'Food',
         leadingIconAsset: iconAsset,
         onTap: () {},
       ),
@@ -97,7 +97,7 @@ void main() {
         hasEnabledState: true,
         isEnabled: true,
         hasTapAction: true,
-        label: 'Active set Animals',
+        label: 'Active set Food',
       ),
     );
   });
@@ -108,7 +108,7 @@ void main() {
       await pumpHarness(
         tester,
         child: CustomizeSetSelectorField(
-          label: 'Animals',
+          label: 'Food',
           leadingIconAsset: iconAsset,
           isEnabled: isEnabled,
           onTap: onTap,
