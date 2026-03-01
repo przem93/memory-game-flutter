@@ -238,7 +238,11 @@ Gate:
 - documentation updates merged and consistent with implemented behavior.
 
 Status:
-- `pending`.
+- `done`.
+
+Stage 6 closure note:
+- Documentation closure is complete in `docs/success-screen-stage-6-closure.md`.
+- Changelog entry is synchronized with final `Success` acceptance.
 
 ## Open Questions to Lock Before Stage 2/3
 
@@ -257,4 +261,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress` (Stages 1-5 done; Stage 6 pending).
+- `done`.

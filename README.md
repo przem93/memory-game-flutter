@@ -66,6 +66,9 @@ Release is currently manual for both stores.
 - Game Spec Lock: `docs/game-screen-spec-lock.md`
 - Game validation (Stage 5): `docs/game-screen-stage-5-validation.md`
 - Game closure (Stage 6): `docs/game-screen-stage-6-closure.md`
+- Success Spec Lock: `docs/success-screen-spec-lock.md`
+- Success validation (Stage 5): `docs/success-screen-stage-5-validation.md`
+- Success closure (Stage 6): `docs/success-screen-stage-6-closure.md`
 - Cursor project rules: `.cursor/rules/`
 
 ## Main Menu
@@ -76,6 +79,8 @@ Release is currently manual for both stores.
   - `Quick Play` opens `SelectLevelScreen`; choosing a difficulty starts gameplay
     board initialization with mapped grid config.
   - Gameplay `Close` in `GameTopBar` returns to `SelectLevelScreen` (MVP flow).
+  - Completing gameplay opens `SuccessScreen`; `Play again` restarts the same
+    difficulty with a fresh shuffled board, and `Close` returns to `MainMenuScreen`.
   - `Customize` navigates to the game configuration flow.
 - Visual implementation and acceptance notes are documented in the Main Menu
   files listed in the Documentation section.

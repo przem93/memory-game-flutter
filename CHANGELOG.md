@@ -17,6 +17,9 @@ All notable user-visible changes to this project are documented in this file.
 - Implemented `GameScreen` gameplay loop with deterministic pair setup,
   match/mismatch state transitions, and elapsed timer behavior across
   `simple`, `medium`, and `hard` boards.
+- Implemented `SuccessScreen` post-completion flow with final elapsed time
+  presentation, `Play again` replay for the same difficulty, and `Close`
+  navigation back to `MainMenuScreen`.
 
 ### Changed
 
@@ -46,3 +49,7 @@ All notable user-visible changes to this project are documented in this file.
   is now closed as `done`.
 - Reduced revealed/matched gameplay card icon scale so symbols fit card faces
   with better visual balance during play.
+- Added Success Stage 5/6 documentation set:
+  - `docs/success-screen-stage-5-validation.md`,
+  - `docs/success-screen-stage-6-closure.md`.
+- Closed Success roadmap as `done` after Stage 6 documentation sync.
