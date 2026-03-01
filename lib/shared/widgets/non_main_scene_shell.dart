@@ -29,11 +29,10 @@ class NonMainSceneShell extends StatelessWidget {
                 key: screenKey,
                 container: true,
                 label: semanticsLabel,
-                child: Stack(
-                  fit: StackFit.expand,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (child != null)
-                      Positioned.fill(child: child!),
+                    if (child != null) Expanded(child: child!),
                     MainMenuDeveloperBrand(
                       scalePreset: isTablet
                           ? MainMenuDeveloperBrandScalePreset.tablet
