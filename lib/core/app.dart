@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
+import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
+import 'package:memory_game/features/success/presentation/success_screen.dart';
 import 'package:memory_game/shared/theme/app_theme.dart';
 
 class MemoryGameApp extends StatelessWidget {
@@ -12,28 +14,84 @@ class MemoryGameApp extends StatelessWidget {
     return MaterialApp(
       title: 'Memory Game',
       theme: AppTheme.light(),
-      home: Builder(
-        builder: (context) => MainMenuScreen(
-          onQuickPlayPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => SelectLevelScreen(
-                  onStartRequested: (startConfig) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => GameScreen(startConfig: startConfig),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            );
-          },
-          onCustomizePressed: () {
-            debugPrint('Customize tapped');
-          },
+      home: Builder(builder: (context) => _buildMainMenu(context)),
+    );
+  }
+
+  Widget _buildMainMenu(BuildContext context) {
+    return MainMenuScreen(
+      onQuickPlayPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (selectLevelContext) => SelectLevelScreen(
+              onStartRequested: (startConfig) =>
+                  _openGameFlow(selectLevelContext, startConfig),
+            ),
+          ),
+        );
+      },
+      onCustomizePressed: () {
+        debugPrint('Customize tapped');
+      },
+    );
+  }
+
+  void _openGameFlow(BuildContext context, SelectLevelStartConfig startConfig) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (gameContext) => GameScreen(
+          startConfig: startConfig,
+          onCompleted: (elapsed) => _openSuccessFlow(
+            gameContext,
+            startConfig: startConfig,
+            elapsed: elapsed,
+          ),
         ),
       ),
+    );
+  }
+
+  void _openSuccessFlow(
+    BuildContext context, {
+    required SelectLevelStartConfig startConfig,
+    required Duration elapsed,
+  }) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (successContext) => SuccessScreen(
+          elapsed: elapsed,
+          startConfig: startConfig,
+          onPlayAgainTap: () => _openReplayRound(successContext, startConfig),
+          onCloseTap: () => _closeToMainMenu(successContext),
+        ),
+      ),
+    );
+  }
+
+  void _openReplayRound(
+    BuildContext context,
+    SelectLevelStartConfig startConfig,
+  ) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (gameContext) => GameScreen(
+          startConfig: startConfig,
+          onCompleted: (elapsed) => _openSuccessFlow(
+            gameContext,
+            startConfig: startConfig,
+            elapsed: elapsed,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _closeToMainMenu(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute<void>(
+        builder: (mainMenuContext) => _buildMainMenu(mainMenuContext),
+      ),
+      (route) => false,
     );
   }
 }

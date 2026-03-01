@@ -14,6 +14,7 @@ class GameScreen extends StatefulWidget {
   const GameScreen({
     required this.startConfig,
     this.onCloseTap,
+    this.onCompleted,
     this.iconSetProvider,
     this.elapsed = Duration.zero,
     this.seed,
@@ -29,6 +30,7 @@ class GameScreen extends StatefulWidget {
 
   final SelectLevelStartConfig startConfig;
   final VoidCallback? onCloseTap;
+  final ValueChanged<Duration>? onCompleted;
   final GameIconSetProvider? iconSetProvider;
   final Duration elapsed;
   final int? seed;
@@ -53,6 +55,7 @@ class _GameScreenState extends State<GameScreen> {
   String? _generationError;
   late Duration _elapsed;
   int _boardVersion = 0;
+  bool _completionDispatched = false;
 
   @override
   void initState() {
@@ -141,6 +144,7 @@ class _GameScreenState extends State<GameScreen> {
 
   void _hydrateBoard() {
     _boardVersion += 1;
+    _completionDispatched = false;
     _stopTimer(reset: true);
     _stateMachine = null;
     _generationError = null;
@@ -181,6 +185,10 @@ class _GameScreenState extends State<GameScreen> {
 
     if (result.isBoardCompleted) {
       _stopTimer();
+      if (!_completionDispatched) {
+        _completionDispatched = true;
+        widget.onCompleted?.call(_elapsed);
+      }
     }
   }
 

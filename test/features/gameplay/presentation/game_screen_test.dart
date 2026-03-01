@@ -15,6 +15,7 @@ void main() {
     required SelectLevelStartConfig config,
     Size canvas = const Size(393, 852),
     VoidCallback? onCloseTap,
+    ValueChanged<Duration>? onCompleted,
     GameIconSetProvider? iconSetProvider,
     String semanticsLabel = 'Game screen',
     Duration elapsed = Duration.zero,
@@ -31,6 +32,7 @@ void main() {
           startConfig: config,
           seed: 42,
           onCloseTap: onCloseTap,
+          onCompleted: onCompleted,
           iconSetProvider: iconSetProvider,
           elapsed: elapsed,
           mismatchRevealDuration: mismatchRevealDuration,
@@ -109,7 +111,9 @@ void main() {
     expect(closeTapped, isTrue);
   });
 
-  testWidgets('binds provider icon asset path to each board card', (tester) async {
+  testWidgets('binds provider icon asset path to each board card', (
+    tester,
+  ) async {
     await pumpHarness(
       tester,
       config: const SelectLevelStartConfig(
@@ -145,7 +149,9 @@ void main() {
       timerTick: const Duration(milliseconds: 100),
     );
 
-    final boardBefore = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    final boardBefore = tester.widget<GameBoardGrid>(
+      find.byType(GameBoardGrid),
+    );
     final cards = boardBefore.cards;
     final first = cards.first;
     final second = cards.firstWhere(
@@ -192,7 +198,9 @@ void main() {
       find.byType(GameBoardGrid),
     );
     expect(
-      boardAfterResolution.cards.firstWhere((card) => card.id == first.id).state,
+      boardAfterResolution.cards
+          .firstWhere((card) => card.id == first.id)
+          .state,
       GameCardShellState.hidden,
     );
     expect(
@@ -204,7 +212,9 @@ void main() {
     expect(boardAfterResolution.isInteractionEnabled, isTrue);
   });
 
-  testWidgets('completes full happy-path game and freezes timer', (tester) async {
+  testWidgets('completes full happy-path game and freezes timer', (
+    tester,
+  ) async {
     final provider = GameIconSetProvider(
       availableIconAssets: const <String>[
         'assets/sets/food-set/apple-svgrepo-com.svg',
@@ -249,16 +259,70 @@ void main() {
       await tester.pump();
     }
 
-    final completedBoard = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    final completedBoard = tester.widget<GameBoardGrid>(
+      find.byType(GameBoardGrid),
+    );
     expect(completedBoard.isInteractionEnabled, isFalse);
     for (final card in completedBoard.cards) {
       expect(card.state, GameCardShellState.matched);
     }
 
-    final frozenTimerValue = tester.widget<Text>(find.byKey(GameTopBar.timerTextKey));
+    final frozenTimerValue = tester.widget<Text>(
+      find.byKey(GameTopBar.timerTextKey),
+    );
     await tester.pump(const Duration(milliseconds: 1400));
-    final timerAfterWait = tester.widget<Text>(find.byKey(GameTopBar.timerTextKey));
+    final timerAfterWait = tester.widget<Text>(
+      find.byKey(GameTopBar.timerTextKey),
+    );
     expect(timerAfterWait.data, frozenTimerValue.data);
+  });
+
+  testWidgets('emits final elapsed once after board completion', (
+    tester,
+  ) async {
+    final provider = GameIconSetProvider(
+      availableIconAssets: const <String>[
+        'assets/sets/food-set/apple-svgrepo-com.svg',
+        'assets/sets/food-set/banana-svgrepo-com.svg',
+        'assets/sets/food-set/cherry-svgrepo-com.svg',
+      ],
+    );
+    final completionEvents = <Duration>[];
+
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.simple,
+        rows: 2,
+        columns: 2,
+      ),
+      iconSetProvider: provider,
+      mismatchRevealDuration: const Duration(milliseconds: 80),
+      timerTick: const Duration(milliseconds: 150),
+      onCompleted: completionEvents.add,
+    );
+
+    await tester.pump(const Duration(milliseconds: 1100));
+
+    final board = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    final grouped = <String, List<String>>{};
+    for (final card in board.cards) {
+      final symbol = card.symbolAssetPath!;
+      grouped.putIfAbsent(symbol, () => <String>[]).add(card.id);
+    }
+
+    for (final ids in grouped.values) {
+      await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(ids[0])));
+      await tester.pump();
+      await tester.tap(find.byKey(GameBoardGrid.cardShellKeyFor(ids[1])));
+      await tester.pump();
+    }
+
+    expect(completionEvents, hasLength(1));
+    expect(completionEvents.single, greaterThan(Duration.zero));
+
+    await tester.pump(const Duration(milliseconds: 900));
+    expect(completionEvents, hasLength(1));
   });
 
   testWidgets('falls back to navigator maybePop when onCloseTap not provided', (
