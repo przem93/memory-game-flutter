@@ -28,7 +28,7 @@ void main() {
     expect(find.byKey(SuccessResultPanel.titleKey), findsOneWidget);
     expect(find.byKey(SuccessResultPanel.elapsedLabelKey), findsOneWidget);
     expect(find.byKey(SuccessResultPanel.elapsedValueKey), findsOneWidget);
-    expect(find.text('You Win!'), findsNWidgets(2));
+    expect(find.text('You Won!'), findsNWidgets(2));
     expect(find.text('Time elapsed:'), findsOneWidget);
   });
 
@@ -80,7 +80,7 @@ void main() {
         elapsed: Duration(minutes: 4, seconds: 21),
       ),
     );
-    expect(find.bySemanticsLabel('You Win'), findsOneWidget);
+    expect(find.bySemanticsLabel('You Won'), findsOneWidget);
     expect(find.bySemanticsLabel('Time elapsed 00:04:21'), findsOneWidget);
 
     await pumpHarness(

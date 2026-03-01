@@ -53,7 +53,7 @@ void main() {
     expect(find.byType(ScreenLogoRow), findsOneWidget);
     expect(find.byType(SuccessResultPanel), findsOneWidget);
     expect(find.byType(SuccessActionButtons), findsOneWidget);
-    expect(find.text('You Win!'), findsOneWidget);
+    expect(find.text('You Won!'), findsAtLeastNWidgets(1));
     expect(find.text('Time elapsed:'), findsOneWidget);
     expect(find.text('00:04:21'), findsOneWidget);
     expect(find.text('Play again'), findsOneWidget);

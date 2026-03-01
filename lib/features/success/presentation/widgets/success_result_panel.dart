@@ -73,7 +73,7 @@ class SuccessResultPanel extends StatelessWidget {
                 children: [
                   Semantics(
                     readOnly: true,
-                    label: titleSemanticsLabel ?? 'You Win',
+                    label: titleSemanticsLabel ?? 'You Won',
                     child: ExcludeSemantics(
                       child: SizedBox(
                         key: titleContainerKey,
