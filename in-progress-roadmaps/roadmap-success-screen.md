@@ -95,10 +95,19 @@ Gate:
 - widget tests for button labels, callbacks, and disabled behavior.
 
 Status:
-- `pending`.
+- `done`.
 
-Kickoff note:
-- Ready to start after Stage 2.1 closure.
+Stage 2.2 closure note:
+- `SuccessActionButtons` is implemented in `lib/features/success/presentation/widgets/success_action_buttons.dart`.
+- Widget coverage is available in `test/features/success/presentation/widgets/success_action_buttons_test.dart` (labels, callbacks, disabled behavior, semantics, locked dimensions, tablet scaling).
+- Stage gate executed:
+  - `flutter analyze` (reported only existing unrelated infos in gameplay tests),
+  - `flutter test test/features/success/presentation/widgets/success_action_buttons_test.dart` (pass).
+
+Stage 2.3 handoff note:
+- Reuse `NonMainSceneShell` (`background + developer brand`) via a dedicated `SuccessSceneShell`, without duplicating scaffold logic.
+- Keep top logo baseline aligned with `NonMainFlowLayout.phoneTopLogoOffset` and follow the same responsive spacing rule used by other non-main screens.
+- Keep Stage 2.3 scoped to shell alignment/comparison screenshot gate; do not start Stage 3 composition in this step.
 
 ### 2.3 `SuccessSceneShell`
 - reuse existing non-main scene shell (`background + developer brand + top logo row`) without duplicating scaffold logic,

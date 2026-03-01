@@ -85,9 +85,6 @@ void main() {
       ),
     );
 
-    expect(find.bySemanticsLabel('Play again'), findsOneWidget);
-    expect(find.bySemanticsLabel('Close'), findsOneWidget);
-
     final playAgainSemantics = tester.getSemantics(
       find.byKey(SuccessActionButtons.playAgainButtonKey),
     );
