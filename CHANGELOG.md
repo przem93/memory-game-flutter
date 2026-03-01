@@ -59,3 +59,9 @@ All notable user-visible changes to this project are documented in this file.
 - Closed Success roadmap as `done` after Stage 6 documentation sync.
 - Added Customize Stage 3 integration documentation:
   - `docs/customize-screen-stage-3-integration.md`.
+- Finalized Customize Stage 5/6 documentation set:
+  - `docs/customize-screen-stage-5-validation.md`,
+  - `docs/customize-screen-stage-6-closure.md`.
+- Closed Customize roadmap as `done` after Stage 6 documentation sync;
+  acceptance level `accepted-with-known-deviations` (set icon from food-set vs
+  reference cookie-like, acceptable per scope lock).

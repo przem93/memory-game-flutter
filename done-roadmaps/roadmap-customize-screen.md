@@ -202,7 +202,11 @@ Gate:
 - documentation updates merged and consistent with implemented behavior.
 
 Status:
-- `todo`.
+- `done`.
+
+Stage 6 closure note:
+- Documentation closure is complete in `docs/customize-screen-stage-6-closure.md`.
+- Changelog entry is synchronized with final `Customize` acceptance.
 
 ## Open Questions to Lock Before Stage 2/3
 
@@ -221,4 +225,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress`.
+- `done`.
