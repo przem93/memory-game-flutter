@@ -4,8 +4,10 @@ import 'package:memory_game/core/app.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_board_grid.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
+import 'package:memory_game/features/gameplay/presentation/widgets/game_top_bar.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_action_section.dart';
+import 'package:memory_game/features/select_level/presentation/widgets/select_level_option_button.dart';
 import 'package:memory_game/features/success/presentation/success_screen.dart';
 
 void main() {
@@ -18,7 +20,7 @@ void main() {
     tester.view.physicalSize = const Size(393, 852);
     addTearDown(tester.view.reset);
 
-    await tester.pumpWidget(const MemoryGameApp());
+    await tester.pumpWidget(MemoryGameApp(key: UniqueKey()));
     await tester.pumpAndSettle();
   }
 
@@ -42,6 +44,17 @@ void main() {
       await tester.pump();
     }
     await tester.pumpAndSettle();
+  }
+
+  List<String> currentBoardSignature(WidgetTester tester) {
+    final board = tester.widget<GameBoardGrid>(find.byType(GameBoardGrid));
+    return board.cards
+        .map((card) => '${card.id}|${card.symbolAssetPath}')
+        .toList(growable: false);
+  }
+
+  String currentTimerLabel(WidgetTester tester) {
+    return tester.widget<Text>(find.byKey(GameTopBar.timerTextKey)).data ?? '';
   }
 
   Future<void> expectGameplayStartFromDifficulty(
@@ -83,26 +96,67 @@ void main() {
     );
   });
 
-  testWidgets('routes completion to Success and supports replay action', (
-    WidgetTester tester,
-  ) async {
-    await expectGameplayStartFromDifficulty(
-      tester,
-      difficultyLabel: 'Simple',
-      expectedCardCount: 12,
-    );
+  testWidgets(
+    'routes completion to Success and replay starts fresh round for each difficulty',
+    (WidgetTester tester) async {
+      const scenarios = <({String label, int cardCount, SelectLevelDifficulty difficulty})>[
+        (
+          label: 'Simple',
+          cardCount: 12,
+          difficulty: SelectLevelDifficulty.simple,
+        ),
+        (
+          label: 'Medium',
+          cardCount: 16,
+          difficulty: SelectLevelDifficulty.medium,
+        ),
+        (
+          label: 'Hard',
+          cardCount: 20,
+          difficulty: SelectLevelDifficulty.hard,
+        ),
+      ];
 
-    await completeCurrentBoard(tester);
+      for (final scenario in scenarios) {
+        await expectGameplayStartFromDifficulty(
+          tester,
+          difficultyLabel: scenario.label,
+          expectedCardCount: scenario.cardCount,
+        );
+        final firstRoundBoardSignature = currentBoardSignature(tester);
 
-    expect(find.byType(SuccessScreen), findsOneWidget);
-    expect(find.text('Time elapsed:'), findsOneWidget);
+        await tester.pump(const Duration(milliseconds: 1200));
+        expect(currentTimerLabel(tester), isNot('00:00:00'));
 
-    await tester.tap(find.text('Play again'));
-    await tester.pumpAndSettle();
+        await completeCurrentBoard(tester);
 
-    expect(find.byType(GameScreen), findsOneWidget);
-    expect(find.byType(GameCardShell), findsNWidgets(12));
-  });
+        expect(find.byType(SuccessScreen), findsOneWidget);
+        expect(find.text('Time elapsed:'), findsOneWidget);
+
+        await tester.tap(find.text('Play again'));
+        await tester.pumpAndSettle();
+
+        expect(find.byType(GameScreen), findsOneWidget);
+        expect(find.byType(GameCardShell), findsNWidgets(scenario.cardCount));
+
+        final replayGameScreen = tester.widget<GameScreen>(
+          find.byType(GameScreen),
+        );
+        expect(replayGameScreen.startConfig.difficulty, scenario.difficulty);
+        expect(
+          replayGameScreen.startConfig.rows * replayGameScreen.startConfig.columns,
+          scenario.cardCount,
+        );
+
+        final replayBoardSignature = currentBoardSignature(tester);
+        expect(replayBoardSignature, isNot(firstRoundBoardSignature));
+
+        expect(currentTimerLabel(tester), '00:00:00');
+        await tester.pump(const Duration(milliseconds: 1100));
+        expect(currentTimerLabel(tester), isNot('00:00:00'));
+      }
+    },
+  );
 
   testWidgets('routes success close action back to Main Menu', (
     WidgetTester tester,

@@ -180,7 +180,16 @@ Artifacts:
 - tests covering `Success` -> `Close` -> `Main Menu` path.
 
 Status:
-- `pending`.
+- `done`.
+
+Stage 4 closure note:
+- Replay flow contract is covered in `test/app_select_level_flow_test.dart` for all difficulty levels (`Simple|Medium|Hard`), including preserved difficulty, expected board card count, and `Success -> Play again` transition.
+- Replay board freshness is validated by comparing first-round and replay board signatures to ensure a new shuffle order is produced on replay start.
+- Timer contract is validated in replay flow tests by asserting reset to `00:00:00` after replay start and subsequent increment after tick progression.
+- `Success -> Close -> Main Menu` navigation outcome remains covered in `test/app_select_level_flow_test.dart`.
+- Stage 4 gate executed:
+  - `flutter analyze` (reported only existing unrelated infos in gameplay widget tests),
+  - `flutter test test/app_select_level_flow_test.dart` (pass).
 
 ## Stage 5 - 1:1 Validation and Acceptance
 
@@ -236,4 +245,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `in-progress` (Stages 1-2 done; Stage 3 pending).
+- `in-progress` (Stages 1-4 done; Stages 5-6 pending).
