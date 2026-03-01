@@ -28,7 +28,7 @@ void main() {
     expect(find.byKey(SuccessResultPanel.titleKey), findsOneWidget);
     expect(find.byKey(SuccessResultPanel.elapsedLabelKey), findsOneWidget);
     expect(find.byKey(SuccessResultPanel.elapsedValueKey), findsOneWidget);
-    expect(find.text('You Win!'), findsOneWidget);
+    expect(find.text('You Win!'), findsNWidgets(2));
     expect(find.text('Time elapsed:'), findsOneWidget);
   });
 
@@ -119,5 +119,27 @@ void main() {
     expect(phoneSize.height, 186);
     expect(tabletSize.width, closeTo(402, 0.01));
     expect(tabletSize.height, closeTo(223.2, 0.01));
+  });
+
+  testWidgets('uses 95 percent title width and locked outline style', (tester) async {
+    await pumpHarness(
+      tester,
+      child: const SuccessResultPanel(
+        elapsed: Duration(minutes: 4, seconds: 21),
+      ),
+    );
+
+    final titleContainerSize = tester.getSize(
+      find.byKey(SuccessResultPanel.titleContainerKey),
+    );
+    expect(titleContainerSize.width, closeTo(280.25, 0.01));
+
+    final outlinedTitleText = tester.widget<Text>(find.byKey(SuccessResultPanel.titleKey));
+    final outlinePaint = outlinedTitleText.style?.foreground;
+
+    expect(outlinePaint, isNotNull);
+    expect(outlinePaint!.style, PaintingStyle.stroke);
+    expect(outlinePaint.color.value, const Color(0xFF967C01).value);
+    expect(outlinePaint.strokeWidth, closeTo(4, 0.01));
   });
 }

@@ -14,6 +14,7 @@ class SuccessResultPanel extends StatelessWidget {
 
   static const panelKey = ValueKey<String>('successResultPanel');
   static const titleKey = ValueKey<String>('successResultPanelTitle');
+  static const titleContainerKey = ValueKey<String>('successResultPanelTitleContainer');
   static const elapsedLabelKey = ValueKey<String>('successResultPanelElapsedLabel');
   static const elapsedValueKey = ValueKey<String>('successResultPanelElapsedValue');
 
@@ -21,6 +22,9 @@ class SuccessResultPanel extends StatelessWidget {
   static const _phonePanelHeight = 186.0;
   static const _panelRadius = 6.0;
   static const _phoneContentHorizontalPadding = 20.0;
+  static const _titleWidthFactor = 0.95;
+  static const _titleOutlineColor = Color(0xFF967C01);
+  static const _titleOutlineStrokeWidth = 4.0;
 
   final Duration elapsed;
   final SuccessResultPanelScalePreset scalePreset;
@@ -32,10 +36,12 @@ class SuccessResultPanel extends StatelessWidget {
     final scale = scalePreset == SuccessResultPanelScalePreset.tablet ? 1.2 : 1.0;
     final panelWidth = _phonePanelWidth * scale;
     final panelHeight = _phonePanelHeight * scale;
-    final titleSize = 40.0 * scale;
+    final titleSize = 60.0 * scale;
     final elapsedLabelSize = 24.0 * scale;
     final elapsedValueSize = 32.0 * scale;
     final formattedElapsed = _formatDuration(elapsed);
+    final contentWidth =
+        _phonePanelWidth * scale - (_phoneContentHorizontalPadding * 2 * scale);
 
     return SizedBox(
       key: panelKey,
@@ -61,7 +67,7 @@ class SuccessResultPanel extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: SizedBox(
-              width: _phonePanelWidth * scale - (_phoneContentHorizontalPadding * 2 * scale),
+              width: contentWidth,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -69,11 +75,27 @@ class SuccessResultPanel extends StatelessWidget {
                     readOnly: true,
                     label: titleSemanticsLabel ?? 'You Win',
                     child: ExcludeSemantics(
-                      child: Text(
-                        'You Win!',
-                        key: titleKey,
-                        textAlign: TextAlign.center,
-                        style: _titleStyle(titleSize),
+                      child: SizedBox(
+                        key: titleContainerKey,
+                        width: contentWidth * _titleWidthFactor,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Text(
+                              'You Won!',
+                              key: titleKey,
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              style: _titleOutlineStyle(titleSize, scale),
+                            ),
+                            Text(
+                              'You Won!',
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              style: _titleStyle(titleSize),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -125,6 +147,20 @@ class SuccessResultPanel extends StatelessWidget {
           offset: Offset(0, 2),
         ),
       ],
+    );
+  }
+
+  TextStyle _titleOutlineStyle(double fontSize, double scale) {
+    return TextStyle(
+      fontFamily: 'DynaPuff',
+      fontWeight: FontWeight.w700,
+      fontSize: fontSize,
+      height: 1,
+      foreground:
+          Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = _titleOutlineStrokeWidth * scale
+            ..color = _titleOutlineColor,
     );
   }
 
