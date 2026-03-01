@@ -149,7 +149,17 @@ Gate:
 - `flutter run`
 
 Status:
-- `pending`.
+- `done`.
+
+Stage 3 closure note:
+- `SuccessScreenComposition` is integrated in `lib/features/success/presentation/success_screen.dart` using Stage 2 components (`SuccessSceneShell`, `SuccessResultPanel`, `SuccessActionButtons`) with locked non-main shell baseline spacing.
+- Gameplay -> Success wiring is integrated in `lib/core/app.dart` (`onCompleted` -> `SuccessScreen`), with replay preserving `SelectLevelStartConfig` and close clearing stack to `Main Menu`.
+- Final elapsed payload from completed gameplay round is emitted by `GameScreen` (`onCompleted`) and rendered on `Success`.
+- Stage 3 gate executed:
+  - `flutter analyze` (reported only existing unrelated infos in gameplay widget tests),
+  - `flutter test` (suite run executed; failures observed in unrelated `test/select_level_screen_golden_test.dart` baselines),
+  - `flutter run -d "iPhone 17 Pro" --no-resident` (launch success),
+  - focused Stage 3 validation: `flutter test test/features/success/presentation/success_screen_test.dart test/app_select_level_flow_test.dart` (pass).
 
 ## Stage 4 - Replay Flow and Deterministic Gameplay Validation
 
