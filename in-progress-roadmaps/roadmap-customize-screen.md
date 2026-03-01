@@ -55,10 +55,10 @@ Output:
 - locked mapping table for `cards grid -> rows x columns -> pairs`.
 
 Stage 1 Gate:
-- `todo` (Stage 2.1 can start only after Stage 1 is `done`).
+- `done` (`docs/customize-screen-spec-lock.md` locked and accepted for Stage 2.1 kickoff).
 
 Status:
-- `todo`.
+- `done`.
 
 ## Stage 2 - Reusable Components (separate implementation steps)
 
