@@ -78,7 +78,7 @@ Gate:
 - widget tests for layout, text rendering, semantics, and disabled mode behavior.
 
 Status:
-- `todo`.
+- `done` (implemented in `lib/features/customize/presentation/widgets/customize_set_selector_field.dart` with tests in `test/features/customize/presentation/widgets/customize_set_selector_field_test.dart`).
 
 ### 2.2 `CustomizeGridOptionButton`
 - implement reusable square option button for card-count values,
@@ -94,7 +94,7 @@ Gate:
 - widget tests for dimensions, state visuals, and semantics labels.
 
 Status:
-- `todo`.
+- `done` (implemented in `lib/features/customize/presentation/widgets/customize_grid_option_button.dart` with tests in `test/features/customize/presentation/widgets/customize_grid_option_button_test.dart`).
 
 ### 2.3 `CustomizeGridOptionsSection`
 - implement responsive section that arranges all card-count options in a 3x3 layout:
@@ -111,7 +111,7 @@ Gate:
 - widget tests for fixed ordering, spacing, and callback contract.
 
 Status:
-- `todo`.
+- `done` (implemented in `lib/features/customize/presentation/widgets/customize_grid_options_section.dart` with tests in `test/features/customize/presentation/widgets/customize_grid_options_section_test.dart`).
 
 ### 2.4 `CustomizeSceneShell`
 - reuse existing non-main scene shell (`background + top logo row + developer brand`) without duplicating scaffold logic,
@@ -122,7 +122,7 @@ Gate:
 - comparison screenshot for background/logo/footer alignment.
 
 Status:
-- `todo`.
+- `done` (implemented in `lib/features/customize/presentation/widgets/customize_scene_shell.dart` as a wrapper over `NonMainSceneShell`).
 
 ## Stage 3 - `CustomizeScreenComposition` Integration
 
