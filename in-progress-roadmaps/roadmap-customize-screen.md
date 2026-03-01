@@ -163,7 +163,7 @@ Artifacts:
 - tests covering all card-count options (`8..24`) and expected gameplay init config.
 
 Status:
-- `todo`.
+- `done` (mapping contract validated in `test/features/customize/presentation/customize_start_payload_test.dart`, `test/features/customize/presentation/customize_screen_test.dart`, and `test/app_customize_flow_test.dart`; Stage 4 gates executed with known unrelated golden failures outside Customize scope).
 
 ## Stage 5 - 1:1 Validation and Acceptance
 

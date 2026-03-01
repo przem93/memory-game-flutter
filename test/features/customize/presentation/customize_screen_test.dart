@@ -34,27 +34,41 @@ void main() {
     expect(find.byType(CustomizeGridOptionButton), findsNWidgets(9));
   });
 
-  testWidgets('emits locked start payload for selected card count', (
+  testWidgets('emits locked start payload for each supported card count', (
     tester,
   ) async {
     CustomizeStartPayload? emitted;
+    const expected = <int, ({int rows, int columns, int pairCount})>{
+      8: (rows: 2, columns: 4, pairCount: 4),
+      10: (rows: 2, columns: 5, pairCount: 5),
+      12: (rows: 3, columns: 4, pairCount: 6),
+      14: (rows: 2, columns: 7, pairCount: 7),
+      16: (rows: 4, columns: 4, pairCount: 8),
+      18: (rows: 3, columns: 6, pairCount: 9),
+      20: (rows: 4, columns: 5, pairCount: 10),
+      22: (rows: 2, columns: 11, pairCount: 11),
+      24: (rows: 4, columns: 6, pairCount: 12),
+    };
 
     await pumpHarness(
       tester,
       child: CustomizeScreen(onStartRequested: (payload) => emitted = payload),
     );
 
-    await tester.tap(
-      find.byKey(const ValueKey<String>('customizeGridOptionsButton-24')),
-    );
-    await tester.pumpAndSettle();
+    for (final entry in expected.entries) {
+      emitted = null;
+      await tester.tap(
+        find.byKey(ValueKey<String>('customizeGridOptionsButton-${entry.key}')),
+      );
+      await tester.pumpAndSettle();
 
-    expect(emitted, isNotNull);
-    expect(emitted?.setKey, 'food-set');
-    expect(emitted?.cardCount, 24);
-    expect(emitted?.rows, 4);
-    expect(emitted?.columns, 6);
-    expect(emitted?.pairCount, 12);
+      expect(emitted, isNotNull);
+      expect(emitted?.setKey, CustomizeStartPayload.defaultSetKey);
+      expect(emitted?.cardCount, entry.key);
+      expect(emitted?.rows, entry.value.rows);
+      expect(emitted?.columns, entry.value.columns);
+      expect(emitted?.pairCount, entry.value.pairCount);
+    }
   });
 
   testWidgets('marks section titles as semantic headers', (tester) async {
