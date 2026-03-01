@@ -144,7 +144,7 @@ Gate:
 - `flutter run`
 
 Status:
-- `todo`.
+- `done` (implemented in `lib/features/customize/presentation/customize_screen.dart` and wired in `lib/core/app.dart`; Stage 3 tests added in `test/features/customize/presentation/customize_screen_test.dart` and `test/app_customize_flow_test.dart`; mapping payload contract introduced in `lib/features/customize/presentation/customize_start_payload.dart`).
 
 ## Stage 4 - Settings Mapping Validation (`cards grid` -> gameplay board)
 

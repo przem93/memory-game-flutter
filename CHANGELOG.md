@@ -20,6 +20,10 @@ All notable user-visible changes to this project are documented in this file.
 - Implemented `SuccessScreen` post-completion flow with final elapsed time
   presentation, `Play again` replay for the same difficulty, and `Close`
   navigation back to `MainMenuScreen`.
+- Implemented `CustomizeScreen` composition (`Select set` + `Cards grid`) and
+  wired `Main Menu -> Customize -> Game` flow with direct card-count start.
+- Added locked Customize mapping payload (`cardCount -> rows x columns -> pairs`)
+  with fallback to `16` and default set key `food-set`.
 
 ### Changed
 
@@ -53,3 +57,5 @@ All notable user-visible changes to this project are documented in this file.
   - `docs/success-screen-stage-5-validation.md`,
   - `docs/success-screen-stage-6-closure.md`.
 - Closed Success roadmap as `done` after Stage 6 documentation sync.
+- Added Customize Stage 3 integration documentation:
+  - `docs/customize-screen-stage-3-integration.md`.

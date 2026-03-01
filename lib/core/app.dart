@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory_game/features/customize/presentation/customize_screen.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
@@ -31,7 +32,16 @@ class MemoryGameApp extends StatelessWidget {
         );
       },
       onCustomizePressed: () {
-        debugPrint('Customize tapped');
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (customizeContext) => CustomizeScreen(
+              onStartRequested: (payload) => _openGameFlow(
+                customizeContext,
+                payload.toSelectLevelStartConfig(),
+              ),
+            ),
+          ),
+        );
       },
     );
   }
