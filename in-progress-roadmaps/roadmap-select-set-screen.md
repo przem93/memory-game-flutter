@@ -87,7 +87,7 @@ Gate:
 - widget tests for layout, callback emission, and semantics.
 
 Status:
-- `pending`.
+- `done`.
 
 ### 2.3 `SelectSetSceneShell`
 - reuse existing non-main scene shell (`NonMainSceneShell` + `ScreenLogoRow` + developer brand),
