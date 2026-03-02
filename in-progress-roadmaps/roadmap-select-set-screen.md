@@ -73,7 +73,7 @@ Gate:
 - widget tests for layout, text rendering, semantics, and tap behavior.
 
 Status:
-- `pending`.
+- `done`.
 
 ### 2.2 `SelectSetOptionsSection`
 - implement section that renders and spaces all set option buttons vertically,

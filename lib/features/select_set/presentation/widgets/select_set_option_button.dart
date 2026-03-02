@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:memory_game/shared/widgets/set_option_button.dart';
 
-/// Reusable active-set selector field used on Customize screen.
-class CustomizeSetSelectorField extends StatelessWidget {
-  const CustomizeSetSelectorField({
+/// Reusable set option button used on Select Set screen.
+class SelectSetOptionButton extends StatelessWidget {
+  const SelectSetOptionButton({
     required this.label,
     required this.leadingIconAsset,
     this.onTap,
     this.isEnabled = true,
-    this.semanticsLabel,
     super.key,
   })  : assert(label != ''),
         assert(leadingIconAsset != '');
-
-  static const containerKey = SetOptionButton.containerKey;
-  static const semanticsKey = SetOptionButton.semanticsKey;
-  static const iconSlotKey = SetOptionButton.iconSlotKey;
-  static const labelKey = SetOptionButton.labelKey;
 
   final String label;
   final String leadingIconAsset;
   final VoidCallback? onTap;
   final bool isEnabled;
-  final String? semanticsLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +24,7 @@ class CustomizeSetSelectorField extends StatelessWidget {
       leadingIconAsset: leadingIconAsset,
       onTap: onTap,
       isEnabled: isEnabled,
-      semanticsLabel: semanticsLabel ?? 'Active set $label',
+      semanticsLabel: 'Select set $label',
     );
   }
 }
