@@ -52,4 +52,14 @@ void main() {
     final payload = resolveCustomizeStartPayload(16, 'unknown-set');
     expect(payload.setKey, CustomizeStartPayload.defaultSetKey);
   });
+
+  test('toSelectLevelStartConfig passes setKey for animals-set and food-set', () {
+    final animalsPayload = resolveCustomizeStartPayload(16, 'animals-set');
+    final animalsConfig = animalsPayload.toSelectLevelStartConfig();
+    expect(animalsConfig.setKey, 'animals-set');
+
+    final foodPayload = resolveCustomizeStartPayload(16, 'food-set');
+    final foodConfig = foodPayload.toSelectLevelStartConfig();
+    expect(foodConfig.setKey, 'food-set');
+  });
 }

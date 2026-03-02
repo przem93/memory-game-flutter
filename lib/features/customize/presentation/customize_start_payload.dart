@@ -23,12 +23,11 @@ class CustomizeStartPayload {
   int get pairCount => cardCount ~/ 2;
 
   SelectLevelStartConfig toSelectLevelStartConfig() {
-    // Gameplay currently uses SelectLevelStartConfig; map Customize payload
-    // into the existing contract until set-aware start config is introduced.
     return SelectLevelStartConfig(
       difficulty: SelectLevelDifficulty.simple,
       rows: rows,
       columns: columns,
+      setKey: setKey,
     );
   }
 }

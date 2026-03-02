@@ -7,11 +7,16 @@ class SelectLevelStartConfig {
     required this.difficulty,
     required this.rows,
     required this.columns,
+    this.setKey,
   });
 
   final SelectLevelDifficulty difficulty;
   final int rows;
   final int columns;
+
+  /// Optional set key for icon source (e.g. `animals-set`, `food-set`).
+  /// When null, defaults to `food-set` in gameplay.
+  final String? setKey;
 
   int get pairCount => (rows * columns) ~/ 2;
 

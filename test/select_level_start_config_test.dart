@@ -38,6 +38,18 @@ void main() {
       expect(fallback.rows, 3);
       expect(fallback.columns, 4);
       expect(fallback.pairCount, 6);
+      expect(fallback.setKey, isNull);
+    });
+
+    test('accepts optional setKey in constructor', () {
+      const config = SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.simple,
+        rows: 3,
+        columns: 4,
+        setKey: 'animals-set',
+      );
+
+      expect(config.setKey, 'animals-set');
     });
   });
 }

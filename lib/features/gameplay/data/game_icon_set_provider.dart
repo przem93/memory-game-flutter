@@ -42,6 +42,24 @@ class GameIconSetProvider {
     List<String> availableIconAssets = _defaultFoodSetAssets,
   }) : _availableIconAssets = List.unmodifiable(availableIconAssets);
 
+  /// Creates a provider for the given set key. Unknown or null keys fall back to
+  /// food-set.
+  factory GameIconSetProvider.forSetKey(String? setKey) {
+    final assets = _assetsForSetKey(setKey);
+    return GameIconSetProvider(availableIconAssets: assets);
+  }
+
+  static List<String> _assetsForSetKey(String? setKey) {
+    switch (setKey) {
+      case 'animals-set':
+        return _animalsSetAssets;
+      case 'food-set':
+        return _defaultFoodSetAssets;
+      default:
+        return _defaultFoodSetAssets;
+    }
+  }
+
   static const List<String> _defaultFoodSetAssets = <String>[
     'assets/sets/food-set/apple-svgrepo-com.svg',
     'assets/sets/food-set/avocado-svgrepo-com.svg',
@@ -60,6 +78,28 @@ class GameIconSetProvider {
     'assets/sets/food-set/steak-svgrepo-com.svg',
     'assets/sets/food-set/watermelon-svgrepo-com.svg',
     'assets/sets/food-set/yogurt-svgrepo-com.svg',
+  ];
+
+  static const List<String> _animalsSetAssets = <String>[
+    'assets/sets/animals-set/alpaca-svgrepo-com.svg',
+    'assets/sets/animals-set/animal-kingdom-coati-svgrepo-com.svg',
+    'assets/sets/animals-set/antelope-svgrepo-com.svg',
+    'assets/sets/animals-set/armadillo-svgrepo-com.svg',
+    'assets/sets/animals-set/badger-svgrepo-com.svg',
+    'assets/sets/animals-set/bat-svgrepo-com.svg',
+    'assets/sets/animals-set/bear-svgrepo-com.svg',
+    'assets/sets/animals-set/beetle-insect-svgrepo-com.svg',
+    'assets/sets/animals-set/bison-svgrepo-com.svg',
+    'assets/sets/animals-set/boar-svgrepo-com.svg',
+    'assets/sets/animals-set/butterfly-svgrepo-com.svg',
+    'assets/sets/animals-set/camel-svgrepo-com.svg',
+    'assets/sets/animals-set/cheetah-svgrepo-com.svg',
+    'assets/sets/animals-set/coral-svgrepo-com.svg',
+    'assets/sets/animals-set/cow-svgrepo-com.svg',
+    'assets/sets/animals-set/crocodile-svgrepo-com.svg',
+    'assets/sets/animals-set/crow-svgrepo-com.svg',
+    'assets/sets/animals-set/deer-svgrepo-com.svg',
+    'assets/sets/animals-set/panther-svgrepo-com.svg',
   ];
 
   final List<String> _availableIconAssets;
@@ -115,12 +155,14 @@ class GameIconSetProvider {
   }
 
   String _identityFromAssetPath(String assetPath) {
-    const prefix = 'assets/sets/food-set/';
+    const setsPrefix = 'assets/sets/';
     const suffix = '.svg';
 
     var value = assetPath;
-    if (value.startsWith(prefix)) {
-      value = value.substring(prefix.length);
+    if (value.startsWith(setsPrefix)) {
+      final afterSets = value.substring(setsPrefix.length);
+      final slashIndex = afterSets.indexOf('/');
+      value = slashIndex >= 0 ? afterSets.substring(slashIndex + 1) : afterSets;
     }
     if (value.endsWith(suffix)) {
       value = value.substring(0, value.length - suffix.length);

@@ -108,5 +108,47 @@ void main() {
       expect(mediumResult.length, 16);
       expect(hardResult.length, 20);
     });
+
+    group('forSetKey', () {
+      test('animals-set returns icons from animals-set', () {
+        final animalsProvider = GameIconSetProvider.forSetKey('animals-set');
+        final result = animalsProvider.generateForPairCount(3, seed: 1);
+
+        expect(result.length, 6);
+        for (final icon in result) {
+          expect(icon.assetPath, startsWith('assets/sets/animals-set/'));
+        }
+      });
+
+      test('food-set returns icons from food-set', () {
+        final foodProvider = GameIconSetProvider.forSetKey('food-set');
+        final result = foodProvider.generateForPairCount(3, seed: 1);
+
+        expect(result.length, 6);
+        for (final icon in result) {
+          expect(icon.assetPath, startsWith('assets/sets/food-set/'));
+        }
+      });
+
+      test('null falls back to food-set', () {
+        final fallbackProvider = GameIconSetProvider.forSetKey(null);
+        final result = fallbackProvider.generateForPairCount(3, seed: 1);
+
+        expect(result.length, 6);
+        for (final icon in result) {
+          expect(icon.assetPath, startsWith('assets/sets/food-set/'));
+        }
+      });
+
+      test('unknown setKey falls back to food-set', () {
+        final fallbackProvider = GameIconSetProvider.forSetKey('unknown-set');
+        final result = fallbackProvider.generateForPairCount(3, seed: 1);
+
+        expect(result.length, 6);
+        for (final icon in result) {
+          expect(icon.assetPath, startsWith('assets/sets/food-set/'));
+        }
+      });
+    });
   });
 }

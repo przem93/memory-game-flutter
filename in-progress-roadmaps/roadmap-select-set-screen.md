@@ -143,7 +143,7 @@ Artifacts:
 - tests covering both sets and gameplay init with correct icon source.
 
 Status:
-- `pending`.
+- `done` (SelectLevelStartConfig.setKey, GameIconSetProvider.forSetKey, app.dart/SuccessScreen pass iconSetProvider, tests passing).
 
 ## Stage 5 - 1:1 Validation and Acceptance
 

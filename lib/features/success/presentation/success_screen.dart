@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memory_game/features/gameplay/data/game_icon_set_provider.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
@@ -115,9 +116,14 @@ class SuccessScreen extends StatelessWidget {
   }
 
   void _restartGame(BuildContext context) {
+    final iconSetProvider =
+        GameIconSetProvider.forSetKey(startConfig.setKey);
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
-        builder: (_) => GameScreen(startConfig: startConfig),
+        builder: (_) => GameScreen(
+          startConfig: startConfig,
+          iconSetProvider: iconSetProvider,
+        ),
       ),
     );
   }

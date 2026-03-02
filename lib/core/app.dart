@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memory_game/features/customize/presentation/customize_screen.dart';
+import 'package:memory_game/features/gameplay/data/game_icon_set_provider.dart';
 import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
@@ -47,10 +48,13 @@ class MemoryGameApp extends StatelessWidget {
   }
 
   void _openGameFlow(BuildContext context, SelectLevelStartConfig startConfig) {
+    final iconSetProvider =
+        GameIconSetProvider.forSetKey(startConfig.setKey);
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (gameContext) => GameScreen(
           startConfig: startConfig,
+          iconSetProvider: iconSetProvider,
           onCompleted: (elapsed) => _openSuccessFlow(
             gameContext,
             startConfig: startConfig,
@@ -82,10 +86,13 @@ class MemoryGameApp extends StatelessWidget {
     BuildContext context,
     SelectLevelStartConfig startConfig,
   ) {
+    final iconSetProvider =
+        GameIconSetProvider.forSetKey(startConfig.setKey);
     Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         builder: (gameContext) => GameScreen(
           startConfig: startConfig,
+          iconSetProvider: iconSetProvider,
           onCompleted: (elapsed) => _openSuccessFlow(
             gameContext,
             startConfig: startConfig,
