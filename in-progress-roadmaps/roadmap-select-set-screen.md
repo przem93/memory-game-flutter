@@ -98,7 +98,7 @@ Gate:
 - comparison screenshot for background/logo/footer alignment.
 
 Status:
-- `pending`.
+- `done` (widget and golden tests in `test/features/select_set/presentation/widgets/select_set_scene_shell_test.dart` and `select_set_scene_shell_golden_test.dart`; phone and tablet baselines generated).
 
 ## Stage 3 - `SelectSetScreen` Composition and Customize Integration
 
