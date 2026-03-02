@@ -123,7 +123,7 @@ Gate:
 - `flutter run`
 
 Status:
-- `pending`.
+- `done` (SelectSetScreen composed, CustomizeScreen StatefulWidget with set selection, navigation wired, tests passing).
 
 ## Stage 4 - Set-to-Gameplay Contract Validation
 

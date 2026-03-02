@@ -16,7 +16,10 @@ void main() {
     };
 
     for (final entry in expected.entries) {
-      final payload = resolveCustomizeStartPayload(entry.key);
+      final payload = resolveCustomizeStartPayload(
+        entry.key,
+        CustomizeStartPayload.defaultSetKey,
+      );
       expect(payload.setKey, CustomizeStartPayload.defaultSetKey);
       expect(payload.cardCount, entry.key);
       expect(payload.rows, entry.value.rows);
@@ -26,11 +29,27 @@ void main() {
   });
 
   test('falls back to 16 cards mapping for unsupported values', () {
-    final payload = resolveCustomizeStartPayload(9);
+    final payload = resolveCustomizeStartPayload(
+      9,
+      CustomizeStartPayload.defaultSetKey,
+    );
     expect(payload.setKey, CustomizeStartPayload.defaultSetKey);
     expect(payload.cardCount, CustomizeStartPayload.fallbackCardCount);
     expect(payload.rows, 4);
     expect(payload.columns, 4);
     expect(payload.pairCount, 8);
+  });
+
+  test('passes through animals-set and food-set', () {
+    final animalsPayload = resolveCustomizeStartPayload(16, 'animals-set');
+    expect(animalsPayload.setKey, 'animals-set');
+
+    final foodPayload = resolveCustomizeStartPayload(16, 'food-set');
+    expect(foodPayload.setKey, 'food-set');
+  });
+
+  test('falls back to food-set for unknown set key', () {
+    final payload = resolveCustomizeStartPayload(16, 'unknown-set');
+    expect(payload.setKey, CustomizeStartPayload.defaultSetKey);
   });
 }

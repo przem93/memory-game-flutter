@@ -6,6 +6,7 @@ import 'package:memory_game/features/gameplay/presentation/game_screen.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
 import 'package:memory_game/features/main_menu/presentation/main_menu_screen.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_action_section.dart';
+import 'package:memory_game/features/select_set/presentation/select_set_screen.dart';
 
 void main() {
   setUp(() {
@@ -30,6 +31,27 @@ void main() {
     expect(find.byType(CustomizeScreen), findsOneWidget);
     expect(find.text('Select set'), findsOneWidget);
     expect(find.text('Cards grid'), findsOneWidget);
+  });
+
+  testWidgets('set selector opens Select Set and selection returns to Customize',
+      (tester) async {
+    await pumpApp(tester);
+
+    await tester.tap(find.byKey(MainMenuActionSection.actionButtonKeyAt(1)));
+    await tester.pumpAndSettle();
+    expect(find.byType(CustomizeScreen), findsOneWidget);
+    expect(find.text('Food'), findsOneWidget);
+
+    await tester.tap(find.text('Food'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SelectSetScreen), findsOneWidget);
+
+    await tester.tap(find.text('Animals'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SelectSetScreen), findsNothing);
+    expect(find.byType(CustomizeScreen), findsOneWidget);
+    expect(find.text('Animals'), findsOneWidget);
   });
 
   testWidgets('Close returns from Customize to Main Menu', (tester) async {

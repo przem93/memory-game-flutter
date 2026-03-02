@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
 import 'package:memory_game/features/select_level/presentation/widgets/select_level_option_button.dart';
+import 'package:memory_game/features/select_set/domain/select_set_catalog.dart';
 
 /// Immutable gameplay payload emitted by Customize flow.
 class CustomizeStartPayload {
@@ -44,8 +45,9 @@ const _cardCountGridMapping = <int, ({int rows, int columns})>{
   24: (rows: 4, columns: 6),
 };
 
-/// Resolves locked Customize payload from a selected cards-grid value.
-CustomizeStartPayload resolveCustomizeStartPayload(int cardCount) {
+/// Resolves locked Customize payload from a selected cards-grid value and set key.
+CustomizeStartPayload resolveCustomizeStartPayload(int cardCount, String setKey) {
+  final resolvedSetKey = resolveSetEntry(setKey).setKey;
   final grid = _cardCountGridMapping[cardCount];
   if (grid == null) {
     final fallbackGrid =
@@ -55,7 +57,7 @@ CustomizeStartPayload resolveCustomizeStartPayload(int cardCount) {
       'Falling back to ${CustomizeStartPayload.fallbackCardCount}.',
     );
     return CustomizeStartPayload(
-      setKey: CustomizeStartPayload.defaultSetKey,
+      setKey: resolvedSetKey,
       cardCount: CustomizeStartPayload.fallbackCardCount,
       rows: fallbackGrid.rows,
       columns: fallbackGrid.columns,
@@ -63,7 +65,7 @@ CustomizeStartPayload resolveCustomizeStartPayload(int cardCount) {
   }
 
   return CustomizeStartPayload(
-    setKey: CustomizeStartPayload.defaultSetKey,
+    setKey: resolvedSetKey,
     cardCount: cardCount,
     rows: grid.rows,
     columns: grid.columns,
