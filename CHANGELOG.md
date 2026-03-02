@@ -24,6 +24,10 @@ All notable user-visible changes to this project are documented in this file.
   wired `Main Menu -> Customize -> Game` flow with direct card-count start.
 - Added locked Customize mapping payload (`cardCount -> rows x columns -> pairs`)
   with fallback to `16` and default set key `food-set`.
+- Implemented `SelectSetScreen`: Customize -> tap set selector -> Select Set
+  screen -> choose Animals or Food -> return to Customize with selected set.
+- Selected set is used for card icons in game (MVP sets: `animals-set`,
+  `food-set`).
 
 ### Changed
 
@@ -65,3 +69,5 @@ All notable user-visible changes to this project are documented in this file.
 - Closed Customize roadmap as `done` after Stage 6 documentation sync;
   acceptance level `accepted-with-known-deviations` (set icon from food-set vs
   reference cookie-like, acceptable per scope lock).
+- Customize flow: set selector opens `SelectSetScreen` for user to choose
+  Animals or Food; selected set is passed to gameplay for card icons.

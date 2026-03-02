@@ -15,8 +15,9 @@ Scope: documentation closure and final status decision for `CustomizeScreen`
 ## Final navigation contract
 
 - `MainMenuScreen` -> `CustomizeScreen` via `Customize` button.
+- `CustomizeScreen` -> tap set selector row -> `SelectSetScreen`; user chooses Animals or Food -> pop back to `CustomizeScreen` with selected set.
 - `CustomizeScreen` -> `GameScreen` when user taps any cards-grid option (`8`..`24`).
-- Payload passed to game: `cardCount`, `pairCount` (`cardCount / 2`), `setKey` (fixed `food-set`).
+- Payload passed to game: `cardCount`, `pairCount` (`cardCount / 2`), `setKey` (user-selected: `animals-set` or `food-set`).
 - Close action in `GameTopBar` returns to `CustomizeScreen` when entering via Customize flow.
 
 ## Decision
@@ -32,10 +33,10 @@ Reason:
 - Navigation and payload contract remain covered by existing tests
   (`test/app_customize_flow_test.dart` and Customize presentation tests).
 
-## Deferred scope handoff
+## Deferred scope handoff (resolved)
 
-- Set-picker screen (opening set selector to choose icon set) is out of scope for this roadmap.
-- Plan in separate roadmap when set-picker screen is implemented.
+- Set-picker screen (opening set selector to choose icon set) was deferred from Customize roadmap.
+- Implemented in separate roadmap: `SelectSetScreen` (see `docs/select-set-screen-stage-6-closure.md`).
 
 ## Stage 6 completion checklist
 

@@ -72,6 +72,9 @@ Release is currently manual for both stores.
 - Customize Spec Lock: `docs/customize-screen-spec-lock.md`
 - Customize validation (Stage 5): `docs/customize-screen-stage-5-validation.md`
 - Customize closure (Stage 6): `docs/customize-screen-stage-6-closure.md`
+- Select Set Spec Lock: `docs/select-set-screen-spec-lock.md`
+- Select Set validation (Stage 5): `docs/select-set-screen-stage-5-validation.md`
+- Select Set closure (Stage 6): `docs/select-set-screen-stage-6-closure.md`
 - Cursor project rules: `.cursor/rules/`
 
 ## Main Menu
@@ -84,8 +87,11 @@ Release is currently manual for both stores.
   - Gameplay `Close` in `GameTopBar` returns to `SelectLevelScreen` (MVP flow).
   - Completing gameplay opens `SuccessScreen`; `Play again` restarts the same
     difficulty with a fresh shuffled board, and `Close` returns to `MainMenuScreen`.
-  - `Customize` opens `CustomizeScreen`; selecting a cards-grid option (8..24)
-    starts `GameScreen` with the chosen configuration. `Close` in `GameTopBar`
-    returns to `CustomizeScreen` when entering via Customize flow.
+  - `Customize` opens `CustomizeScreen`; tapping the set selector row (Select set)
+    opens `SelectSetScreen`; choosing Animals or Food returns to Customize with
+    the selected set. Selecting a cards-grid option (8..24) starts `GameScreen`
+    with the chosen configuration; game uses the selected set for card icons.
+    `Close` in `GameTopBar` returns to `CustomizeScreen` when entering via
+    Customize flow.
 - Visual implementation and acceptance notes are documented in the Main Menu
   files listed in the Documentation section.

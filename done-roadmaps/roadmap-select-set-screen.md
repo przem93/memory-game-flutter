@@ -180,7 +180,7 @@ Gate:
 - documentation updates merged and consistent with implemented behavior.
 
 Status:
-- `pending`.
+- `done`.
 
 ## Open Questions to Lock Before Stage 2/3
 
@@ -198,4 +198,4 @@ Status:
 - Stage 6 documentation is updated.
 
 Final status:
-- `pending`.
+- `done`.
