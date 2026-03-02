@@ -52,7 +52,7 @@ Stage 1 Gate:
 - `done` (`docs/select-set-screen-spec-lock.md` locked and accepted for Stage 2.1 kickoff).
 
 Status:
-- `pending`.
+- `done`.
 
 ## Stage 2 - Reusable Components (separate implementation steps)
 
