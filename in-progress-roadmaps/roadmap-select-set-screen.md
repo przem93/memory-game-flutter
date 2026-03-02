@@ -166,7 +166,7 @@ Gate:
 - `flutter build ios --simulator`
 
 Status:
-- `pending`.
+- `done` (golden tests in `test/features/select_set/presentation/select_set_screen_golden_test.dart`; phone and tablet baselines; validation doc `docs/select-set-screen-stage-5-validation.md`; accepted-with-known-deviations).
 
 ## Stage 6 - Documentation and Screen Closure
 
