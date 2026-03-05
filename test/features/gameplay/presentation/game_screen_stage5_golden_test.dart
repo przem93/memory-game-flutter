@@ -11,7 +11,7 @@ void main() {
   const goldenPrefix = '../../../goldens';
 
   /// All card counts available in Customize (Cards grid).
-  const gameScreenCardCounts = [8, 10, 12, 14, 16, 18, 20, 22, 24];
+  const gameScreenCardCounts = [6, 8, 10, 12, 14, 16, 18, 20, 24];
 
   Future<void> pumpFor(
     WidgetTester tester, {

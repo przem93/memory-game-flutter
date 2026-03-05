@@ -4,6 +4,7 @@ import 'package:memory_game/features/customize/presentation/customize_start_payl
 void main() {
   test('resolves locked mapping for all supported card counts', () {
     const expected = <int, ({int rows, int columns, int pairCount})>{
+      6: (rows: 2, columns: 3, pairCount: 3),
       8: (rows: 2, columns: 4, pairCount: 4),
       10: (rows: 2, columns: 5, pairCount: 5),
       12: (rows: 3, columns: 4, pairCount: 6),
@@ -11,7 +12,6 @@ void main() {
       16: (rows: 4, columns: 4, pairCount: 8),
       18: (rows: 3, columns: 6, pairCount: 9),
       20: (rows: 4, columns: 5, pairCount: 10),
-      22: (rows: 2, columns: 11, pairCount: 11),
       24: (rows: 4, columns: 6, pairCount: 12),
     };
 
