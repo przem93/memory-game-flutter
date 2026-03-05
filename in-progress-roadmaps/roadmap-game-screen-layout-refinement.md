@@ -56,7 +56,7 @@ Każdy krok implementowany i weryfikowany osobno.
 - testy widgetowe/scenariuszowe potwierdzające brak brandu na game screen i obecność na innym wybranym non-main screen.
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ### 2.2 Przekazanie ograniczonej wysokości do planszy i usunięcie scrolla
 

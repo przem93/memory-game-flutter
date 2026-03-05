@@ -6,6 +6,7 @@ import 'package:memory_game/features/gameplay/presentation/widgets/game_board_gr
 import 'package:memory_game/features/gameplay/presentation/widgets/game_card_shell.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_scene_shell.dart';
 import 'package:memory_game/features/gameplay/presentation/widgets/game_top_bar.dart';
+import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_start_config.dart';
 import 'package:memory_game/features/select_level/presentation/widgets/select_level_option_button.dart';
 
@@ -43,6 +44,20 @@ void main() {
     );
     await tester.pumpAndSettle();
   }
+
+  testWidgets('does not show developer brand on game screen', (
+    WidgetTester tester,
+  ) async {
+    await pumpHarness(
+      tester,
+      config: const SelectLevelStartConfig(
+        difficulty: SelectLevelDifficulty.simple,
+        rows: 3,
+        columns: 4,
+      ),
+    );
+    expect(find.byType(MainMenuDeveloperBrand), findsNothing);
+  });
 
   testWidgets('renders expected card count for all roadmap difficulties', (
     tester,

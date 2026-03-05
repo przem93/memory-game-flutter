@@ -9,12 +9,16 @@ class NonMainSceneShell extends StatelessWidget {
     required this.screenKey,
     required this.semanticsLabel,
     this.child,
+    this.showDeveloperBrand = true,
     super.key,
   });
 
   final Key screenKey;
   final String semanticsLabel;
   final Widget? child;
+
+  /// When false, the developer brand footer is not shown (e.g. on game screen).
+  final bool showDeveloperBrand;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +37,12 @@ class NonMainSceneShell extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (child != null) Expanded(child: child!),
-                    MainMenuDeveloperBrand(
-                      scalePreset: isTablet
-                          ? MainMenuDeveloperBrandScalePreset.tablet
-                          : MainMenuDeveloperBrandScalePreset.phone,
-                    ),
+                    if (showDeveloperBrand)
+                      MainMenuDeveloperBrand(
+                        scalePreset: isTablet
+                            ? MainMenuDeveloperBrandScalePreset.tablet
+                            : MainMenuDeveloperBrandScalePreset.phone,
+                      ),
                   ],
                 ),
               );

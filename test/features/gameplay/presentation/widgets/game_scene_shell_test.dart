@@ -16,36 +16,24 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('reuses background and developer brand', (
+  testWidgets('reuses background and does not show developer brand', (
     WidgetTester tester,
   ) async {
     await pumpShell(tester, const Size(393, 852));
 
     expect(find.byType(MainMenuBackground), findsOneWidget);
-    expect(find.byType(MainMenuDeveloperBrand), findsOneWidget);
+    expect(find.byType(MainMenuDeveloperBrand), findsNothing);
     expect(find.byType(SafeArea), findsOneWidget);
     expect(find.byKey(GameSceneShell.screenKey), findsOneWidget);
   });
 
-  testWidgets('uses phone developer brand preset on phone width', (
+  testWidgets('does not show developer brand on phone or tablet width', (
     WidgetTester tester,
   ) async {
     await pumpShell(tester, const Size(393, 852));
+    expect(find.byType(MainMenuDeveloperBrand), findsNothing);
 
-    final brand = tester.widget<MainMenuDeveloperBrand>(
-      find.byType(MainMenuDeveloperBrand),
-    );
-    expect(brand.scalePreset, MainMenuDeveloperBrandScalePreset.phone);
-  });
-
-  testWidgets('uses tablet developer brand preset on tablet width', (
-    WidgetTester tester,
-  ) async {
     await pumpShell(tester, const Size(1024, 1366));
-
-    final brand = tester.widget<MainMenuDeveloperBrand>(
-      find.byType(MainMenuDeveloperBrand),
-    );
-    expect(brand.scalePreset, MainMenuDeveloperBrandScalePreset.tablet);
+    expect(find.byType(MainMenuDeveloperBrand), findsNothing);
   });
 }

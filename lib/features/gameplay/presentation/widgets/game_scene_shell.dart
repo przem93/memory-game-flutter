@@ -19,6 +19,7 @@ class GameSceneShell extends StatelessWidget {
     return NonMainSceneShell(
       screenKey: screenKey,
       semanticsLabel: semanticsLabel,
+      showDeveloperBrand: false,
       child: child,
     );
   }
