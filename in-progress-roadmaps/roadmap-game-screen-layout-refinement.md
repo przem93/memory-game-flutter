@@ -37,7 +37,7 @@ Roadmap zmian na ekranie gry (`Game Screen`): dynamiczne dopasowanie rozmiaru ka
 - status `done` (można startować Stage 2).
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ---
 
