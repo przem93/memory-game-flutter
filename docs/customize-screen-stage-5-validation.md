@@ -26,7 +26,7 @@ This note captures Stage 5 (`1:1 Validation and Acceptance`) for `Customize`.
   - `pass` (DynaPuff bold, white fill with shadow treatment aligned with spec lock)
 - Set selector field (`Animals`) dimensions/style/icon alignment:
   - `pass` (354x55, radius 5.5, border 1, icon slot 30x30; label and icon layout match spec)
-- All nine grid buttons (`8..24`) dimensions and spacing:
+- All nine grid buttons (`6`, `8..24`) dimensions and spacing:
   - `pass` (110.667x89, radius 5.5, gap 11, fixed ordering per spec lock)
 - Top logo row + developer brand alignment with non-main shell baseline:
   - `pass` (shell reuse via `CustomizeSceneShell` and `NonMainFlowLayout` spacing rules)

@@ -12,7 +12,7 @@ gate verification for the Customize roadmap.
   - `lib/features/customize/presentation/widgets/customize_grid_options_section.dart`
 - Wired Main Menu `Customize` action to open `CustomizeScreen`:
   - `lib/core/app.dart`
-- Wired cards-grid tap (`8..24`) to immediate game start via locked mapping:
+- Wired cards-grid tap (`6`, `8..24`) to immediate game start via locked mapping:
   - `lib/features/customize/presentation/customize_start_payload.dart`
 - Kept active gameplay set source fixed to `food-set` (roadmap scope lock).
 

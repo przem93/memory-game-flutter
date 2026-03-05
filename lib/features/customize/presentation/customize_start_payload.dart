@@ -33,6 +33,7 @@ class CustomizeStartPayload {
 }
 
 const _cardCountGridMapping = <int, ({int rows, int columns})>{
+  6: (rows: 2, columns: 3),
   8: (rows: 2, columns: 4),
   10: (rows: 2, columns: 5),
   12: (rows: 3, columns: 4),
@@ -40,7 +41,6 @@ const _cardCountGridMapping = <int, ({int rows, int columns})>{
   16: (rows: 4, columns: 4),
   18: (rows: 3, columns: 6),
   20: (rows: 4, columns: 5),
-  22: (rows: 2, columns: 11),
   24: (rows: 4, columns: 6),
 };
 

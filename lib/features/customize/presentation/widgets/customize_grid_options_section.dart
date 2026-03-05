@@ -17,7 +17,7 @@ class CustomizeGridOptionsSection extends StatelessWidget {
     'customizeGridOptionsSectionSemantics',
   );
 
-  static const buttonValues = <int>[8, 10, 12, 14, 16, 18, 20, 22, 24];
+  static const buttonValues = <int>[6, 8, 10, 12, 14, 16, 18, 20, 24];
   static const _buttonsPerRow = 3;
 
   final List<int> availableCardCounts;

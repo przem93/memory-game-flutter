@@ -6,6 +6,7 @@ All notable user-visible changes to this project are documented in this file.
 
 ### Added
 
+- Customize Cards grid: added **6 cards** (2×3) option for an easier, balanced layout.
 - Implemented the `MainMenuScreen` with reusable component composition:
   background, logo group, primary action section, and developer brand footer.
 - Added locked screen golden baselines for phone and tablet:
@@ -31,6 +32,8 @@ All notable user-visible changes to this project are documented in this file.
 
 ### Changed
 
+- **Game screen**: Card board now always uses **full width** of the content area. When the board is taller than the viewport (e.g. 24 cards 4×6), the board is vertically scrollable instead of being shrunk with empty side margins.
+- **Customize Cards grid**: removed **22 cards** (2×11) option; replaced with 6 cards for better screen fill. Supported counts are now 6, 8, 10, 12, 14, 16, 18, 20, 24. Mapping table and spec lock updated accordingly.
 - Added a `CLOSE` action on `SelectLevelScreen` below difficulty options
   (30 px spacing) to let players return directly to Main Menu.
 - Finalized Main Menu documentation closure in:

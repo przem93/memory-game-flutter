@@ -118,20 +118,19 @@ class _GameScreenState extends State<GameScreen> {
                           ? _tabletBoardBottomPadding
                           : _phoneBoardBottomPadding,
                     ),
-                    child: Align(
-                      key: GameScreen.boardSlotKey,
-                      alignment: Alignment.topCenter,
-                      child: _generationError == null
-                          ? GameBoardGrid(
+                    child: _generationError == null
+                        ? SingleChildScrollView(
+                            key: GameScreen.boardSlotKey,
+                            child: GameBoardGrid(
                               rows: widget.startConfig.rows,
                               columns: widget.startConfig.columns,
                               cards: _cards,
                               onCardTap: _onCardTap,
                               isInteractionEnabled:
                                   _stateMachine?.isInteractionEnabled ?? false,
-                            )
-                          : _buildErrorState(),
-                    ),
+                            ),
+                          )
+                        : _buildErrorState(),
                   ),
                 ),
               ],

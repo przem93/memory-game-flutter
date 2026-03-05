@@ -115,6 +115,9 @@ class GameBoardGrid extends StatelessWidget {
     );
   }
 
+  /// Sizes the board to fill [constraints] while keeping card aspect ratio.
+  /// When the parent gives unbounded height (e.g. inside [SingleChildScrollView]),
+  /// the width-based branch is always used so the board uses full width.
   Size _resolveBoardSize(BoxConstraints constraints) {
     final horizontalGap = (columns - 1) * gridSpacing;
     final verticalGap = (rows - 1) * gridSpacing;

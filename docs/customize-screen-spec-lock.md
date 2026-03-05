@@ -66,9 +66,9 @@ Coordinates are measured from top-left in `Customize.svg`.
 - Horizontal gap between columns: `11`
 - Vertical gap between rows: `11`
 - Grid order is fixed:
-  - row 1: `8`, `10`, `12`
-  - row 2: `14`, `16`, `18`
-  - row 3: `20`, `22`, `24`
+  - row 1: `6`, `8`, `10`
+  - row 2: `12`, `14`, `16`
+  - row 3: `18`, `20`, `24`
 
 ### Non-main shell alignment lock
 
@@ -103,7 +103,7 @@ Coordinates are measured from top-left in `Customize.svg`.
 
 ### Content and values lock
 
-- Supported values: `8`, `10`, `12`, `14`, `16`, `18`, `20`, `22`, `24`
+- Supported values: `6`, `8`, `10`, `12`, `14`, `16`, `18`, `20`, `24`
 - Each value is rendered once in fixed matrix order (see section 2).
 
 ### Visual treatment lock
@@ -169,8 +169,11 @@ Coordinates are measured from top-left in `Customize.svg`.
 
 ## 7) Locked Mapping Table (`cardCount -> rows x columns -> pairs`)
 
+Options are chosen for balanced grid aspect ratios and good screen fill (22 was removed in favour of 6).
+
 | cardCount | rows | columns | pairCount |
 | ---: | ---: | ---: | ---: |
+| 6 | 2 | 3 | 3 |
 | 8 | 2 | 4 | 4 |
 | 10 | 2 | 5 | 5 |
 | 12 | 3 | 4 | 6 |
@@ -178,7 +181,6 @@ Coordinates are measured from top-left in `Customize.svg`.
 | 16 | 4 | 4 | 8 |
 | 18 | 3 | 6 | 9 |
 | 20 | 4 | 5 | 10 |
-| 22 | 2 | 11 | 11 |
 | 24 | 4 | 6 | 12 |
 
 Fallback rule:
@@ -214,6 +216,6 @@ Stage 1 is `done` when:
 
 - `docs/customize-screen-spec-lock.md` is present and accepted.
 - Layout, selector field spec, cards-grid spec, styling, and behavior contracts are all locked.
-- Mapping table for `8..24` is explicit and treated as authoritative.
+- Mapping table for `6` and `8..24` is explicit and treated as authoritative.
 - Known assumptions and follow-up checkpoints are explicitly documented.
 - No unresolved blocker remains for Stage 2.1 (`CustomizeSetSelectorField`) kickoff.
