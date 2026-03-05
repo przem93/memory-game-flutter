@@ -1,41 +1,86 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memory_game/features/select_set/presentation/widgets/select_set_scene_shell.dart';
 
 void main() {
-  testWidgets('SelectSetSceneShell renders phone baseline', (
-    WidgetTester tester,
-  ) async {
-    tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(393, 852);
+  const goldenPrefix = '../../../../goldens';
+
+  Future<void> pumpFor(
+    WidgetTester tester, {
+    required TargetPlatform platform,
+    required Size physicalSize,
+    double devicePixelRatio = 1,
+  }) async {
+    tester.view.devicePixelRatio = devicePixelRatio;
+    tester.view.physicalSize = physicalSize;
     addTearDown(tester.view.reset);
 
     await tester.pumpWidget(
-      const MaterialApp(home: SelectSetSceneShell(child: SizedBox.expand())),
+      MaterialApp(
+        theme: ThemeData(platform: platform),
+        home: const SelectSetSceneShell(child: SizedBox.expand()),
+      ),
     );
     await tester.pumpAndSettle();
+  }
 
-    await expectLater(
-      find.byType(SelectSetSceneShell),
-      matchesGoldenFile('select_set_scene_shell_phone.png'),
+  Future<void> runOnPlatform(
+    WidgetTester tester, {
+    required TargetPlatform platform,
+    required Size physicalSize,
+    required String goldenPath,
+    double devicePixelRatio = 1,
+  }) async {
+    debugDefaultTargetPlatformOverride = platform;
+    try {
+      await pumpFor(
+        tester,
+        platform: platform,
+        physicalSize: physicalSize,
+        devicePixelRatio: devicePixelRatio,
+      );
+
+      await expectLater(
+        find.byType(SelectSetSceneShell),
+        matchesGoldenFile(goldenPath),
+      );
+    } finally {
+      debugDefaultTargetPlatformOverride = null;
+    }
+  }
+
+  testWidgets('SelectSetSceneShell goldens: iOS + Android (phone + tablet)',
+      (WidgetTester tester) async {
+    const phoneSize = Size(393, 852);
+    const tabletSize = Size(834, 1194);
+
+    await runOnPlatform(
+      tester,
+      platform: TargetPlatform.iOS,
+      physicalSize: phoneSize,
+      goldenPath: '$goldenPrefix/ios/select_set_scene_shell_phone.png',
     );
-  });
 
-  testWidgets('SelectSetSceneShell renders tablet baseline', (
-    WidgetTester tester,
-  ) async {
-    tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(1024, 1366);
-    addTearDown(tester.view.reset);
-
-    await tester.pumpWidget(
-      const MaterialApp(home: SelectSetSceneShell(child: SizedBox.expand())),
+    await runOnPlatform(
+      tester,
+      platform: TargetPlatform.android,
+      physicalSize: phoneSize,
+      goldenPath: '$goldenPrefix/android/select_set_scene_shell_phone.png',
     );
-    await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(SelectSetSceneShell),
-      matchesGoldenFile('select_set_scene_shell_tablet.png'),
+    await runOnPlatform(
+      tester,
+      platform: TargetPlatform.iOS,
+      physicalSize: tabletSize,
+      goldenPath: '$goldenPrefix/ios/select_set_scene_shell_tablet.png',
+    );
+
+    await runOnPlatform(
+      tester,
+      platform: TargetPlatform.android,
+      physicalSize: tabletSize,
+      goldenPath: '$goldenPrefix/android/select_set_scene_shell_tablet.png',
     );
   });
 }
