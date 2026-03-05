@@ -2,8 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
+import 'golden_sizes.dart' as golden_sizes;
 
 void main() {
+  const goldenBaseName = 'select_level_screen';
+  const goldenPrefix = 'goldens';
+
   Future<void> pumpFor(
     WidgetTester tester, {
     required TargetPlatform platform,
@@ -48,37 +52,35 @@ void main() {
     }
   }
 
-  testWidgets('SelectLevelScreen goldens: iOS + Android (phone + tablet)',
+  testWidgets('SelectLevelScreen goldens: iOS + Android (popular sizes)',
       (WidgetTester tester) async {
-    const phoneSize = Size(393, 852);
-    const tabletSize = Size(834, 1194);
-
-    await runOnPlatform(
-      tester,
-      platform: TargetPlatform.iOS,
-      physicalSize: phoneSize,
-      goldenPath: 'goldens/ios/select_level_screen_phone.png',
-    );
-
-    await runOnPlatform(
-      tester,
-      platform: TargetPlatform.android,
-      physicalSize: phoneSize,
-      goldenPath: 'goldens/android/select_level_screen_phone.png',
-    );
-
-    await runOnPlatform(
-      tester,
-      platform: TargetPlatform.iOS,
-      physicalSize: tabletSize,
-      goldenPath: 'goldens/ios/select_level_screen_tablet.png',
-    );
-
-    await runOnPlatform(
-      tester,
-      platform: TargetPlatform.android,
-      physicalSize: tabletSize,
-      goldenPath: 'goldens/android/select_level_screen_tablet.png',
-    );
+    for (final entry in golden_sizes.goldenPhoneSizes.entries) {
+      await runOnPlatform(
+        tester,
+        platform: TargetPlatform.iOS,
+        physicalSize: entry.value,
+        goldenPath: '$goldenPrefix/ios/${goldenBaseName}_${entry.key}.png',
+      );
+      await runOnPlatform(
+        tester,
+        platform: TargetPlatform.android,
+        physicalSize: entry.value,
+        goldenPath: '$goldenPrefix/android/${goldenBaseName}_${entry.key}.png',
+      );
+    }
+    for (final entry in golden_sizes.goldenTabletSizes.entries) {
+      await runOnPlatform(
+        tester,
+        platform: TargetPlatform.iOS,
+        physicalSize: entry.value,
+        goldenPath: '$goldenPrefix/ios/${goldenBaseName}_${entry.key}.png',
+      );
+      await runOnPlatform(
+        tester,
+        platform: TargetPlatform.android,
+        physicalSize: entry.value,
+        goldenPath: '$goldenPrefix/android/${goldenBaseName}_${entry.key}.png',
+      );
+    }
   });
 }

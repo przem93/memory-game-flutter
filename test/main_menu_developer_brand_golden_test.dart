@@ -2,8 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
+import 'golden_sizes.dart' as golden_sizes;
 
 void main() {
+  const goldenBaseName = 'main_menu_developer_brand';
+  const goldenPrefix = 'goldens';
+
   Future<void> pumpFor(
     WidgetTester tester, {
     required TargetPlatform platform,
@@ -17,11 +21,11 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(platform: platform),
-        home: const Scaffold(
+        home: Scaffold(
           body: SizedBox(
-            width: 393,
-            height: 852,
-            child: MainMenuDeveloperBrand(),
+            width: physicalSize.width,
+            height: physicalSize.height,
+            child: const MainMenuDeveloperBrand(),
           ),
         ),
       ),
@@ -56,20 +60,19 @@ void main() {
 
   testWidgets('MainMenuDeveloperBrand goldens: iOS + Android (phone)',
       (WidgetTester tester) async {
-    const phoneSize = Size(393, 852);
-
-    await runOnPlatform(
-      tester,
-      platform: TargetPlatform.iOS,
-      physicalSize: phoneSize,
-      goldenPath: 'goldens/ios/main_menu_developer_brand_phone.png',
-    );
-
-    await runOnPlatform(
-      tester,
-      platform: TargetPlatform.android,
-      physicalSize: phoneSize,
-      goldenPath: 'goldens/android/main_menu_developer_brand_phone.png',
-    );
+    for (final entry in golden_sizes.goldenPhoneSizes.entries) {
+      await runOnPlatform(
+        tester,
+        platform: TargetPlatform.iOS,
+        physicalSize: entry.value,
+        goldenPath: '$goldenPrefix/ios/${goldenBaseName}_${entry.key}.png',
+      );
+      await runOnPlatform(
+        tester,
+        platform: TargetPlatform.android,
+        physicalSize: entry.value,
+        goldenPath: '$goldenPrefix/android/${goldenBaseName}_${entry.key}.png',
+      );
+    }
   });
 }
