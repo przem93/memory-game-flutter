@@ -32,7 +32,7 @@ All notable user-visible changes to this project are documented in this file.
 
 ### Changed
 
-- **Game screen**: Card board now always uses **full width** of the content area. When the board is taller than the viewport (e.g. 24 cards 4×6), the board is vertically scrollable instead of being shrunk with empty side margins.
+- **Game screen:** Cards now fit the available screen space (phone and tablet) without scrolling; card size is dynamic (aspect ratio preserved). Developer logo (footer) is no longer shown on the game screen; other screens (Select Level, Customize, Success, Select Set) unchanged.
 - **Customize Cards grid**: removed **22 cards** (2×11) option; replaced with 6 cards for better screen fill. Supported counts are now 6, 8, 10, 12, 14, 16, 18, 20, 24. Mapping table and spec lock updated accordingly.
 - Added a `CLOSE` action on `SelectLevelScreen` below difficulty options
   (30 px spacing) to let players return directly to Main Menu.

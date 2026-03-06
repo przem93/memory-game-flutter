@@ -66,6 +66,9 @@ Release is currently manual for both stores.
 - Game Spec Lock: `docs/game-screen-spec-lock.md`
 - Game validation (Stage 5): `docs/game-screen-stage-5-validation.md`
 - Game closure (Stage 6): `docs/game-screen-stage-6-closure.md`
+- Game Screen Layout Refinement Spec Lock: `docs/game-screen-layout-refinement-spec-lock.md`
+- Game Screen Layout Refinement validation (Stage 4): `docs/game-screen-layout-refinement-validation.md`
+- Game Screen Layout Refinement closure (Stage 5): `docs/game-screen-layout-refinement-stage-5-closure.md`
 - Success Spec Lock: `docs/success-screen-spec-lock.md`
 - Success validation (Stage 5): `docs/success-screen-stage-5-validation.md`
 - Success closure (Stage 6): `docs/success-screen-stage-6-closure.md`

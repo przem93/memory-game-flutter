@@ -191,3 +191,11 @@ Stage 1 is `done` when:
 - `docs/game-screen-spec-lock.md` is present and accepted.
 - Layout, board geometry, card-state matrix, timer/close specs, and icon fallback contract are all locked.
 - No unresolved blocker remains for Stage 2.1 (`GameTopBar`) kickoff.
+
+## 9) Layout refinement – current behaviour
+
+The following applies after the **Game Screen Layout Refinement** roadmap. See `docs/game-screen-layout-refinement-spec-lock.md` and `docs/game-screen-layout-refinement-validation.md`.
+
+- **Developer brand:** On the game screen the developer brand (footer) is **not** shown. Other non-main screens (Select Level, Customize, Success, Select Set) still show it.
+- **No scroll:** The entire card grid fits within the available space **without scrolling**. `GameScreen` does not wrap `GameBoardGrid` in a scroll view; the board receives bounded height and fits in the area below the top bar down to the safe area bottom (minus bottom padding).
+- **Dynamic card size:** Card size is derived only from the available space and the fixed card aspect ratio. The layout uses a width-first trial with a height-based fallback when needed so that the grid always fits; no fixed card dimensions.

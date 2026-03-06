@@ -136,7 +136,7 @@ Każdy krok implementowany i weryfikowany osobno.
 - dokumentacja i changelog zaktualizowane i spójne z implementacją.
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ---
 
@@ -152,4 +152,4 @@ Roadmapa uznana za **done** gdy:
 - Roadmapa przeniesiona do `done-roadmaps`.
 
 **Status końcowy:**  
-- `pending`.
+- `done`.
