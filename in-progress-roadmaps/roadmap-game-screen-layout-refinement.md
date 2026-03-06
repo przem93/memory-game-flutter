@@ -122,7 +122,7 @@ Każdy krok implementowany i weryfikowany osobno.
 - `flutter build ios --simulator`.
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ---
 
