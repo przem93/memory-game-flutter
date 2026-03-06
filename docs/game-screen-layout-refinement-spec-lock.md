@@ -20,7 +20,7 @@ The area where the card grid must fit is defined as follows.
 
 - **Start:** bottom of `GameTopBar` plus the gap below it (`_topBarToBoardGap`).
 - **End:** bottom of the safe area, minus the bottom padding applied to the board slot.
-- **Bottom padding (baseline):** `_phoneBoardBottomPadding` (phone) / `_tabletBoardBottomPadding` (tablet). Current values in `game_screen.dart`: **138** (phone), **166** (tablet). After Stage 2.1 (developer brand removed from game screen), these values may be reduced in Stage 2.3 to a minimal margin from the safe area edge.
+- **Bottom padding:** `_phoneBoardBottomPadding` (phone) / `_tabletBoardBottomPadding` (tablet). Values in `game_screen.dart`: **24** (phone), **32** (tablet). Minimal margin from the bottom safe area edge; developer brand is not shown on the game screen (Stage 2.3 applied).
 
 So the **available height** for the board = height of the `Expanded` content area (from below top bar + gap down to safe area bottom) minus the bottom padding.
 
@@ -68,7 +68,7 @@ Implementation will extend the shell (e.g. `GameSceneShell` or `NonMainSceneShel
 ## Assumptions and deviations
 
 - **Safe area:** Unchanged; content is laid out inside the same `SafeArea` as today (in `NonMainSceneShell`).
-- **Bottom padding:** Baseline values 138 (phone) / 166 (tablet) are the current implementation; Stage 2.3 may reduce them after the developer brand is removed from the game screen. Any change will be reflected in this spec or the roadmap.
+- **Bottom padding:** Stage 2.3 applied. Values are 24 (phone) / 32 (tablet) — minimal margin from the bottom safe area; developer brand is not shown on the game screen.
 - **Other screens:** No change to layout or developer brand on Select Level, Customize, Success, or Select Set in this refinement.
 - **Orientation / breakpoint:** Tablet vs phone uses existing breakpoint (e.g. width > 600) and the same margin/inset constants as today.
 

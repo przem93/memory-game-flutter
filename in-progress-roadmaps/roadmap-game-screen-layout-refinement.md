@@ -87,7 +87,7 @@ Każdy krok implementowany i weryfikowany osobno.
 - krótka weryfikacja wizualna.
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ---
 
