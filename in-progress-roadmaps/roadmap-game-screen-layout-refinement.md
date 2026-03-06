@@ -75,7 +75,7 @@ Każdy krok implementowany i weryfikowany osobno.
 - wizualna weryfikacja na jednym rozmiarze phone i tablet — cała plansza widoczna bez scrolla.
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ### 2.3 Dopasowanie dolnego paddingu (opcjonalne)
 

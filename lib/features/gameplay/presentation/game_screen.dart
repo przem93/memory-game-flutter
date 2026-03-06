@@ -107,6 +107,7 @@ class _GameScreenState extends State<GameScreen> {
                 SizedBox(height: _topBarToBoardGap),
                 Expanded(
                   child: Padding(
+                    key: GameScreen.boardSlotKey,
                     padding: EdgeInsets.only(
                       left: isTablet
                           ? _tabletHorizontalInset
@@ -119,16 +120,13 @@ class _GameScreenState extends State<GameScreen> {
                           : _phoneBoardBottomPadding,
                     ),
                     child: _generationError == null
-                        ? SingleChildScrollView(
-                            key: GameScreen.boardSlotKey,
-                            child: GameBoardGrid(
-                              rows: widget.startConfig.rows,
-                              columns: widget.startConfig.columns,
-                              cards: _cards,
-                              onCardTap: _onCardTap,
-                              isInteractionEnabled:
-                                  _stateMachine?.isInteractionEnabled ?? false,
-                            ),
+                        ? GameBoardGrid(
+                            rows: widget.startConfig.rows,
+                            columns: widget.startConfig.columns,
+                            cards: _cards,
+                            onCardTap: _onCardTap,
+                            isInteractionEnabled:
+                                _stateMachine?.isInteractionEnabled ?? false,
                           )
                         : _buildErrorState(),
                   ),
