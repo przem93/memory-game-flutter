@@ -104,7 +104,7 @@ Każdy krok implementowany i weryfikowany osobno.
 - aktualizacja goldens: `flutter test … --update-goldens` dla zmienionych testów game screen.
 
 **Status:**  
-- `pending`.
+- `done`.
 
 ---
 
