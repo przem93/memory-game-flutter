@@ -61,7 +61,10 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(CustomizeScreen), findsOneWidget);
 
-    await tester.tap(find.text('CLOSE'));
+    final closeSlot = find.byKey(CustomizeScreen.closeButtonSlotKey);
+    await tester.ensureVisible(closeSlot);
+    await tester.pumpAndSettle();
+    await tester.tap(closeSlot);
     await tester.pumpAndSettle();
 
     expect(find.byType(MainMenuScreen), findsOneWidget);

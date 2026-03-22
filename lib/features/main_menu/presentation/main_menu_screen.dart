@@ -5,6 +5,7 @@ import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_ac
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_background.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_logo_group.dart';
+import 'package:memory_game/shared/widgets/ad_banner_slot.dart';
 
 /// Full Main Menu composition built from reusable Stage 2 components.
 class MainMenuScreen extends StatelessWidget {
@@ -56,55 +57,64 @@ class MainMenuScreen extends StatelessWidget {
                 key: screenKey,
                 container: true,
                 label: semanticsLabel,
-                child: Stack(
-                  fit: StackFit.expand,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Positioned(
-                      key: logoSlotKey,
-                      top: logoTop,
-                      left: 0,
-                      right: 0,
-                      child: Semantics(
-                        header: true,
-                        label: 'Memory logo',
-                        child: MainMenuLogoGroup(
-                          spacing: 33,
-                          scalePreset: isTablet
-                              ? MainMenuLogoScalePreset.tablet
-                              : MainMenuLogoScalePreset.phone,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      key: actionsSlotKey,
-                      top: actionsTop,
-                      left: 0,
-                      right: 0,
-                      child: Center(
-                        child: SizedBox(
-                          width: actionsWidth,
-                          child: MainMenuActionSection(
-                            buttonSpacing: _phoneActionGap,
-                            semanticsLabel: 'Main menu primary actions',
-                            actions: [
-                              MainMenuActionItem(
-                                label: 'Quick Play',
-                                onPressed: onQuickPlayPressed,
+                    Expanded(
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Positioned(
+                            key: logoSlotKey,
+                            top: logoTop,
+                            left: 0,
+                            right: 0,
+                            child: Semantics(
+                              header: true,
+                              label: 'Memory logo',
+                              child: MainMenuLogoGroup(
+                                spacing: 33,
+                                scalePreset: isTablet
+                                    ? MainMenuLogoScalePreset.tablet
+                                    : MainMenuLogoScalePreset.phone,
                               ),
-                              MainMenuActionItem(
-                                label: 'Customize',
-                                onPressed: onCustomizePressed,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            key: actionsSlotKey,
+                            top: actionsTop,
+                            left: 0,
+                            right: 0,
+                            child: Center(
+                              child: SizedBox(
+                                width: actionsWidth,
+                                child: MainMenuActionSection(
+                                  buttonSpacing: _phoneActionGap,
+                                  semanticsLabel: 'Main menu primary actions',
+                                  actions: [
+                                    MainMenuActionItem(
+                                      label: 'Quick Play',
+                                      onPressed: onQuickPlayPressed,
+                                    ),
+                                    MainMenuActionItem(
+                                      label: 'Customize',
+                                      onPressed: onCustomizePressed,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     MainMenuDeveloperBrand(
+                      alignment: Alignment.center,
                       scalePreset: isTablet
                           ? MainMenuDeveloperBrandScalePreset.tablet
                           : MainMenuDeveloperBrandScalePreset.phone,
                     ),
+                    const AdBannerSlot(),
                   ],
                 ),
               );

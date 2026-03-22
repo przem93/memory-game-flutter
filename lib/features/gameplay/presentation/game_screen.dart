@@ -46,7 +46,8 @@ class _GameScreenState extends State<GameScreen> {
   static const _phoneHorizontalMargin = 29.0;
   static const _tabletHorizontalInset = 48.0;
   static const _topBarToBoardGap = 20.0;
-  /// Minimal margin from bottom safe area (no developer brand on game screen; Stage 2.3).
+  /// Space between the board and the bottom of the region given to this screen
+  /// (above the bottom ad strip in [GameSceneShell]; no developer brand on game).
   static const _phoneBoardBottomPadding = 24.0;
   static const _tabletBoardBottomPadding = 32.0;
 

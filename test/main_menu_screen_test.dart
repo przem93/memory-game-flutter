@@ -6,6 +6,7 @@ import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_ba
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_logo_group.dart';
 import 'package:memory_game/features/select_level/presentation/select_level_screen.dart';
+import 'package:memory_game/shared/widgets/ad_banner_slot.dart';
 
 void main() {
   setUp(() {
@@ -26,6 +27,7 @@ void main() {
     expect(find.byType(MainMenuLogoGroup), findsOneWidget);
     expect(find.byType(MainMenuActionSection), findsOneWidget);
     expect(find.byType(MainMenuDeveloperBrand), findsOneWidget);
+    expect(find.byType(AdBannerSlot), findsOneWidget);
     expect(find.text('QUICK PLAY'), findsOneWidget);
     expect(find.text('CUSTOMIZE'), findsOneWidget);
   });

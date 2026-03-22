@@ -5,10 +5,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_mobile_ads/src/ad_instance_manager.dart';
 import 'package:memory_game/shared/widgets/ad_banner_slot.dart';
 
+import 'support/google_mobile_ads_test_binding.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  const mockAdaptiveHeight = 90.0;
+  const mockAdaptiveHeight = kTestAnchoredAdaptiveBannerHeight;
 
   Future<void> sendAdEvent(
     int adId,
@@ -31,23 +33,7 @@ void main() {
         );
   }
 
-  setUp(() {
-    instanceManager = AdInstanceManager('plugins.flutter.io/google_mobile_ads');
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(instanceManager.channel, (
-          MethodCall methodCall,
-        ) async {
-          switch (methodCall.method) {
-            case 'AdSize#getAnchoredAdaptiveBannerAdSize':
-              return mockAdaptiveHeight;
-            case 'loadBannerAd':
-            case 'disposeAd':
-              return null;
-            default:
-              fail('unexpected method: ${methodCall.method}');
-          }
-        });
-  });
+  setUp(setupGoogleMobileAdsTestMocks);
 
   testWidgets(
     'AdBannerSlot reserves mock adaptive height and exposes Semantics',

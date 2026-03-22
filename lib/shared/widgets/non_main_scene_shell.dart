@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_background.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/shared/layout/non_main_flow_layout.dart';
+import 'package:memory_game/shared/widgets/ad_banner_slot.dart';
 
 /// Shared shell for all non-main screens with identical background/footer.
 class NonMainSceneShell extends StatelessWidget {
@@ -43,6 +44,7 @@ class NonMainSceneShell extends StatelessWidget {
                             ? MainMenuDeveloperBrandScalePreset.tablet
                             : MainMenuDeveloperBrandScalePreset.phone,
                       ),
+                    const AdBannerSlot(),
                   ],
                 ),
               );

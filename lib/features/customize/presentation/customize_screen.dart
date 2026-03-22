@@ -5,7 +5,6 @@ import 'package:memory_game/features/customize/presentation/customize_start_payl
 import 'package:memory_game/features/customize/presentation/widgets/customize_grid_options_section.dart';
 import 'package:memory_game/features/customize/presentation/widgets/customize_scene_shell.dart';
 import 'package:memory_game/features/customize/presentation/widgets/customize_set_selector_field.dart';
-import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_primary_button.dart';
 import 'package:memory_game/features/select_set/domain/select_set_catalog.dart';
 import 'package:memory_game/features/select_set/presentation/select_set_screen.dart';
@@ -122,13 +121,7 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
                 SizedBox(height: logoToSelectSetSpacing),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.only(
-                      bottom: MainMenuDeveloperBrand.requiredBottomSpace(
-                        isTablet
-                            ? MainMenuDeveloperBrandScalePreset.tablet
-                            : MainMenuDeveloperBrandScalePreset.phone,
-                      ),
-                    ),
+                    padding: const EdgeInsets.only(bottom: 24),
                     clipBehavior: Clip.hardEdge,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

@@ -99,7 +99,7 @@ Roadmapa wprowadzenia **zarezerwowanego miejsca** na reklamę (banner AdMob) jak
 
 **Bramka:** `flutter analyze`, `flutter test`, wizualna kontrola phone + tablet, przejście przez cały flow nawigacji z `lib/core/app.dart`.
 
-**Status:** `pending`.
+**Status:** `done` (slot w [lib/shared/widgets/non_main_scene_shell.dart](lib/shared/widgets/non_main_scene_shell.dart), Main Menu w [lib/features/main_menu/presentation/main_menu_screen.dart](lib/features/main_menu/presentation/main_menu_screen.dart); testy + goldeny zaktualizowane).
 
 ---
 
