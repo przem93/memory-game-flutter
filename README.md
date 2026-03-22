@@ -36,9 +36,10 @@ flutter test
 flutter run
 ```
 
-Dependency note:
+Dependency notes:
 
 - `flutter_native_splash` is used to generate native launch screens for Android and iOS.
+- `google_mobile_ads` provides the AdMob SDK; initialization and platform IDs are documented in `docs/admob-google-mobile-ads-setup.md`.
 
 ## Platform Notes
 
@@ -78,6 +79,8 @@ Release is currently manual for both stores.
 - Select Set Spec Lock: `docs/select-set-screen-spec-lock.md`
 - Select Set validation (Stage 5): `docs/select-set-screen-stage-5-validation.md`
 - Select Set closure (Stage 6): `docs/select-set-screen-stage-6-closure.md`
+- AdMob / Google Mobile Ads setup (Stage 2): `docs/admob-google-mobile-ads-setup.md`
+- AdMob bottom banner Spec Lock: `docs/admob-bottom-banner-spec-lock.md`
 - Cursor project rules: `.cursor/rules/`
 
 ## Main Menu

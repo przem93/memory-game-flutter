@@ -59,7 +59,7 @@ Roadmapa wprowadzenia **zarezerwowanego miejsca** na reklamę (banner AdMob) jak
 
 **Bramka:** `flutter analyze`, build debug **Android + iOS** (symulator/emulator wystarczy do smoke), krótki opis w `docs` lub README.
 
-**Status:** `pending`.
+**Status:** `done` (setup: `docs/admob-google-mobile-ads-setup.md`, init w `lib/main.dart`, Android/iOS jak w dokumencie).
 
 ---
 
