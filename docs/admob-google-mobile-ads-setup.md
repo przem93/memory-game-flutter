@@ -18,7 +18,15 @@ The repository uses **Google’s sample test App IDs** so local and CI builds wo
 
 **Production:** Replace these with the real App ID from [AdMob](https://admob.google.com/) for your registered app. Do **not** commit production identifiers if your policy is to keep them private—use local overrides, CI secrets, or native build configuration outside version control.
 
-**Ad unit IDs** (banner, etc.) are wired when implementing the banner slot (Stage 3). Use [Google’s test ad unit IDs](https://developers.google.com/admob/android/test-ads#sample_ad_units) during development.
+## Banner ad unit IDs (Stage 3)
+
+Anchored adaptive banner units are resolved in code by [`lib/core/admob_banner_ad_unit_ids.dart`](../lib/core/admob_banner_ad_unit_ids.dart):
+
+- **Default:** Google’s [sample banner test ad unit IDs](https://developers.google.com/admob/android/test-ads#sample_ad_units) (Android and iOS) so local builds and CI need no secrets.
+- **Production:** pass real ad unit IDs at compile time, e.g.  
+  `--dart-define=ADMOB_BANNER_AD_UNIT_ANDROID=ca-app-pub-.../...`  
+  `--dart-define=ADMOB_BANNER_AD_UNIT_IOS=ca-app-pub-.../...`  
+  Do not commit production ad unit IDs if your policy forbids it.
 
 ## iOS: SKAdNetwork
 
