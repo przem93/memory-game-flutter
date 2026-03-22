@@ -39,7 +39,7 @@ flutter run
 Dependency notes:
 
 - `flutter_native_splash` is used to generate native launch screens for Android and iOS.
-- `google_mobile_ads` provides the AdMob SDK; initialization and platform IDs are documented in `docs/admob-google-mobile-ads-setup.md`.
+- `google_mobile_ads` provides the AdMob SDK; initialization, UMP consent order, and platform IDs are documented in `docs/admob-google-mobile-ads-setup.md` and `docs/admob-privacy-ump-compliance.md`.
 
 ## Platform Notes
 
@@ -52,7 +52,7 @@ Dependency notes:
 Release is currently manual for both stores.
 
 - See `docs/release-manual.md` for release checklist.
-- Keep privacy declarations, store metadata, and versioning updated per release.
+- Keep privacy declarations, store metadata, and versioning updated per release. When ads are enabled, align **Google Play Data safety** and **App Store App Privacy** with `docs/admob-privacy-ump-compliance.md`.
 
 ## Documentation
 
@@ -80,6 +80,7 @@ Release is currently manual for both stores.
 - Select Set validation (Stage 5): `docs/select-set-screen-stage-5-validation.md`
 - Select Set closure (Stage 6): `docs/select-set-screen-stage-6-closure.md`
 - AdMob / Google Mobile Ads setup (Stage 2): `docs/admob-google-mobile-ads-setup.md`
+- AdMob UMP, privacy, and store compliance (Stage 5): `docs/admob-privacy-ump-compliance.md`
 - AdMob bottom banner Spec Lock: `docs/admob-bottom-banner-spec-lock.md`
 - Cursor project rules: `.cursor/rules/`
 

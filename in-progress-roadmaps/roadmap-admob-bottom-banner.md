@@ -113,7 +113,7 @@ Roadmapa wprowadzenia **zarezerwowanego miejsca** na reklamę (banner AdMob) jak
 
 **Bramka:** spójność `docs`, ewentualnie `CHANGELOG.md` przy user-visible disclosure.
 
-**Status:** `pending**.
+**Status:** `done` (UMP + init: `lib/core/admob_startup.dart`, link opcji prywatności na Main Menu, `docs/admob-privacy-ump-compliance.md`; checklisty sklepów w dokumencie — wykonanie w konsolach przed produkcją).
 
 ---
 

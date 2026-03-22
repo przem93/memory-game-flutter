@@ -6,6 +6,8 @@ All notable user-visible changes to this project are documented in this file.
 
 ### Added
 
+- **AdMob / privacy (Stage 5):** User Messaging Platform (UMP) runs before ad SDK initialization; optional **Ad privacy settings** link on the main menu when the platform requires a privacy-options entry point. Documentation: `docs/admob-privacy-ump-compliance.md`.
+
 - Customize Cards grid: added **6 cards** (2×3) option for an easier, balanced layout.
 - Implemented the `MainMenuScreen` with reusable component composition:
   background, logo group, primary action section, and developer brand footer.

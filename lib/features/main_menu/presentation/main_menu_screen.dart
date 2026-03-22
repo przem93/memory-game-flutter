@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_action_section.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_background.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_developer_brand.dart';
+import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_ad_privacy_options_link.dart';
 import 'package:memory_game/features/main_menu/presentation/widgets/main_menu_logo_group.dart';
 import 'package:memory_game/shared/widgets/ad_banner_slot.dart';
 
@@ -108,6 +109,7 @@ class MainMenuScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const MainMenuAdPrivacyOptionsLink(),
                     MainMenuDeveloperBrand(
                       alignment: Alignment.center,
                       scalePreset: isTablet

@@ -5,7 +5,7 @@ This document describes the **SDK and platform wiring** added in roadmap Stage 2
 ## Dependency
 
 - **Package:** [`google_mobile_ads`](https://pub.dev/packages/google_mobile_ads) (declared in `pubspec.yaml`).
-- **Initialization:** `MobileAds.instance.initialize()` is called from `lib/main.dart` after `WidgetsFlutterBinding.ensureInitialized()`. Failures are logged and the app still starts (graceful degradation).
+- **Startup (Stage 5):** `lib/main.dart` calls [`ensureConsentAndMobileAdsReady()`](../lib/core/admob_startup.dart), which runs **UMP** (`ConsentInformation` → `ConsentForm.loadAndShowConsentFormIfRequired`) and then `MobileAds.instance.initialize()` after `WidgetsFlutterBinding.ensureInitialized()`. Failures are logged and the app still starts (graceful degradation). See [`docs/admob-privacy-ump-compliance.md`](admob-privacy-ump-compliance.md) for privacy, AdMob console checklist, and store declarations.
 
 ## Test vs production App IDs
 
@@ -55,4 +55,5 @@ flutter build ios --simulator
 
 - Roadmap: `in-progress-roadmaps/roadmap-admob-bottom-banner.md`
 - Spec lock (layout): `docs/admob-bottom-banner-spec-lock.md`
+- UMP / privacy / stores (Stage 5): `docs/admob-privacy-ump-compliance.md`
 - Flutter AdMob: [Get started](https://developers.google.com/admob/flutter/quick-start)
