@@ -72,6 +72,10 @@ Implementation will extend the shell (e.g. `GameSceneShell` or `NonMainSceneShel
 - **Other screens:** No change to layout or developer brand on Select Level, Customize, Success, or Select Set in this refinement.
 - **Orientation / breakpoint:** Tablet vs phone uses existing breakpoint (e.g. width > 600) and the same margin/inset constants as today.
 
+## Future extension (AdMob bottom banner)
+
+When `docs/admob-bottom-banner-spec-lock.md` is implemented (roadmap Stage 4), the vertical **end** of the region available to the board is no longer “safe area bottom minus bottom padding” only: the parent layout must also subtract the **reserved ad strip height** (`H_ad`) above the system inset. The board’s `Expanded` (or equivalent) area ends **above** that strip. Until that integration ships, the formulas in § “Available space on game screen” remain valid. See the AdMob spec for stacking and fixed-height slot rules.
+
 ## Stage 1 gate checklist
 
 Stage 1 is **done** when:

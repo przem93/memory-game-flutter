@@ -41,7 +41,7 @@ Roadmapa wprowadzenia **zarezerwowanego miejsca** na reklamę (banner AdMob) jak
 
 **Bramka Stage 1:** status `done` (można startować Stage 2).
 
-**Status:** `pending`.
+**Status:** `done` (Spec Lock: `docs/admob-bottom-banner-spec-lock.md`).
 
 ---
 
