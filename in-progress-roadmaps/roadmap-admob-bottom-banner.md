@@ -75,7 +75,7 @@ Roadmapa wprowadzenia **zarezerwowanego miejsca** na reklamę (banner AdMob) jak
 
 **Bramka:** `flutter analyze`, testy widgetowe minimalne (np. wymiary, obecność placeholderu).
 
-**Status:** `pending`.
+**Status:** `done` (`lib/shared/widgets/ad_banner_slot.dart`, `test/ad_banner_slot_test.dart`).
 
 ### 3.2 Integracja z `BannerAd` / adaptive
 
@@ -84,7 +84,7 @@ Roadmapa wprowadzenia **zarezerwowanego miejsca** na reklamę (banner AdMob) jak
 
 **Bramka:** `flutter test`, ręczny smoke z testowymi ID.
 
-**Status:** `pending`.
+**Status:** `done` (anchored adaptive + `BannerAd`/`AdWidget` w `AdBannerSlot`; jedna instancja na mount slota, przeładowanie przy zmianie szerokości/orientacji; smoke ręczny: Stage 4 po wpięciu w shell / lokalny `MaterialApp` z samym slotem).
 
 ---
 
